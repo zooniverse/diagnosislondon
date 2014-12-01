@@ -24,10 +24,23 @@ wrapHTML = (sel, el) ->
   el.style.color = 'yellow'
   sel.removeAllRanges()
   sel.addRange range
+  
+  el.addEventListener 'click', (e) ->
+    e.preventDefault()
+    unwrapHTML @
+  el.addEventListener 'mouseup', (e) ->
+    e.stopPropagation()
+
+unwrapHTML = (el) ->
+  text = el.textContent
+  el.insertAdjacentHTML 'afterend', text
+  text_viewer.removeChild el
+  text_viewer.normalize()
 
 text_viewer.addEventListener 'mouseup', (e) ->
   sel = window.getSelection()
-  wrapHTML( sel, document.createElement 'b' ) if sel.type is 'Range'
+  wrapper = document.createElement 'b'
+  wrapHTML( sel, wrapper ) if sel.type is 'Range'
 
 classify_page.on classify_page.LOAD_SUBJECT, (e, subject)->
   ms.maxWidth = subjectViewer.maxWidth
