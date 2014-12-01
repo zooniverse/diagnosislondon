@@ -16,6 +16,18 @@ text_viewer.style.marginLeft = ".5em"
 # set the image scale if not already set  
 ms.on 'marking-surface:add-tool', (tool) ->
   @rescale() if @scaleX is 0
+  
+wrapHTML = (sel, el) ->
+  range = sel.getRangeAt 0 if sel.rangeCount
+  range = range.cloneRange()
+  range.surroundContents el
+  el.style.color = 'yellow'
+  sel.removeAllRanges()
+  sel.addRange range
+
+text_viewer.addEventListener 'mouseup', (e) ->
+  sel = window.getSelection()
+  wrapHTML( sel, document.createElement 'b' ) if sel.type is 'Range'
 
 classify_page.on classify_page.LOAD_SUBJECT, (e, subject)->
   ms.maxWidth = subjectViewer.maxWidth
