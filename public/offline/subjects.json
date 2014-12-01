@@ -1,9 +1,21 @@
 [{
-  "id": "BHL001",
+  "id": "WL001",
   "zooniverse_id": "APK0000001",
   "location": {"standard": "offline/actual_70350e95-0f2e-4928-ab8f-c46e802a434b.jpg", "ocr": "offline/finsbury.txt"}
 },{
-  "id": "BHL002",
+  "id": "WL002",
   "zooniverse_id": "APK0000002",
   "location": {"standard": "offline/actual_cf7639a7-409c-4c44-9edc-8fac45abbace.jpg", "ocr": "offline/port.txt"}
+},{
+  "id": "WL003",
+  "zooniverse_id": "APK0000003",
+  "location": {"standard": "offline/actual_d01aae95-68a1-4518-b509-3c159ffb40c9.jpg", "ocr": "offline/kensington.txt"}
+},{
+  "id": "WL004",
+  "zooniverse_id": "APK0000004",
+  "location": {"standard": "offline/actual_11938929-5485-4835-b832-39ad923f2b77.jpg", "ocr": "offline/bermondsey.txt"}
+},{
+  "id": "WL005",
+  "zooniverse_id": "APK0000005",
+  "location": {"standard": "offline/actual_6fa1e24a-e9bd-4dab-95b9-859f8a5737cd.jpg", "ocr": "offline/barking.txt"}
 }]
