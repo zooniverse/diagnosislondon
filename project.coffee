@@ -19,11 +19,22 @@ module.exports =
   }]
   
   tasks:
-    annotations:
+    decide:
       type: 'radio'
-      question: 'Mark names and issues in the text'
+      question: 'Are there any health issues on this page?'
       choices: [{
-        label: 'Business name'
+        label: 'Yes'
+        value: 'yes'
+        next: 'annotate'
+      },{
+        label: 'No'
+        value: 'no'
+      }]
+    annotate:
+      type: 'radio'
+      question: 'Mark businesses and health issues in the text'
+      choices: [{
+        label: 'Business'
         color: 'orange'
         value: 'business'
       },{
@@ -40,5 +51,5 @@ module.exports =
         next: null
       }]
 
-  firstTask: 'annotations'
+  firstTask: 'decide'
 
