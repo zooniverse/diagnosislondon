@@ -50,6 +50,7 @@ wrapHTML = (sel, el) ->
   
 
 unwrapHTML = (el) ->
+  return unless el.parentNode == text_viewer
   text = el.textContent
   el.insertAdjacentHTML 'afterend', text
   text_viewer.removeChild el
