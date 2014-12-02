@@ -7,6 +7,8 @@ classify_page = currentProject.classifyPages[0]
   
 ms = subjectViewer.markingSurface
 
+current_task = null
+
 text_viewer = document.createElement "pre"
 subjectViewer.markingSurfaceContainer.append text_viewer
 text_viewer.style.display = "inline-block"
@@ -42,7 +44,7 @@ wrapHTML = (sel, el) ->
   range = sel.getRangeAt 0 if sel.rangeCount
   range = range.cloneRange()
   range.surroundContents el
-  el.style.color = 'yellow'
+  el.style.color = current_task.getChoice().color
   sel.removeAllRanges()
   sel.addRange range
   
@@ -77,3 +79,9 @@ classify_page.on classify_page.LOAD_SUBJECT, (e, subject)->
   
   $.get( subject.location.ocr ).done (response) ->
     text_viewer.innerHTML = response
+
+classify_page.el.on decisionTree.LOAD_TASK, ({originalEvent: detail: {task}})->
+  current_task = task
+  
+  if task.key is 'annotations'
+    task.reset 'business'

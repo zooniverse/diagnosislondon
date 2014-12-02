@@ -19,17 +19,19 @@ module.exports =
   }]
   
   tasks:
-    illustrations:
+    annotations:
       type: 'radio'
-      question: 'Are there any illustrations on this page?'
+      question: 'Mark names and issues in the text'
       choices: [{
-        label: 'Yes'
-        value: 'yes'
-        next: 'review'
+        label: 'Business name'
+        color: 'orange'
+        value: 'business'
       },{
-        label: 'No'
-        value: 'no'
+        label: 'Health issue'
+        color: 'yellow'
+        value: 'health'
       }]
+      next: 'review'
     review:
       type: 'button'
       question: "Use the 'Back' button to review your work, or click 'Finished' to move on to the next page."
@@ -38,5 +40,5 @@ module.exports =
         next: null
       }]
 
-  firstTask: 'illustrations'
+  firstTask: 'annotations'
 
