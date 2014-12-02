@@ -44,7 +44,8 @@ wrapHTML = (sel, el) ->
   range = sel.getRangeAt 0 if sel.rangeCount
   range = range.cloneRange()
   range.surroundContents el
-  el.style.color = current_task.getChoice().color
+  el.style.backgroundColor = current_task.getChoice().color
+  el.style.color = '#333'
   sel.removeAllRanges()
   sel.addRange range
   
