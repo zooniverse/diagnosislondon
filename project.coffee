@@ -41,6 +41,10 @@ module.exports =
         label: 'Health issue'
         color: 'yellow'
         value: 'health'
+      },{
+        label: 'Action taken'
+        color: 'cornflowerblue'
+        value: 'health'
       }]
       next: 'review'
     review:
