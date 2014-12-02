@@ -20,6 +20,7 @@ ms.on 'marking-surface:add-tool', (tool) ->
 createAnnotation = (sel) ->
   return unless sel.type is 'Range'
   wrapper = document.createElement 'b'
+  wrapper.setAttribute 'tabindex', 0
   wrapHTML( sel, wrapper )
   
   wrapper.addEventListener 'click', (e) ->
