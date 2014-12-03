@@ -1,3 +1,4 @@
+require './tasks/annotation'
 
 module.exports =
   id: 'wellcome'
@@ -31,12 +32,13 @@ module.exports =
         value: 'no'
       }]
     annotate:
-      type: 'radio'
+      type: 'annotation'
       question: 'Mark businesses and health issues in the text'
       choices: [{
         label: 'Business'
         color: 'orange'
         value: 'business'
+        checked: true
       },{
         label: 'Health issue'
         color: 'yellow'

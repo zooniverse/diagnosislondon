@@ -84,6 +84,3 @@ classify_page.on classify_page.LOAD_SUBJECT, (e, subject)->
 
 classify_page.el.on decisionTree.LOAD_TASK, ({originalEvent: detail: {task}})->
   current_task = task
-  
-  if task.key is 'annotate'
-    task.reset 'business'
