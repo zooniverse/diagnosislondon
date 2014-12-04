@@ -3,6 +3,7 @@ DecisionTree = require 'zooniverse-decision-tree'
 
 class AnnotationTask extends RadioTask
   @type: 'annotation'
+  annotations = []
   
   choiceTemplate: (choice, i) -> "
   <label class='readymade-choice-input-wrapper'>
@@ -31,11 +32,24 @@ class AnnotationTask extends RadioTask
     super
     
     if @choices.length is 1
-      @reset @choices[0].value
+      @check @choices[0].value
     else
       for choice in @choices
         if choice.checked
-          @reset choice.value
+          @check choice.value
+
+  reset: (value = @annotations) ->
+    @annotations = value
+    
+  getValue: ->
+    @annotations
+    
+  check: (value) ->
+    @el.querySelector('input:checked')?.checked = false
+
+    if value?
+      choiceIndex = i for choice, i in @choices when choice.value is value
+      @el.querySelector("[data-choice-index='#{choiceIndex}']").checked = true
 
 DecisionTree.registerTask AnnotationTask
 DecisionTree.AnnotationTask = AnnotationTask

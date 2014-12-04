@@ -25,6 +25,7 @@ class TextViewer
   createAnnotation: (type) =>
     tool = new AnnotationTool @, type
     @tools.push tool
+    current_task.reset (tool.annotation for tool in @tools)
     console.log tool.annotation
   
   deleteAnnotation: (tool) =>
@@ -35,6 +36,7 @@ class TextViewer
     
     index = @tools.indexOf tool
     @tools.splice index, 1
+    current_task.reset (tool.annotation for tool in @tools)
     
     tool.destroy()
   
