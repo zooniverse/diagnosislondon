@@ -21,15 +21,22 @@ class TextViewer
       @createAnnotation current_task.getChoice().value
   
   createAnnotation: (type) =>
-    at = new AnnotationTool @el, type
+    at = new AnnotationTool @, type
     console.log at.annotation
+  
+  deleteAnnotation: (tool) =>
+    text = tool.annotation.text
+    tool.el.insertAdjacentHTML 'afterend', text
+    @el.removeChild tool.el
+    @el.normalize()
+    tool.destroy()
   
   load: (text) =>
     @el.innerHTML = text
 
 class AnnotationTool
   
-  constructor: (@text, type) ->
+  constructor: (@text_viewer, type) ->
     sel = window.getSelection()
     return unless sel.type is 'Range'
     @el = document.createElement 'b'
@@ -37,9 +44,10 @@ class AnnotationTool
     @wrapHTML sel
   
     @el.addEventListener 'click', (e) =>
-      return unless @el.parentNode == @text
+      return unless @el.parentNode is @text_viewer.el
       e.preventDefault()
-      @unwrapHTML()
+      @text_viewer.deleteAnnotation @
+      
     @el.addEventListener 'mouseup', (e) =>
       e.stopPropagation()
     
@@ -53,22 +61,19 @@ class AnnotationTool
       start: start
       end: end
     
+  destroy: =>
+  
   wrapHTML: (sel) =>
     range = sel.getRangeAt 0 if sel.rangeCount
     range = range.cloneRange()
     range.surroundContents @el
     sel.removeAllRanges()
     sel.addRange range
-  
-  unwrapHTML: () =>
-    text = @el.textContent
-    @el.insertAdjacentHTML 'afterend', text
-    @text.removeChild @el
-    @text.normalize()
+    
   
   getNodePosition: () =>
     start = 0
-    for node in @text.childNodes
+    for node in @text_viewer.el.childNodes
       if node == @el
         break
       else
