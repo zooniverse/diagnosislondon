@@ -46,7 +46,7 @@ module.exports =
       },{
         label: 'Action taken'
         color: 'cornflowerblue'
-        value: 'health'
+        value: 'action'
       }]
       next: 'review'
     review:

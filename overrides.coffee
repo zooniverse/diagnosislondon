@@ -18,10 +18,10 @@ class TextViewer
     @el.style.marginLeft = ".5em"
     
     @el.addEventListener 'mouseup', (e) =>
-      @createAnnotation()
+      @createAnnotation current_task.getChoice().value
   
-  createAnnotation: =>
-    at = new AnnotationTool @el, window.getSelection(), current_task.getChoice().color
+  createAnnotation: (type) =>
+    at = new AnnotationTool @el, type
     console.log at.annotation
   
   load: (text) =>
@@ -29,7 +29,8 @@ class TextViewer
 
 class AnnotationTool
   
-  constructor: (@text, sel, type) ->
+  constructor: (@text, type) ->
+    sel = window.getSelection()
     return unless sel.type is 'Range'
     @el = document.createElement 'b'
     @el.setAttribute 'tabindex', 0
@@ -42,15 +43,15 @@ class AnnotationTool
     @el.addEventListener 'mouseup', (e) =>
       e.stopPropagation()
     
-    @el.style.backgroundColor = type
+    @el.style.backgroundColor = current_task.getChoice().color
     @el.style.color = '#333'
   
     {start, end} = @getNodePosition()
     @annotation = 
+      type: type
       text: @el.textContent
       start: start
       end: end
-      node: @el
     
   wrapHTML: (sel) =>
     range = sel.getRangeAt 0 if sel.rangeCount
