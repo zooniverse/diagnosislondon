@@ -1,4 +1,5 @@
 require './readymade/overrides.coffee'
+AnnotationTool = require './annotation'
 
 currentProject = require 'zooniverse-readymade/current-project'
 classify_page = currentProject.classifyPages[0]
@@ -27,6 +28,9 @@ class TextViewer
     @tools.push tool
     current_task.reset (tool.annotation for tool in @tools)
     console.log tool.annotation
+    
+    tool.el.style.backgroundColor = current_task.getChoice().color
+    tool.el.style.color = '#333'
   
   deleteAnnotation: (tool) =>
     text = tool.annotation.text
@@ -45,55 +49,6 @@ class TextViewer
   
   reset: =>
     @tools = []
-
-class AnnotationTool
-  
-  constructor: (@text_viewer, type) ->
-    sel = window.getSelection()
-    return unless sel.type is 'Range'
-    @el = document.createElement 'b'
-    @el.setAttribute 'tabindex', 0
-    @wrapHTML sel
-  
-    @el.addEventListener 'click', (e) =>
-      return unless @el.parentNode is @text_viewer.el
-      e.preventDefault()
-      @text_viewer.deleteAnnotation @
-      
-    @el.addEventListener 'mouseup', (e) =>
-      e.stopPropagation()
-    
-    @el.style.backgroundColor = current_task.getChoice().color
-    @el.style.color = '#333'
-  
-    {start, end} = @getNodePosition()
-    @annotation = 
-      type: type
-      text: @el.textContent
-      start: start
-      end: end
-    
-  destroy: =>
-  
-  wrapHTML: (sel) =>
-    range = sel.getRangeAt 0 if sel.rangeCount
-    range = range.cloneRange()
-    range.surroundContents @el
-    sel.removeAllRanges()
-    sel.addRange range
-    
-  
-  getNodePosition: () =>
-    start = 0
-    for node in @text_viewer.el.childNodes
-      if node == @el
-        break
-      else
-        start += node.textContent.length
-  
-    end = start + node.textContent.length
-    start += 1
-    {start, end}
 
 text_viewer = new TextViewer
 subjectViewer.markingSurfaceContainer.append text_viewer.el
