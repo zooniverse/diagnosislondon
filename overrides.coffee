@@ -11,6 +11,8 @@ current_task = null
 
 class TextViewer
   
+  tools: []
+  
   constructor: ->
     @el = document.createElement "pre"
     @el.style.display = "inline-block"
@@ -21,18 +23,26 @@ class TextViewer
       @createAnnotation current_task.getChoice().value
   
   createAnnotation: (type) =>
-    at = new AnnotationTool @, type
-    console.log at.annotation
+    tool = new AnnotationTool @, type
+    @tools.push tool
+    console.log tool.annotation
   
   deleteAnnotation: (tool) =>
     text = tool.annotation.text
     tool.el.insertAdjacentHTML 'afterend', text
     @el.removeChild tool.el
     @el.normalize()
+    
+    index = @tools.indexOf tool
+    @tools.splice index, 1
+    
     tool.destroy()
   
   load: (text) =>
     @el.innerHTML = text
+  
+  reset: =>
+    @tools = []
 
 class AnnotationTool
   
@@ -97,6 +107,7 @@ classify_page.on classify_page.LOAD_SUBJECT, (e, subject)->
   
   $.get( subject.location.ocr ).done (response) ->
     text_viewer.load response
+    text_viewer.reset()
 
 classify_page.el.on decisionTree.LOAD_TASK, ({originalEvent: detail: {task}})->
   current_task = task
