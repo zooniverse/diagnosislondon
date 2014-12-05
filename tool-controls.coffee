@@ -43,6 +43,9 @@ class AccessibleControls
     
     dismiss_button.addEventListener 'click', (e) =>
       @el.removeAttribute 'data-selected'
+    
+    delete_button.addEventListener 'click', (e) =>
+      @tool.remove()
       
     delete_button.addEventListener 'keydown', (e) =>
       if @details? && e.which == 9 && e.shiftKey
@@ -71,14 +74,15 @@ class AccessibleControls
     form.appendChild detail.el
   
   onChange: (e) =>
-    console.log @detailTasks, @tool.annotation
     for key, task of @detailTasks
       @tool.annotation[key] = task.getValue()
-      console.log @tool.annotation
 
   render: ->
     setTimeout => # Ugh.
       for key, task of @detailTasks
         task.reset @tool.annotation[key]
+  
+  destroy: ->
+    @el.parentNode.removeChild @el
   
 module.exports = AccessibleControls

@@ -44,6 +44,7 @@ class TextViewer extends Base
     @el.innerHTML = text
   
   reset: =>
+    tool.destroy() for tool in @tools
     @tools = []
 
 module.exports = TextViewer

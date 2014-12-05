@@ -23,7 +23,6 @@ class AnnotationTool
       return unless @el.parentNode is @text_viewer.el
       e.preventDefault()
       @controls.el.setAttribute 'data-selected', true
-      # @text_viewer.deleteAnnotation @
       
     @el.addEventListener 'mouseup', (e) =>
       e.stopPropagation()
@@ -37,7 +36,11 @@ class AnnotationTool
       start: start
       end: end
     
+  remove: =>
+    @text_viewer.deleteAnnotation @
+    
   destroy: =>
+    @controls.destroy()
   
   wrapHTML: (sel) =>
     range = sel.getRangeAt 0 if sel.rangeCount

@@ -28,7 +28,8 @@ classify_page.el.on decisionTree.CHANGE, ({originalEvent: {detail}})->
   {key, value} = detail
   
   if key is 'annotate'
-    options = decisionTree.currentTask.getChoice()
+    options = {}
+    options[key] = value for key, value of decisionTree.currentTask.getChoice()
     options.type = options.value
     options.value = null
     text_viewer.tool_options = options
