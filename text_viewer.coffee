@@ -15,9 +15,7 @@ class TextViewer extends Base
   
   constructor: ->
     @el = document.createElement "pre"
-    @el.style.display = "inline-block"
-    @el.style.textAlign = "left"
-    @el.style.marginLeft = ".5em"
+    @el.classList.add 'text-viewer'
     
     @el.addEventListener 'mouseup', (e) =>
       @createAnnotation()

@@ -5,6 +5,7 @@ class AnnotationTool
     sel = window.getSelection()
     return unless sel.type is 'Range'
     @el = document.createElement 'b'
+    @el.classList.add 'highlight'
     @el.setAttribute 'tabindex', 0
     @wrapHTML sel
   
@@ -17,7 +18,6 @@ class AnnotationTool
       e.stopPropagation()
     
     @el.style.backgroundColor = @color
-    @el.style.color = '#333'
   
     {start, end} = @getNodePosition()
     @annotation = 
