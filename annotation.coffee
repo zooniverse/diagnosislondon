@@ -1,6 +1,7 @@
 class AnnotationTool
   
-  constructor: (@text_viewer, type) ->
+  constructor: (@text_viewer, options) ->
+    @[key] = value for key, value of options
     sel = window.getSelection()
     return unless sel.type is 'Range'
     @el = document.createElement 'b'
@@ -14,10 +15,13 @@ class AnnotationTool
       
     @el.addEventListener 'mouseup', (e) =>
       e.stopPropagation()
+    
+    @el.style.backgroundColor = @color
+    @el.style.color = '#333'
   
     {start, end} = @getNodePosition()
     @annotation = 
-      type: type
+      type: @type
       text: @el.textContent
       start: start
       end: end

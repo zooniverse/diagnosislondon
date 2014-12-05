@@ -27,7 +27,11 @@ classify_page.on classify_page.LOAD_SUBJECT, (e, subject)->
 classify_page.el.on decisionTree.CHANGE, ({originalEvent: {detail}})->
   {key, value} = detail
   
-  text_viewer.tool_options = decisionTree.currentTask.getChoice() if key is 'annotate'
+  if key is 'annotate'
+    options = decisionTree.currentTask.getChoice()
+    options.type = options.value
+    options.value = null
+    text_viewer.tool_options = options
 
 classify_page.el.on text_viewer.CHANGE, (e)->
   decisionTree.currentTask.reset (tool.annotation for tool in text_viewer.tools)

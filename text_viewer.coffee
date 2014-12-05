@@ -20,15 +20,12 @@ class TextViewer extends Base
     @el.style.marginLeft = ".5em"
     
     @el.addEventListener 'mouseup', (e) =>
-      @createAnnotation @tool_options.value
+      @createAnnotation()
   
-  createAnnotation: (type) =>
-    tool = new AnnotationTool @, type
+  createAnnotation: () =>
+    tool = new AnnotationTool @, @tool_options
     @tools.push tool
     console.log tool.annotation
-    
-    tool.el.style.backgroundColor = @tool_options.color
-    tool.el.style.color = '#333'
     
     @dispatchEvent @CHANGE
   
