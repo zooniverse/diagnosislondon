@@ -22,7 +22,7 @@ class TextViewer extends Base
   
   createAnnotation: () =>
     tool = new AnnotationTool @, @tool_options
-    @tools.push tool
+    @tools.push tool if tool?
     console.log tool.annotation
     
     @dispatchEvent @CHANGE

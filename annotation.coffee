@@ -1,4 +1,7 @@
+ToolControls = require './tool-controls'
+
 class AnnotationTool
+  @Controls: ToolControls
   
   constructor: (@text_viewer, options) ->
     @[key] = value for key, value of options
@@ -8,11 +11,19 @@ class AnnotationTool
     @el.classList.add 'highlight'
     @el.setAttribute 'tabindex', 0
     @wrapHTML sel
+    
+    if @constructor.Controls?
+      @controls = new @constructor.Controls
+          tool: this
+          details: @details
+    
+      @text_viewer.el.parentNode.insertBefore @controls.el, @text_viewer.el.nextSibling
   
     @el.addEventListener 'click', (e) =>
       return unless @el.parentNode is @text_viewer.el
       e.preventDefault()
-      @text_viewer.deleteAnnotation @
+      @controls.el.setAttribute 'data-selected', true
+      # @text_viewer.deleteAnnotation @
       
     @el.addEventListener 'mouseup', (e) =>
       e.stopPropagation()

@@ -47,6 +47,19 @@ module.exports =
         label: 'Action taken'
         color: 'cornflowerblue'
         value: 'action'
+      },{
+        label: 'Correction'
+        color: 'grey'
+        value: 'correction'
+        details:[{
+          type: 'text'
+          key: 'new-text'
+          choices:[{
+            value: 'text'
+            key: 'correction'
+            label: 'Correction'
+          }]
+        }]
       }]
       next: 'review'
     review:
