@@ -21,10 +21,14 @@ class TextViewer extends Base
       @createAnnotation()
   
   createAnnotation: () =>
-    tool = new AnnotationTool @, @tool_options
-    @tools.push tool if tool?
-    
-    @dispatchEvent @CHANGE
+    sel = window.getSelection()
+    if sel.type is 'Range'
+      options =
+        sel: sel
+      options[key] = value for key, value of @tool_options
+      tool = new AnnotationTool @, options
+      @tools.push tool if tool?
+      @dispatchEvent @CHANGE
   
   deleteAnnotation: (tool) =>
     text = tool.annotation.text

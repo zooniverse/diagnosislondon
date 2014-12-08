@@ -5,12 +5,10 @@ class AnnotationTool
   
   constructor: (@text_viewer, options) ->
     @[key] = value for key, value of options
-    sel = window.getSelection()
-    return unless sel.type is 'Range'
     @el = document.createElement 'b'
     @el.classList.add 'highlight'
     @el.setAttribute 'tabindex', 0
-    @wrapHTML sel
+    @wrapHTML @sel
     
     if @constructor.Controls?
       @controls = new @constructor.Controls
@@ -40,7 +38,6 @@ class AnnotationTool
     @text_viewer.deleteAnnotation @
     @annotation = null
     @controls.destroy()
-    console.log @text_viewer.tools
   
   wrapHTML: (sel) =>
     range = sel.getRangeAt 0 if sel.rangeCount
