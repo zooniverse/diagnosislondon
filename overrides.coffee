@@ -20,9 +20,9 @@ classify_page.on classify_page.LOAD_SUBJECT, (e, subject)->
   ms.maxHeight = subjectViewer.maxHeight
   ms.rescale 0, 0, subjectViewer.maxWidth, subjectViewer.maxHeight
   
+  text_viewer.reset()
   $.get( subject.location.ocr ).done (response) ->
     text_viewer.load response
-    text_viewer.reset()
   
 classify_page.el.on decisionTree.CHANGE, ({originalEvent: {detail}})->
   {key, value} = detail
@@ -35,4 +35,4 @@ classify_page.el.on decisionTree.CHANGE, ({originalEvent: {detail}})->
     text_viewer.tool_options = options
 
 classify_page.el.on text_viewer.CHANGE, (e)->
-  decisionTree.currentTask.reset (tool.annotation for tool in text_viewer.tools)
+  decisionTree.currentTask.reset (tool.annotation for tool in text_viewer.tools) if decisionTree.currentTask.key is 'annotate'

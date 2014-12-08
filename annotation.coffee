@@ -36,11 +36,11 @@ class AnnotationTool
       start: start
       end: end
     
-  remove: =>
-    @text_viewer.deleteAnnotation @
-    
   destroy: =>
+    @text_viewer.deleteAnnotation @
+    @annotation = null
     @controls.destroy()
+    console.log @text_viewer.tools
   
   wrapHTML: (sel) =>
     range = sel.getRangeAt 0 if sel.rangeCount

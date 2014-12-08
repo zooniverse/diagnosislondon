@@ -23,7 +23,6 @@ class TextViewer extends Base
   createAnnotation: () =>
     tool = new AnnotationTool @, @tool_options
     @tools.push tool if tool?
-    console.log tool.annotation
     
     @dispatchEvent @CHANGE
   
@@ -36,15 +35,12 @@ class TextViewer extends Base
     index = @tools.indexOf tool
     @tools.splice index, 1
     
-    tool.destroy()
-    
     @dispatchEvent @CHANGE
   
   load: (text) =>
     @el.innerHTML = text
   
   reset: =>
-    tool.destroy() for tool in @tools
-    @tools = []
+    @tools[0].destroy() until @tools.length is 0
 
 module.exports = TextViewer

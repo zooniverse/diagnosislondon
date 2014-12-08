@@ -15,7 +15,6 @@ class AccessibleControls
     @el.setAttribute 'data-selected', true
     @el.insertAdjacentHTML 'beforeEnd', @template
     
-    console.log @tool
     @el.style.left = "#{@tool.el.offsetLeft}px"
     @el.style.top = "#{@tool.el.offsetTop}px"
     
@@ -45,7 +44,7 @@ class AccessibleControls
       @el.removeAttribute 'data-selected'
     
     delete_button.addEventListener 'click', (e) =>
-      @tool.remove()
+      @tool.destroy()
       
     delete_button.addEventListener 'keydown', (e) =>
       if @details? && e.which == 9 && e.shiftKey
