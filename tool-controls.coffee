@@ -29,8 +29,8 @@ class AccessibleControls
     setTimeout => # Ugh.
       if @details?
         @detailsControls.style.display = ''
-        for detail in @details
-          @addDetail detail
+        @el.style.top = "#{@tool.el.offsetTop + @tool.el.offsetHeight}px"
+        @addDetail detail for detail in @details
     
     # @tool.addEvent 'marking-surface:tool:select', @onToolSelect
     # @tool.addEvent 'marking-surface:tool:deselect', @onToolDeselect
