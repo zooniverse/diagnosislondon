@@ -38,6 +38,7 @@ class TextViewer extends Base
     @dispatchEvent @CHANGE
   
   load: (text) =>
+    @reset()
     @el.innerHTML = text
   
   reset: =>

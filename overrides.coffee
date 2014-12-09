@@ -20,7 +20,6 @@ classify_page.on classify_page.LOAD_SUBJECT, (e, subject)->
   ms.maxHeight = subjectViewer.maxHeight
   ms.rescale 0, 0, subjectViewer.maxWidth, subjectViewer.maxHeight
   
-  text_viewer.reset()
   $.get( subject.location.ocr ).done (response) ->
     text_viewer.load response
   
