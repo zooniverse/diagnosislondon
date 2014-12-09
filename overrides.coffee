@@ -22,6 +22,9 @@ classify_page.on classify_page.LOAD_SUBJECT, (e, subject)->
   
   $.get( subject.location.ocr ).done (response) ->
     text_viewer.load response
+
+classify_page.el.on decisionTree.LOAD_TASK, ({originalEvent: detail: {task}})->
+  task.reset 'yes' if task.key is 'decide'
   
 classify_page.el.on decisionTree.CHANGE, ({originalEvent: {detail}})->
   {key, value} = detail
