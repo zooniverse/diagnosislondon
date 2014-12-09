@@ -37,4 +37,4 @@ classify_page.el.on decisionTree.CHANGE, ({originalEvent: {detail}})->
     text_viewer.tool_options = options
 
 classify_page.el.on text_viewer.CHANGE, (e)->
-  decisionTree.currentTask.reset (tool.annotation for tool in text_viewer.tools) if decisionTree.currentTask.key is 'annotate'
+  decisionTree.tasks['annotate'].reset (tool.annotation for tool in text_viewer.tools)

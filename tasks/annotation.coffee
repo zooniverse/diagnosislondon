@@ -3,7 +3,7 @@ DecisionTree = require 'zooniverse-decision-tree'
 
 class AnnotationTask extends RadioTask
   @type: 'annotation'
-  annotations = []
+  annotations: []
   
   choiceTemplate: (choice, i) -> "
   <label class='readymade-choice-input-wrapper'>
