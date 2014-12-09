@@ -47,9 +47,7 @@ class AnnotationTask extends RadioTask
   check: (value) ->
     @el.querySelector('input:checked')?.checked = false
 
-    if value?
-      choiceIndex = i for choice, i in @choices when choice.value is value
-      @el.querySelector("[data-choice-index='#{choiceIndex}']").checked = true
+    @el.querySelector("[value=#{value}]").checked = true if value?
 
 DecisionTree.registerTask AnnotationTask
 DecisionTree.AnnotationTask = AnnotationTask
