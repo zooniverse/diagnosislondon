@@ -31,10 +31,6 @@ class TextViewer extends Base
       @dispatchEvent @CHANGE
   
   deleteAnnotation: (tool) =>
-    text = tool.annotation.text
-    tool.el.insertAdjacentHTML 'afterend', text
-    @el.removeChild tool.el
-    @el.normalize()
     
     index = @tools.indexOf tool
     @tools.splice index, 1

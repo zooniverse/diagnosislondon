@@ -36,6 +36,7 @@ class AnnotationTool
     
   destroy: =>
     @text_viewer.deleteAnnotation @
+    @unwrapHTML()
     @annotation = null
     @controls.destroy()
   
@@ -45,6 +46,13 @@ class AnnotationTool
     range.surroundContents @el
     sel.removeAllRanges()
     sel.addRange range
+  
+  unwrapHTML: () =>
+    text = @annotation.text
+    @el.insertAdjacentHTML 'afterend', text
+    parent = @el.parentNode
+    parent.removeChild @el
+    parent.normalize()
     
   
   getNodePosition: () =>
