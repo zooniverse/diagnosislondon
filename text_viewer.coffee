@@ -17,8 +17,13 @@ class TextViewer extends Base
     @el = document.createElement "pre"
     @el.classList.add 'text-viewer'
     
-    @el.addEventListener 'mouseup', (e) =>
-      @createAnnotation()
+    # @el.addEventListener 'mouseup', (e) =>
+    #   @createAnnotation()
+    
+    document.addEventListener 'selectionchange', (e) =>
+      clearTimeout @selectionEndTimeout if @selectionEndTimeout?
+
+      @selectionEndTimeout = setTimeout @createAnnotation, 3000
   
   createAnnotation: () =>
     sel = window.getSelection()
@@ -27,6 +32,7 @@ class TextViewer extends Base
         sel: sel
       options[key] = value for key, value of @tool_options
       tool = new AnnotationTool @, options
+      t.destroy() for t in @tools when t.annotation.start == tool.annotation.start and t.annotation.end == tool.annotation.end
       @tools.push tool if tool?
       @dispatchEvent @CHANGE
   

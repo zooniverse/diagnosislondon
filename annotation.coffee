@@ -45,7 +45,7 @@ class AnnotationTool
     range = range.cloneRange()
     range.surroundContents @el
     sel.removeAllRanges()
-    sel.addRange range
+    # sel.addRange range
   
   unwrapHTML: () =>
     text = @annotation.text
