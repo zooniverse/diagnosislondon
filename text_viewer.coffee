@@ -26,13 +26,15 @@ class TextViewer extends Base
       @selectionEndTimeout = setTimeout @createAnnotation, 3000
   
   createAnnotation: () =>
+    console.log 'annotating'
+    @selectionEndTimeout = null
     sel = window.getSelection()
     if sel.type is 'Range'
       options =
         sel: sel
       options[key] = value for key, value of @tool_options
       tool = new AnnotationTool @, options
-      t.destroy() for t in @tools when t.annotation.start == tool.annotation.start and t.annotation.end == tool.annotation.end
+      t.destroy() for t in @tools when t.contains tool or tool.contains t
       @tools.push tool if tool?
       @dispatchEvent @CHANGE
   

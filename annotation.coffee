@@ -66,5 +66,9 @@ class AnnotationTool
     end = start + node.textContent.length
     start += 1
     {start, end}
+  
+  contains: (tool) =>
+    console.log @annotation.start <= tool.annotation.start and @annotation.end >= tool.annotation.end
+    return @annotation.start <= tool.annotation.start and @annotation.end >= tool.annotation.end
 
 module.exports = AnnotationTool
