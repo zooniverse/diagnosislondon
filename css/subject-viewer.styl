@@ -1,0 +1,152 @@
+.readymade-subject-viewer
+  .drawing-controls
+    text-align: right
+
+  button[name="restart-tutorial"]
+    @extends #_RESET_BUTTON
+
+  .readymade-marking-surface-container
+    text-align: center
+
+  .marking-surface-svg
+    color: lime
+    cursor: crosshair
+
+  .readymade-coordinates-label
+    font-size: 10px
+    font-weight: bold
+    opacity: 0
+    pointer-events: none
+    transition: opacity 0.5s
+
+    rect
+      fill: rgba(black, 0.5)
+
+    text
+      fill: white
+
+  [data-hidden] > .marking-surface-tool-focus-root
+    opacity: 0.1
+    pointer-events: none
+
+  .marking-surface-tool[data-show-coordinates][data-selected] .readymade-coordinates-label
+    opacity: 1
+    transition: none
+
+  .marking-surface-tool-controls-container
+    width: 100% // TODO: This should be the default.
+
+  .marking-surface-tool-controls
+    background: rgba(white, 0.75)
+    color: black
+    text-align: left
+    z-index: 1
+
+    .decision-tree-question
+      padding: 5px 10px
+
+    .readymade-choice-clickable
+      background: transparent
+
+    .decision-tree-confirmation
+      display: none
+
+  .readymade-details-controls
+    text-align: center
+
+    button
+      @extends #_RESET_BUTTON
+      border: 1px solid
+      border-radius: 3px
+      margin: 10px 0
+      padding: 0 15px
+
+  button[name="readymade-destroy-drawing"]
+    @extends #_RESET_BUTTON
+    background: black
+    border-radius: 50%
+    color: white
+    height: 1.5em
+    line-height: 1
+    position: absolute
+    right: -0.75em
+    top: -0.75em
+    width: 1.5em
+
+    &:hover
+      background: red
+
+  .readymade-frame-controls
+    line-height: 1
+
+    &[data-single-frame]
+      // NOTE: This won't work if we ever put anything other than frame controls here (metadata, etc.).
+      display: none
+
+  .readymade-frame-play-controls
+    display: inline-block
+    margin-right: 10px
+
+    button
+      @extends #_RESET_BUTTON
+      width: 1.5em
+      height: 1.5em
+
+      &:disabled
+        display: none
+
+  .readymade-frame-toggles-list
+    display: inline-block
+
+    button
+      @extends #_RESET_BUTTON
+      background: rgba(black, 0.5)
+      border-radius: 50%
+      color: transparent
+      height: 1em
+      width: 1em
+      overflow: hidden
+      position: relative
+
+      &[data-selected]:before
+        SPACE = 4px
+        background: white
+        border-radius: 50%
+        bottom: SPACE
+        content: ""
+        left: SPACE
+        position: absolute
+        right: SPACE
+        top: SPACE
+
+.readymade-clickable
+  background: rgba(white, 0.7)
+  border-radius: 1em
+  color: black
+  cursor: pointer
+  display: inline-block
+  font-size: 0.8em
+  font-weight: bold
+  padding: 0 1em
+
+  .readymade-clickable-not-checked
+    opacity: 0.7
+
+
+.readymade-has-clickable
+  > input:first-child
+    position: absolute
+    display:inline-block
+    opacity: 0
+    left: -500px
+  
+    &:focus + .readymade-clickable
+      border: 1px solid white
+
+    &:not(:checked) + .readymade-clickable
+      .readymade-clickable-checked
+        display: none
+
+    &:checked + .readymade-clickable
+      .readymade-clickable-not-checked
+        display: none
