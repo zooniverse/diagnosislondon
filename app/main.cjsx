@@ -1,6 +1,8 @@
 init = require './init'
 React = require 'react/addons'
 TabSet = require './lib/tab-control'
+Classifier = require './classifier'
+Profile = require './profile'
 
 nav = document.querySelector 'ul[role=navigation]'
 nav_links = nav.querySelectorAll 'a'
@@ -30,5 +32,9 @@ window.addEventListener 'hashchange', (e) ->
     hash = '#home' if hash == '#'
     panel = document.querySelector hash
     tabset.activate panel
+    
+  
+React.render <Classifier />, document.querySelector '#classify'
+React.render <Profile />, document.querySelector '#profile'
 
 window.React = React
