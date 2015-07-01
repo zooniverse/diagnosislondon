@@ -1,40 +1,32 @@
 init = require './init'
 React = require 'react/addons'
-TabSet = require './lib/tab-control'
 Classifier = require './classifier'
 Profile = require './profile'
+Panoptes = require 'panoptes-client'
 
-nav = document.querySelector 'ul[role=navigation]'
-nav_links = nav.querySelectorAll 'a'
-
-tabset = new TabSet
-
-prefix = 'nav'
-for link, i in nav_links
-  href = link.getAttribute 'href'
-  if href[0] == '#'
-    tab = link
-    tab.id = prefix + '-tab-' + i if tab.id == ''
-    panel = document.querySelector href
-    if panel?
-      # home is a special case
-      href = '#' if href == '#home'
-      hash = href.replace '#', '#/'
-      tabset.add tab, panel, hash == window.location.hash
-      do (href) ->
-        link.addEventListener 'click', (e) ->
-          window.location.hash = href.replace '#', '#/'
-          e.preventDefault()
-
-window.addEventListener 'hashchange', (e) ->
-  if window.location.hash[0..1] == '#/'
-    hash = window.location.hash.replace '#/', '#'
-    hash = '#home' if hash == '#'
-    panel = document.querySelector hash
-    tabset.activate panel
-    
+# let's try talking to panoptes by getting the current user and some subjects for a known workflow
+_client = new Panoptes
+  appID: '535759b966935c297be11913acee7a9ca17c025f9f15520e7504728e71110a27'
+  host: 'https://panoptes-staging.zooniverse.org'
   
-React.render <Classifier />, document.querySelector '#classify'
-React.render <Profile />, document.querySelector '#profile'
+currentUser = (response) ->
+  user = response
+  React.render <Profile user=user />, document.querySelector '#profile'
+    
+  subjectQuery =
+    workflow_id: 643 # annoTate, for testing
+    sort: 'queued'
+  _client.api.type('subjects').get subjectQuery
+    
+subjects = (response) ->
+  console.log response
+  React.render <Classifier subjects=response />, document.querySelector '#classify'
+  
+auth = _client.api.auth
+
+auth
+  .checkCurrent()
+  .then( currentUser )
+  .then( subjects )
 
 window.React = React
