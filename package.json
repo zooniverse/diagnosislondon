@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "gulp",
-    "deploy-to-staging": "gulp clean && gulp build && publisssh ./public/build preview.zooniverse.org/wellcome && gulp clean"
+    "deploy-to-staging": "gulp clean && gulp build && publisssh ./public/build zooniverse-static/preview.zooniverse.org/wellcome && gulp clean"
   },
   "devDependencies": {
     "cjsx-loader": "^1.0.0",
