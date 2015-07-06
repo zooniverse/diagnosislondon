@@ -1,25 +1,7 @@
 .readymade-site-header
   padding: 20px 5vw 0
-
-  .readymade-creator
-    display: inline-block
-    line-height: 1
-
-    a
-      color: inherit
-      text-decoration: none
-
-  .readymade-project-producer
-    border-bottom: 1px solid
-    font-size: 12px
-    font-weight: bold
-    letter-spacing: 2px
-    margin-left: -1em
-    padding-bottom: 1px
-    text-transform: uppercase
-
-    &:empty
-      display: none
+  background: #000
+  background: rgba( 0, 0, 0, 0.5)
 
   .readymade-project-title
     font-size: 36px
@@ -45,10 +27,11 @@
     text-transform: uppercase
 
     &:hover
-      background: rgba(black, 0.25)
+    &:focus
+      background: rgba(white, 0.25)
 
-    &.active
-      background: rgba(black, 0.5)
+    &[aria-selected=true]
+      background: rgba(white, 0.5)
 
 [role=navigation]
   list-style-type: none
