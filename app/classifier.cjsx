@@ -3,14 +3,13 @@ React = require 'react/addons'
 SubjectTools = require './classify/subject-tools'
 SubjectViewer = require './classify/subject-viewer'
 AnnotationTool = require './classify/annotation-tool'
-DecisionTree = require './classify/decision-tree'
+AnnotationToolbar = require './classify/annotation-toolbar'
 ClassificationSummary = require './classify/summary'
 
 module.exports = React.createClass
   displayName: 'Classifier'
   
   getInitialState: ->
-    value: 'business'
     tools: []
 
   render: ->
@@ -18,20 +17,20 @@ module.exports = React.createClass
       <div className="readymade-subject-viewer-container">
         <div className="readymade-subject-viewer">
           <SubjectTools />
-          <SubjectViewer ref='subject_viewer' value = {@state.value} addTool = {@addTool} />
+          <SubjectViewer ref='subject_viewer' addTool = {@addTool} />
         </div>
       </div>
       <div className="readymade-decision-tree-container">
+        <AnnotationToolbar onClick = {@onDecisionTreeClick} />
         {@state.tools.map (tool, i) =>
           <AnnotationTool key={tool.id} tool={tool} deleteTool = {@deleteTool} />
-        }
-        <DecisionTree onChange = {@onDecisionTreeChange} /> 
+        } 
         <ClassificationSummary />
       </div>
     </div>
     
-  onDecisionTreeChange: (e) ->
-    @setState value: e.target.value
+  onDecisionTreeClick: (e) ->
+    @refs.subject_viewer.createAnnotation e.currentTarget.value
   
   addTool: (tool) ->
     tools = @state.tools
