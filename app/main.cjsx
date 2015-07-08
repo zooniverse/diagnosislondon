@@ -19,7 +19,6 @@ currentUser = (response) ->
   _client.api.type('subjects').get subjectQuery
     
 subjects = (response) ->
-  console.log response
   React.render <Classifier subjects=response />, document.querySelector '#classify'
   
 auth = _client.api.auth

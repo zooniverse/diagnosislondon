@@ -1,4 +1,5 @@
 class AnnotationTool
+  @count: 0
   
   constructor: (@text, options) ->
     @[key] = value for key, value of options
@@ -14,11 +15,14 @@ class AnnotationTool
     @el.style.backgroundColor = @color
   
     {start, end} = @getNodePosition()
-    @annotation = 
+    @annotation =
       type: @type
       text: @el.textContent
       start: start
       end: end
+    
+    @id = "annotation-#{AnnotationTool.count}"
+    AnnotationTool.count++
     
   destroy: ->
     @unwrapHTML()

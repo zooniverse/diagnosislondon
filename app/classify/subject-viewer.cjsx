@@ -11,9 +11,6 @@ module.exports = React.createClass
   getInitialState: ->
     text: subject.text
   
-  componentWillReceiveProps: (nextProps) ->
-    console.log nextProps
-  
   render: ->
     <div className="readymade-marking-surface-container">
         <pre ref = 'textViewer' className="text-viewer"  onMouseUp = {@createAnnotation}>{@state.text}</pre>
@@ -27,5 +24,4 @@ module.exports = React.createClass
         type: @props.value
       options[key] = value for key, value of @tool_options
       tool = new AnnotationTool @refs.textViewer.getDOMNode(), options
-      console.log tool.annotation
       @props.addTool tool

@@ -2,16 +2,16 @@ React = require 'react/addons'
 
 SubjectTools = require './classify/subject-tools'
 SubjectViewer = require './classify/subject-viewer'
+AnnotationTool = require './classify/annotation-tool'
 DecisionTree = require './classify/decision-tree'
 ClassificationSummary = require './classify/summary'
 
 module.exports = React.createClass
   displayName: 'Classifier'
   
-  tools: []
-  
   getInitialState: ->
     value: 'business'
+    tools: []
 
   render: ->
     <div className="readymade-classification-interface">
@@ -20,25 +20,35 @@ module.exports = React.createClass
           <SubjectTools />
           <SubjectViewer ref='subject_viewer' value = {@state.value} addTool = {@addTool} />
         </div>
-      </div> 
-      <DecisionTree onChange = {@onDecisionTreeChange} /> 
-      <ClassificationSummary />
+      </div>
+      <div className="readymade-decision-tree-container">
+        {@state.tools.map (tool, i) =>
+          <AnnotationTool key={tool.id} tool={tool} deleteTool = {@deleteTool} />
+        }
+        <DecisionTree onChange = {@onDecisionTreeChange} /> 
+        <ClassificationSummary />
+      </div>
     </div>
     
   onDecisionTreeChange: (e) ->
     @setState value: e.target.value
   
   addTool: (tool) ->
-    @tools.push tool if tool?
+    tools = @state.tools
+    tools.push tool if tool?
+    @setState {tools}
 
   deleteTool: (tool) ->
-  
-    index = @tools.indexOf tool
-    @tools.splice index, 1
+    tools = @state.tools
+    index = tools.indexOf tool
+    tools.splice index, 1
+    tool.destroy()
+    @setState {tools}
 
-  load: (text) ->
+  load: (subject) ->
     @reset()
-    @el.innerHTML = text
 
   reset: ->
-      @tools[0].destroy() until @tools.length is 0
+    tools = @state.tools
+    tools[0].destroy() until @tools.length is 0
+    @setState {tools}
