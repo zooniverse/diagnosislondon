@@ -20,13 +20,16 @@ module.exports = React.createClass
         <div className="decision-tree-question">Select text and mark it by clicking a button:</div>
         <div className="decision-tree-choices">
           {@tools.map (tool) =>
-            <div className="decision-tree-choice">
+            <div key={tool.value} className="decision-tree-choice">
               <button className="readymade-choice-clickable" value={tool.value} onClick = {@props.onClick}>
                 <span className="readymade-choice-label">{tool.label}</span> 
                 <span className="readymade-choice-color #{tool.value}"></span> 
               </button> 
             </div>
           }
+        </div>
+        <div className="decision-tree-confirmation">
+          <button type="button" name="decision-tree-confirm-task" onClick={@props.addTool}>New Health Issue</button>
         </div> 
       </div>
     </div>

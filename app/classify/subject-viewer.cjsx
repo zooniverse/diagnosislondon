@@ -1,7 +1,7 @@
 React = require 'react/addons'
 subject = require '../test-subject'
 
-AnnotationTool = require '../lib/annotation-tool'
+SelectionTool = require '../lib/selection-tool'
 
 module.exports = React.createClass
   displayName: 'SubjectViewer'
@@ -23,5 +23,4 @@ module.exports = React.createClass
         sel: sel
         type: type
       options[key] = value for key, value of @tool_options
-      tool = new AnnotationTool @refs.textViewer.getDOMNode(), options
-      @props.addTool tool
+      tool = new SelectionTool @refs.textViewer.getDOMNode(), options

@@ -2,47 +2,58 @@ React = require 'react/addons'
 
 SubjectTools = require './classify/subject-tools'
 SubjectViewer = require './classify/subject-viewer'
-AnnotationTool = require './classify/annotation-tool'
+Annotation = require './classify/annotation'
 AnnotationToolbar = require './classify/annotation-toolbar'
 ClassificationSummary = require './classify/summary'
+AnnotationTool = require './lib/annotation-tool'
 
 module.exports = React.createClass
   displayName: 'Classifier'
   
   getInitialState: ->
-    tools: []
+    annotations: []
+  
+  componentDidMount: ->
+    @newAnnotation()
 
   render: ->
     <div className="readymade-classification-interface">
       <div className="readymade-subject-viewer-container">
         <div className="readymade-subject-viewer">
           <SubjectTools />
-          <SubjectViewer ref='subject_viewer' addTool = {@addTool} />
+          <SubjectViewer ref='subject_viewer' />
         </div>
       </div>
       <div className="readymade-decision-tree-container">
-        <AnnotationToolbar onClick = {@onDecisionTreeClick} />
-        {@state.tools.map (tool, i) =>
-          <AnnotationTool key={tool.id} tool={tool} deleteTool = {@deleteTool} />
+        <AnnotationToolbar onClick={@onToolbarClick} addTool={@newAnnotation} />
+        {@state.annotations.map (tool) =>
+          <Annotation key={tool.id} tool={tool} delete={@deleteAnnotation} />
         } 
         <ClassificationSummary />
       </div>
     </div>
     
-  onDecisionTreeClick: (e) ->
-    @refs.subject_viewer.createAnnotation e.currentTarget.value
+  onToolbarClick: (e) ->
+    @addText @refs.subject_viewer.createAnnotation e.currentTarget.value
   
-  addTool: (tool) ->
-    tools = @state.tools
-    tools.push tool if tool?
-    @setState {tools}
+  newAnnotation: ->
+    annotations = @state.annotations
+    annotations.push new AnnotationTool
+    @setState {annotations}
+    
+  addText: (textRange) ->
+    annotations = @state.annotations
+    currentAnnotation = annotations.pop()
+    currentAnnotation.addRange textRange if textRange?
+    annotations.push currentAnnotation
+    @setState {annotations}
 
-  deleteTool: (tool) ->
-    tools = @state.tools
-    index = tools.indexOf tool
-    tools.splice index, 1
-    tool.destroy()
-    @setState {tools}
+  deleteAnnotation: (annotation) ->
+    annotations = @state.annotations
+    index = annotations.indexOf annotation
+    annotations.splice index, 1
+    @newAnnotation() if annotations.length == 0
+    @setState {annotations}
 
   load: (subject) ->
     @reset()
