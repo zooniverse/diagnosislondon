@@ -5,5 +5,7 @@ module.exports = React.createClass
 
   render: ->
     <div>
-      <p>Yo, {@props.user.display_name}!</p>
+      {if @props.user?
+        <p>Yo, {@props.user.display_name}!</p>
+      }
     </div>
