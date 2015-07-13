@@ -6,8 +6,6 @@ SelectionTool = require '../lib/selection-tool'
 module.exports = React.createClass
   displayName: 'SubjectViewer'
   
-  tool_options: {}
-  
   getInitialState: ->
     text: subject.text
   
@@ -20,7 +18,6 @@ module.exports = React.createClass
     sel = window.getSelection()
     if sel.type is 'Range'
       options =
-        sel: sel
         type: type
-      options[key] = value for key, value of @tool_options
-      tool = new SelectionTool @refs.textViewer.getDOMNode(), options
+        text: @refs.textViewer.getDOMNode()
+      tool = new SelectionTool options

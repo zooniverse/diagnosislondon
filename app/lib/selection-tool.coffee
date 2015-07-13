@@ -1,18 +1,13 @@
 class SelectionTool
   @count: 0
   
-  constructor: (@text, options) ->
+  constructor: (options) ->
     @[key] = value for key, value of options
     @el = document.createElement 'b'
     @el.classList.add 'highlight'
     @el.classList.add @type if @type?
     @el.setAttribute 'tabindex', 0
-    @wrapHTML @sel
-      
-    @el.addEventListener 'mouseup', (e) =>
-      e.stopPropagation()
-    
-    @el.style.backgroundColor = @color
+    @wrapHTML window.getSelection()
   
     {start, end} = @getNodePosition()
     @annotation =
