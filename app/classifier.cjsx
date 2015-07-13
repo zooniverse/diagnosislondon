@@ -15,18 +15,18 @@ module.exports = React.createClass
 
   render: ->
     <div className="readymade-classification-interface">
-      <div className="readymade-subject-viewer-container">
-        <div className="readymade-subject-viewer">
-          <SubjectTools />
-          <SubjectViewer ref='subject_viewer' />
-        </div>
-      </div>
       <div className="readymade-decision-tree-container">
         <AnnotationToolbar onClick={@onToolbarClick} addTool={@newAnnotation} onFinish={@onFinishPage} />
         {@state.annotations.map (tool) =>
           <Annotation key={tool.id} tool={tool} delete={@deleteAnnotation} />
         } 
         <ClassificationSummary />
+      </div>
+      <div className="readymade-subject-viewer-container">
+        <div className="readymade-subject-viewer">
+          <SubjectTools />
+          <SubjectViewer ref='subject_viewer' />
+        </div>
       </div>
     </div>
     

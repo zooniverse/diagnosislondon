@@ -11,7 +11,8 @@ module.exports = React.createClass
   
   render: ->
     <div className="readymade-marking-surface-container">
-        <pre ref = 'textViewer' className="text-viewer">{@state.text}</pre>
+      <pre ref = 'textViewer' className="text-viewer">{@state.text}</pre>
+      <img  className="subject-image" src="http://demo.zooniverse.org/wellcome/offline/actual_d01aae95-68a1-4518-b509-3c159ffb40c9.jpg" alt="" />
     </div>
   
   createAnnotation: (type) ->
