@@ -12,9 +12,6 @@ module.exports = React.createClass
   
   getInitialState: ->
     annotations: []
-  
-  componentDidMount: ->
-    @newAnnotation()
 
   render: ->
     <div className="readymade-classification-interface">
@@ -38,21 +35,20 @@ module.exports = React.createClass
   
   newAnnotation: ->
     annotations = @state.annotations
-    annotations.push new AnnotationTool
+    annotations.unshift new AnnotationTool
     @setState {annotations}
     
   addText: (textRange) ->
     annotations = @state.annotations
-    currentAnnotation = annotations.pop()
+    currentAnnotation = annotations.shift()
     currentAnnotation.addRange textRange if textRange?
-    annotations.push currentAnnotation
+    annotations.unshift currentAnnotation
     @setState {annotations}
 
   deleteAnnotation: (annotation) ->
     annotations = @state.annotations
     index = annotations.indexOf annotation
     annotations.splice index, 1
-    @newAnnotation() if annotations.length == 0
     @setState {annotations}
 
   load: (subject) ->
