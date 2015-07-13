@@ -1,4 +1,4 @@
-React = require 'react/addons'
+React = require 'react'
 
 SubjectTools = require './classify/subject-tools'
 SubjectViewer = require './classify/subject-viewer'

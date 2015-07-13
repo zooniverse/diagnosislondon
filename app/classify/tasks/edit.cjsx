@@ -1,4 +1,4 @@
-React = require 'react/addons'
+React = require 'react'
 annotation_tools = require './annotation-tools'
 
 module.exports = React.createClass

@@ -1,5 +1,5 @@
 init = require './init'
-React = require 'react/addons'
+React = require 'react'
 Classifier = require './classifier'
 Profile = require './profile'
 Panoptes = require 'panoptes-client'

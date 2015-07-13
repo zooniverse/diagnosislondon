@@ -1,4 +1,4 @@
-React = require 'react/addons'
+React = require 'react'
 subject = require '../test-subject'
 
 SelectionTool = require '../lib/selection-tool'

@@ -1,4 +1,4 @@
-React = require 'react/addons'
+React = require 'react'
 ChooseTask = require './tasks/choose'
 EditTask = require './tasks/edit'
 
