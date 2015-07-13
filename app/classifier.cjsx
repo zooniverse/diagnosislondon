@@ -22,7 +22,7 @@ module.exports = React.createClass
         </div>
       </div>
       <div className="readymade-decision-tree-container">
-        <AnnotationToolbar onClick={@onToolbarClick} addTool={@newAnnotation} />
+        <AnnotationToolbar onClick={@onToolbarClick} addTool={@newAnnotation} onFinish={@onFinishPage} />
         {@state.annotations.map (tool) =>
           <Annotation key={tool.id} tool={tool} delete={@deleteAnnotation} />
         } 
@@ -33,9 +33,12 @@ module.exports = React.createClass
   onToolbarClick: (e) ->
     @addText @refs.subject_viewer.createAnnotation e.currentTarget.value
   
-  newAnnotation: ->
+  onFinishPage: ->
+    console.log @state.annotations
+  
+  newAnnotation: (type) ->
     annotations = @state.annotations
-    annotations.unshift new AnnotationTool
+    annotations.unshift new AnnotationTool type
     @setState {annotations}
     
   addText: (textRange) ->

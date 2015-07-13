@@ -10,13 +10,17 @@ TextRange = React.createClass
 
 module.exports = React.createClass
   displayName: 'Annotation'
+  
+  labels:
+    health: 'Health Issue'
+    welfare: 'Welfare Issue'
     
   componentWillUnmount: ->
     range.destroy() for range in @props.tool.ranges
   
   render: ->
     <div>
-      Health Issue <button ref="delete" onClick={@delete}>X</button>
+      {@labels[@props.tool.type]} <button ref="delete" onClick={@delete}>X</button>
       <ul>
       {@props.tool.ranges.map (range) =>
         <TextRange key={range.id} tool={range} />

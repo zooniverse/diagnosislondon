@@ -1,11 +1,12 @@
 class AnnotationTool
   @count: 0
   
+  type: 'health'
   ranges: []
   
-  constructor: ->
+  constructor: (@type) ->
     AnnotationTool.count++
-    @id = "note-#{AnnotationTool.count}"
+    @id = "#{@type}-#{AnnotationTool.count}"
     @ranges = []
   
   addRange: (rangeTool) ->
