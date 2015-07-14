@@ -1,7 +1,9 @@
 React = require 'react'
+AccountBar = require './panoptes/account-bar'
+LoginBar = require './panoptes/login-bar'
 
 module.exports = React.createClass
-  displayName: 'Profile'
+  displayName: 'UserStatus'
   
   getDefaultProps: ->
     user: null
@@ -21,10 +23,10 @@ module.exports = React.createClass
       .checkCurrent()
       .then (user) =>
         @setState user: user
-
+    
+  
   render: ->
-    <div>
-      {if @state.user?
-        <p>Yo, {@state.user.display_name}!</p>
-      }
-    </div>
+    if @state.user?
+      <AccountBar user={@state.user} auth={@props.auth} />
+    else
+      <LoginBar auth={@props.auth} />

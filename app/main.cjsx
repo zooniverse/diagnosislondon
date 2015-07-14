@@ -2,6 +2,7 @@ init = require './init'
 React = require 'react'
 Classifier = require './classifier'
 Profile = require './profile'
+UserStatus = require './user-status'
 Panoptes = require 'panoptes-client'
 a11y = require 'react-a11y'
 
@@ -11,23 +12,25 @@ a11y_options =
 a11y React, a11y_options
 
 # let's try talking to panoptes by getting the current user and some subjects for a known workflow
-_client = new Panoptes
+client = new Panoptes
   appID: '535759b966935c297be11913acee7a9ca17c025f9f15520e7504728e71110a27'
   host: 'https://panoptes-staging.zooniverse.org'
   
 currentUser = (response) ->
   user = response
-  React.render <Profile user=user />, document.querySelector '#profile'
+  console.log user
+  React.render <Profile user=user auth=client.api.auth />, document.querySelector '#profile'
+  React.render <UserStatus user=user auth=client.api.auth />, document.querySelector '#user-status'
     
   subjectQuery =
     workflow_id: 643 # annoTate, for testing
     sort: 'queued'
-  _client.api.type('subjects').get subjectQuery
+  client.api.type('subjects').get subjectQuery
     
 subjects = (response) ->
   React.render <Classifier subjects=response />, document.querySelector '#classify'
   
-auth = _client.api.auth
+auth = client.api.auth
 
 auth
   .checkCurrent()
