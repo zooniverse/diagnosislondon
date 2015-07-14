@@ -3,6 +3,12 @@ React = require 'react'
 Classifier = require './classifier'
 Profile = require './profile'
 Panoptes = require 'panoptes-client'
+a11y = require 'react-a11y'
+
+a11y_options =
+  includeSrcNode: true
+
+a11y React, a11y_options
 
 # let's try talking to panoptes by getting the current user and some subjects for a known workflow
 _client = new Panoptes
