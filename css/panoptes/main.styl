@@ -17,7 +17,7 @@
 .account-bar
 
   .account-info
-    padding-bottom: 1.25em
+    padding: 1.25em 0
 
     .avatar
       height: calc(1em + 1.5vw)
@@ -69,3 +69,8 @@
     .account-menu
       opacity: 1
       pointer-events: auto
+  
+  .account-menu[aria-hidden=false]
+    opacity: 1
+    pointer-events: auto
+
