@@ -32,6 +32,7 @@ module.exports = React.createClass
   
   onFinishPage: ->
     console.log @state.annotations
+    @reset()
   
   newAnnotation: (type) ->
     annotations = @state.annotations
@@ -56,6 +57,7 @@ module.exports = React.createClass
     @reset()
 
   reset: ->
-    tools = @state.tools
-    tools[0].destroy() until @tools.length is 0
-    @setState {tools}
+    annotations = @state.annotations
+    annotation.destroy() for annotation in annotations
+    annotations = []
+    @setState {annotations}
