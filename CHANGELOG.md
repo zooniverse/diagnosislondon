@@ -6,6 +6,8 @@
 
 **Merged pull requests:**
 
+- List all annotations after editing one [\#2](https://github.com/zooniverse/wellcome/pull/2) ([eatyourgreens](https://github.com/eatyourgreens))
+
 - Expandable menu [\#1](https://github.com/zooniverse/wellcome/pull/1) ([eatyourgreens](https://github.com/eatyourgreens))
 
 ## [0.0.1](https://github.com/zooniverse/wellcome/tree/0.0.1) (2015-06-29)
