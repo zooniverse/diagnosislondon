@@ -1,6 +1,7 @@
 React = require 'react'
 ChooseTask = require './tasks/choose'
 EditTask = require './tasks/edit'
+Annotation = require './annotation'
 
 module.exports = React.createClass
   displayName: 'AnnotationToolbar'
@@ -13,7 +14,12 @@ module.exports = React.createClass
     <div className="decision-tree">
         {switch @state.step
           when 'choose'
-            <ChooseTask onChooseTask={@edit} onFinish={@finish} />
+            <div>
+              <ChooseTask onChooseTask={@edit} onFinish={@finish} />
+              {@props.annotations.map (tool) =>
+                <Annotation key={tool.id} tool={tool} delete={@props.deleteTool} />
+              }
+            </div>
           when 'edit'
             <EditTask type={@state.type} onClick={@selectText} onComplete={@choose}/>
         }

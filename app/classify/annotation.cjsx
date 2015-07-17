@@ -14,9 +14,6 @@ module.exports = React.createClass
   labels:
     health: 'Health Issue'
     welfare: 'Welfare Issue'
-    
-  componentWillUnmount: ->
-    range.destroy() for range in @props.tool.ranges
   
   render: ->
     <div>

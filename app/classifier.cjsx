@@ -16,10 +16,7 @@ module.exports = React.createClass
   render: ->
     <div className="readymade-classification-interface">
       <div className="readymade-decision-tree-container">
-        <AnnotationToolbar onClick={@onToolbarClick} addTool={@newAnnotation} onFinish={@onFinishPage} />
-        {@state.annotations.map (tool) =>
-          <Annotation key={tool.id} tool={tool} delete={@deleteAnnotation} />
-        } 
+        <AnnotationToolbar annotations={@state.annotations} onClick={@onToolbarClick} addTool={@newAnnotation} deleteTool={@deleteAnnotation} onFinish={@onFinishPage} />
         <ClassificationSummary />
       </div>
       <div className="readymade-subject-viewer-container">
@@ -52,6 +49,7 @@ module.exports = React.createClass
     annotations = @state.annotations
     index = annotations.indexOf annotation
     annotations.splice index, 1
+    annotation.destroy()
     @setState {annotations}
 
   load: (subject) ->

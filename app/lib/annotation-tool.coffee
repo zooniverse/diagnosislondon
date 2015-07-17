@@ -12,4 +12,7 @@ class AnnotationTool
   addRange: (rangeTool) ->
     @ranges.push rangeTool
   
+  destroy: ->
+    range.destroy() for range in @ranges
+  
 module.exports = AnnotationTool
