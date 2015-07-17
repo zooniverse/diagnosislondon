@@ -13,10 +13,13 @@ module.exports = React.createClass
 
   render: ->
     <div className="account-bar" onKeyDown={@navigateMenu}>
-      <button aria-expanded={@state.expanded} aria-haspopup=true className="secret-button account-info" onClick={@toggleAccountMenu}>
-        <span className="display-name"><strong>{@props.user.display_name}</strong></span>
+      <div className="account-info">
+        <button aria-expanded={@state.expanded} aria-haspopup="true" className="secret-button display-name" onClick={@toggleAccountMenu}>
+          <strong>{@props.user.display_name}</strong>
+        </button>
         <Avatar user={@props.user} />
-      </button>
+        <a href="#" className="message-link"><i className="fa fa-envelope#{if @state.unread then '' else '-o'}" /></a>
+      </div>
       <div aria-hidden={!@state.expanded} aria-label="account menu" className="account-menu" ref="accountMenu">
         <button className="secret-button sign-out-button" type="button" onClick={@handleSignOutClick}>Sign out</button>
       </div>
@@ -30,8 +33,8 @@ module.exports = React.createClass
   
   navigateMenu: (e) ->
     return unless @state.expanded
-    focusables = []
-    focusables.push control for control in @getDOMNode().querySelectorAll '[role=button], button, a[href]'
+    focusables = [@getDOMNode().querySelector 'button']
+    focusables.push control for control in @getDOMNode().querySelectorAll '.account-menu button, .account-menu a[href]'
     focus_index = i for control, i in focusables when control == document.activeElement
     switch e.which
       when UP
