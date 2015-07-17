@@ -32,6 +32,9 @@ module.exports = React.createClass
       type: type
   
   choose: ->
+    @props.annotations.map (annotation) ->
+      range.el.classList.add 'complete' for range in annotation.ranges
+      
     @setState step: 'choose'
   
   finish: ->
