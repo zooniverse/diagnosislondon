@@ -7,7 +7,10 @@
   },
   "scripts": {
     "start": "gulp",
-    "deploy-to-staging": "gulp clean && gulp build && publisssh ./public/build zooniverse-static/preview.zooniverse.org/wellcome && gulp clean"
+    "deploy-to-staging": "gulp clean && gulp build && publisssh ./public/build zooniverse-static/preview.zooniverse.org/wellcome && gulp clean",
+    "get-fallback-polyfills": "curl \"$npm_package_config_fallbackPolyfillsURL\" > ./public/fallback-polyfills.js",
+    "get-font-awesome": "rm -rf ./public/font-awesome; curl --location \"$npm_package_config_fontAwesomeURL\" --output ./fa.zip && unzip -q ./fa.zip -d ./fa.tmp && mkdir ./public/font-awesome && mv ./fa.tmp/*/{css,fonts} ./public/font-awesome; rm -rf ./fa.{zip,tmp}",
+    "postinstall": "npm run get-fallback-polyfills && npm run get-font-awesome"
   },
   "devDependencies": {
     "babel-runtime": "^5.1.11",
@@ -37,5 +40,9 @@
   "dependencies": {
     "publisssh": "~1.0.0",
     "react": "0.13.2"
+  },
+  "config": {
+    "fontAwesomeURL": "https://github.com/FortAwesome/Font-Awesome/blob/8027c940b6/assets/font-awesome-4.2.0.zip?raw=true",
+    "fallbackPolyfillsURL": "https://cdn.polyfill.io/v1/polyfill.min.js?features=default,es6,Promise,fetch&flags=gated&ua=(MSIE%209.0)"
   }
 }
