@@ -26,8 +26,8 @@ module.exports = React.createClass
     </div>
   
   createAnnotation: (type) ->
-    sel = window.getSelection()
-    if sel.type is 'Range'
+    sel = document.getSelection()
+    if sel.rangeCount
       options =
         type: type
         text: @refs.textViewer.getDOMNode()
