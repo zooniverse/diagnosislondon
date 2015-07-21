@@ -22,7 +22,7 @@ module.exports = React.createClass
       <div className="readymade-subject-viewer-container">
         <div className="readymade-subject-viewer">
           <SubjectTools />
-          <SubjectViewer ref='subject_viewer' />
+          <SubjectViewer subject={@props.subjects[0]} ref='subject_viewer' />
         </div>
       </div>
     </div>
@@ -33,6 +33,7 @@ module.exports = React.createClass
   onFinishPage: ->
     console.log @state.annotations
     @reset()
+    @props.subjects.shift()
   
   newAnnotation: (type) ->
     annotations = @state.annotations

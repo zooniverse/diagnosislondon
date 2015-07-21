@@ -1,5 +1,4 @@
 React = require 'react'
-subject = require '../test-subject'
 
 SelectionTool = require '../lib/selection-tool'
 
@@ -7,12 +6,23 @@ module.exports = React.createClass
   displayName: 'SubjectViewer'
   
   getInitialState: ->
-    text: subject.text
+    text: 'Loading'
+  
+  componentDidMount: ->
+    text_url = @props.subject.locations[0]['text/plain']
+    @fetchOCR text_url
+    .then @updateText
+  
+  componentWillReceiveProps: (newProps) ->
+    text_url = newProps.subject.locations[0]['text/plain']
+    @fetchOCR text_url
+    .then @updateText
   
   render: ->
+    image = @props.subject.locations[1]['image/jpeg']
     <div className="readymade-marking-surface-container">
-      <pre ref = 'textViewer' className="text-viewer">{@state.text}</pre>
-      <img  className="subject-image" src="http://demo.zooniverse.org/wellcome/offline/actual_d01aae95-68a1-4518-b509-3c159ffb40c9.jpg" alt="" />
+      <div ref = 'textViewer' className="text-viewer">{@state.text}</div>
+      <img  className="subject-image" src={image} alt="" />
     </div>
   
   createAnnotation: (type) ->
@@ -22,3 +32,10 @@ module.exports = React.createClass
         type: type
         text: @refs.textViewer.getDOMNode()
       tool = new SelectionTool options
+  
+  fetchOCR: (url) ->
+    fetch url
+    .then (response)-> return response.text()
+    
+  updateText: (text) ->
+    @setState {text}

@@ -23,7 +23,7 @@ currentUser = (response) ->
   React.render <UserStatus user=user auth=client.api.auth />, document.querySelector '#user-status'
     
   subjectQuery =
-    workflow_id: 643 # annoTate, for testing
+    workflow_id: 1483 # test workflow on panoptes-staging
     sort: 'queued'
   client.api.type('subjects').get subjectQuery
     
