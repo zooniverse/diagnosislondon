@@ -12,6 +12,9 @@ module.exports = React.createClass
   
   getInitialState: ->
     annotations: []
+  
+  getDefaultProps: ->
+    subjects: []
 
   render: ->
     <div className="readymade-classification-interface">
