@@ -17,26 +17,17 @@ client = new Panoptes
   host: 'https://panoptes-staging.zooniverse.org'
 
 auth = client.api.auth
-
-subjectQuery =
-  workflow_id: 1483 # test workflow on panoptes-staging
-  sort: 'queued'
   
-currentUser = (response) ->
+render = (response) ->
   user = response
   React.render <Profile user=user auth=client.api.auth />, document.querySelector '#profile'
   React.render <UserStatus user=user auth=client.api.auth />, document.querySelector '#user-status'
-
-  client.api.type('subjects').get subjectQuery
-    
-subjects = (response) ->
-  React.render <Classifier subjects=response />, document.querySelector '#classify'
+  React.render <Classifier api=client.api />, document.querySelector '#classify'
 
 handleAuthChange = (e) ->
   auth
     .checkCurrent()
-    .then( currentUser )
-    .then( subjects )
+    .then( render )
 
 auth.listen handleAuthChange
 
