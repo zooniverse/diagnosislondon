@@ -6,15 +6,12 @@ Annotation = require './classify/annotation'
 AnnotationToolbar = require './classify/annotation-toolbar'
 ClassificationSummary = require './classify/summary'
 AnnotationTool = require './lib/annotation-tool'
+Subjects = require './lib/subjects'
 
 module.exports = React.createClass
   displayName: 'Classifier'
   
-  subjectQuery:
-    workflow_id: 1483 # test workflow on panoptes-staging
-    sort: 'queued'
-  
-  subjects: []
+  subjects: null
   classification:
     annotations: []
   
@@ -22,10 +19,13 @@ module.exports = React.createClass
     annotations: []
     currentSubject: null
   
+  componentWillMount: ->
+    @subjects = new Subjects @props.api
+  
   componentWillReceiveProps: (newProps)->
     @reset()
-    @subjects = []
-    @fetchSubjects()
+    @subjects.flush()
+    @subjects.fetch()
     .then @nextSubject
 
   render: ->
@@ -55,8 +55,15 @@ module.exports = React.createClass
     @addText @refs.subject_viewer.createAnnotation e.currentTarget.value
   
   onFinishPage: ->
+    @classification.update
+      completed: true
+      'metadata.finished_at': (new Date).toISOString()
+      'metadata.viewport':
+        width: innerWidth
+        height: innerHeight
     console.log JSON.stringify @classification
     console.log @state.currentSubject?.metadata.image
+    @classification.save()
     @reset()
     @nextSubject()
   
@@ -78,35 +85,27 @@ module.exports = React.createClass
     annotations.splice index, 1
     annotation.destroy()
     @setState {annotations}
-
-  fetchSubjects: ->
-    @props.api.type('subjects')
-    .get @subjectQuery
-    .then (newSubjects) =>
-      @subjects.push subject for subject in newSubjects
     
   nextSubject: ->
-    currentSubject = @subjects.shift()
+    currentSubject = @subjects.next()
     # create a new classification here
-    @classification = @createClassification currentSubject
-    @fetchSubjects() if @subjects.length < 2
+    @classification = @createClassification currentSubject if currentSubject?
     @setState {currentSubject}
   
   createClassification: (subject)->
     classification = @props.api
-      .type('classification')
+      .type('classifications')
       .create
         annotations: []
         metadata:
-          workflow_version: 1.1
+          workflow_version: "1.1"
           started_at: (new Date).toISOString()
           user_agent: navigator.userAgent
           user_language: navigator.language
           utc_offset: ((new Date).getTimezoneOffset() * 60).toString() # In seconds
-          subject_dimensions: (null for location in subject.locations)
         links:
-          project: 908
-          workflow: 1483
+          project: "908"
+          workflow: "1483"
           subjects: [subject.id]
 
   reset: ->
