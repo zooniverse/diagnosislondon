@@ -5,27 +5,19 @@ SelectionTool = require '../lib/selection-tool'
 module.exports = React.createClass
   displayName: 'SubjectViewer'
   
+  mediaSrcs: {}
+  
   getInitialState: ->
     text: 'Loading'
   
   componentDidMount: ->
-    text_url = @props.subject?.locations[0]['text/plain']
-    if text_url
-      @fetchOCR text_url
-        .then @updateText
-    else
-      @updateText ''
+    @loadText @props.subject?.locations
   
   componentWillReceiveProps: (newProps) ->
-    text_url = newProps.subject?.locations[0]['text/plain']
-    if text_url
-      @fetchOCR text_url
-        .then @updateText
-    else
-      @updateText ''
+    @loadText newProps.subject?.locations
   
   render: ->
-    image = @props.subject?.locations[1]['image/jpeg']
+    image = @mediaSrcs['image/jpeg']
     <div className="readymade-marking-surface-container">
       <div ref = 'textViewer' className="text-viewer">{@state.text}</div>
       {<img  className="subject-image" src={image} alt="" /> if image}
@@ -42,6 +34,15 @@ module.exports = React.createClass
   fetchOCR: (url) ->
     fetch url
     .then (response)-> return response.text()
+    
+  loadText: (locations) ->
+    locations?.map (location, i) =>
+      @mediaSrcs["#{Object.keys(location)[0]}"] = location["#{Object.keys(location)[0]}"]
+    if @mediaSrcs['text/plain']
+      @fetchOCR @mediaSrcs['text/plain']
+        .then @updateText
+    else
+      @updateText ''
     
   updateText: (text) ->
     @setState {text}
