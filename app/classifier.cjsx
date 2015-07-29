@@ -36,7 +36,7 @@ module.exports = React.createClass
       </div>
       <div className="readymade-subject-viewer-container">
         <div className="readymade-subject-viewer">
-          <SubjectTools />
+          <SubjectTools api={@props.api} subject={@state.currentSubject} />
           <SubjectViewer subject={@state.currentSubject} ref='subject_viewer' />
         </div>
       </div>
