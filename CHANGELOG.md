@@ -6,6 +6,8 @@
 
 **Merged pull requests:**
 
+- Favourites button [\#3](https://github.com/zooniverse/wellcome/pull/3) ([eatyourgreens](https://github.com/eatyourgreens))
+
 - List all annotations after editing one [\#2](https://github.com/zooniverse/wellcome/pull/2) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Expandable menu [\#1](https://github.com/zooniverse/wellcome/pull/1) ([eatyourgreens](https://github.com/eatyourgreens))
