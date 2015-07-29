@@ -7,13 +7,13 @@ AnnotationToolbar = require './classify/annotation-toolbar'
 ClassificationSummary = require './classify/summary'
 AnnotationTool = require './lib/annotation-tool'
 Subjects = require './lib/subjects'
+Classifications = require './lib/classifications'
 
 module.exports = React.createClass
   displayName: 'Classifier'
   
   subjects: null
-  classification:
-    annotations: []
+  classifications: null
   
   getInitialState: ->
     annotations: []
@@ -21,6 +21,7 @@ module.exports = React.createClass
   
   componentWillMount: ->
     @subjects = new Subjects @props.api
+    @classifications = new Classifications @props.api
   
   componentWillReceiveProps: (newProps)->
     @reset()
@@ -49,21 +50,16 @@ module.exports = React.createClass
     @state.annotations.map (annotation, i) ->
       tasks[annotation.type] ?= []
       tasks[annotation.type].push (range.annotation for range in annotation.ranges)
-    @classification.annotations = ({task: key, value: value} for key, value of tasks)
+    @classifications?.set_annotations ({task: key, value: value} for key, value of tasks)
     
   onToolbarClick: (e) ->
     @addText @refs.subject_viewer.createAnnotation e.currentTarget.value
   
   onFinishPage: ->
-    @classification.update
-      completed: true
-      'metadata.finished_at': (new Date).toISOString()
-      'metadata.viewport':
-        width: innerWidth
-        height: innerHeight
-    console.log JSON.stringify @classification
+    @classifications.finish()
+    console.log JSON.stringify @classifications.current()
     console.log @state.currentSubject?.metadata.image
-    @classification.save()
+    @classifications.current().save()
     @reset()
     @nextSubject()
   
@@ -89,24 +85,8 @@ module.exports = React.createClass
   nextSubject: ->
     currentSubject = @subjects.next()
     # create a new classification here
-    @classification = @createClassification currentSubject if currentSubject?
+    @classifications.create currentSubject if currentSubject?
     @setState {currentSubject}
-  
-  createClassification: (subject)->
-    classification = @props.api
-      .type('classifications')
-      .create
-        annotations: []
-        metadata:
-          workflow_version: "1.1"
-          started_at: (new Date).toISOString()
-          user_agent: navigator.userAgent
-          user_language: navigator.language
-          utc_offset: ((new Date).getTimezoneOffset() * 60).toString() # In seconds
-        links:
-          project: "908"
-          workflow: "1483"
-          subjects: [subject.id]
 
   reset: ->
     annotations = @state.annotations

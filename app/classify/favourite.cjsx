@@ -1,4 +1,5 @@
 React = require 'react'
+Favourites = require '../lib/favourites'
 
 module.exports = React.createClass
   displayName: 'FavouriteButton'
@@ -9,11 +10,10 @@ module.exports = React.createClass
     favourited: false
   
   componentWillMount: ->
-    @props.api.type('collections').get({project_id: 908, favorite: true})
-      .then ([favorites]) =>
-        if favorites?
-          @favourites = favorites
-          @checkFavourite @props.subject
+    @favourites = new Favourites @props.api
+    @favourites.fetch()
+      .then =>
+        @checkFavourite @props.subject
   
   componentWillUnmount: ->
     @favourites = null
@@ -31,37 +31,20 @@ module.exports = React.createClass
     </label>
   
   checkFavourite: (subject) ->
-    @favourites?.get('subjects', id: subject.id)
-      .then ([subject]) => 
-        favourited = subject?
+    @favourites?.check subject
+      .then (favourited) =>
         @setState {favourited}
-    
-  createFavourites: ->
-    display_name = 'Diagnosis London Favourites'
-    project = 908
-    subjects = [@props.subject.id]
-    favorite = true
-
-    links = {subjects}
-    links.project = project if project?
-    collection = {favorite, display_name, links}
-
-    @setState favourited: true
-    @props.api.type('collections').create(collection).save().then (favourites)=>
-      @favourites = favourites
       
   toggleFavourite: (e)->
-    if not @favourites?
-      @createFavourites()
-    else if @state.favourited
+    if @state.favourited
       @removeSubject()
     else
       @addSubject()
   
   removeSubject: ->
-    @favourites.removeLink('subjects', [@props.subject.id.toString()])
+    @favourites.remove @props.subject
     @setState favourited: false
   
   addSubject: ->
-    @favourites.addLink('subjects', [@props.subject.id.toString()])
+    @favourites.add @props.subject
     @setState favourited: true
