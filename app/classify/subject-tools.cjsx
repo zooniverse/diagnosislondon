@@ -10,8 +10,7 @@ module.exports = React.createClass
       <label className="readymade-has-clickable"> 
         <input type="checkbox" name="hide-old-marks" /> 
         <span className="readymade-clickable"> 
-          <i className="fa fa-eye-slash readymade-clickable-not-checked"></i> 
-          <i className="fa fa-eye-slash readymade-clickable-checked" style={color: 'orangered'}></i> 
+          <span className="fa fa-eye-slash"></span>
           <span>Hide old marks</span> 
         </span> 
       </label>

@@ -24,8 +24,7 @@ module.exports = React.createClass
     <label className="readymade-has-clickable"> 
       <input type="checkbox" name="favorite" checked={@state.favourited} onChange={@toggleFavourite} /> 
       <span className="readymade-clickable"> 
-        <i className="fa fa-heart-o readymade-clickable-not-checked"></i> 
-        <i className="fa fa-heart readymade-clickable-checked" style={color: 'orangered'}></i> 
+        <span className="fa fa-heart#{if @state.favourited then '' else '-o'}"></span>
         <span>Favourite</span> 
       </span> 
     </label>
