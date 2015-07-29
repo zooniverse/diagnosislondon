@@ -11,16 +11,9 @@ module.exports = React.createClass
   
   componentWillMount: ->
     @setState user: @props.user
-    
-  componentDidMount: ->
-    @props.auth.listen @handleAuthChange
-    @handleAuthChange()
   
-  handleAuthChange: (e) ->
-    @props.auth
-      .checkCurrent()
-      .then (user) =>
-        @setState user: user
+  componentWillReceiveProps: (newProps) ->
+    @setState user: newProps.user unless newProps.user is @props.user
 
   render: ->
     <div>

@@ -13,12 +13,13 @@ module.exports = React.createClass
       .then ([favorites]) =>
         if favorites?
           @favourites = favorites
+          @checkFavourite @props.subject
+  
+  componentWillUnmount: ->
+    @favourites = null
 
   componentWillReceiveProps: (newProps)->
-    @favourites?.get('subjects', id: newProps.subject.id)
-      .then ([subject]) => 
-        favourited = subject?
-        @setState {favourited}
+    @checkFavourite newProps.subject unless newProps.subject is @props.subject
   
   render: ->
     <label className="readymade-has-clickable"> 
@@ -29,6 +30,12 @@ module.exports = React.createClass
       </span> 
     </label>
   
+  checkFavourite: (subject) ->
+    @favourites?.get('subjects', id: subject.id)
+      .then ([subject]) => 
+        favourited = subject?
+        @setState {favourited}
+    
   createFavourites: ->
     display_name = 'Diagnosis London Favourites'
     project = 908

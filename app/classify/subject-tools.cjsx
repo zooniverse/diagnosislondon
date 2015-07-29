@@ -6,7 +6,7 @@ module.exports = React.createClass
   
   render: ->
     <div className="drawing-controls">
-      <Favourite api={@props.api} subject={@props.subject} />
+      {<Favourite api={@props.api} subject={@props.subject} /> if @props.subject?}
       <label className="readymade-has-clickable"> 
         <input type="checkbox" name="hide-old-marks" /> 
         <span className="readymade-clickable"> 

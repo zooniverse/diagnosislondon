@@ -20,7 +20,7 @@ auth = client.api.auth
   
 render = (response) ->
   user = response
-  React.render <Profile user=user auth=client.api.auth />, document.querySelector '#profile'
+  React.render <Profile user=user />, document.querySelector '#profile'
   React.render <UserStatus user=user auth=client.api.auth />, document.querySelector '#user-status'
   React.render <Classifier api=client.api />, document.querySelector '#classify'
 
