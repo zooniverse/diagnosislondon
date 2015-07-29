@@ -36,6 +36,7 @@ module.exports = React.createClass
     .then (response)-> return response.text()
     
   loadText: (locations) ->
+    @mediaSrcs = {}
     locations?.map (location, i) =>
       @mediaSrcs["#{Object.keys(location)[0]}"] = location["#{Object.keys(location)[0]}"]
     if @mediaSrcs['text/plain']
