@@ -40,6 +40,7 @@ module.exports = React.createClass
     links.project = project if project?
     collection = {favorite, display_name, links}
 
+    @setState favourited: true
     @props.api.type('collections').create(collection).save().then (favourites)=>
       @favourites = favourites
       
