@@ -20,6 +20,8 @@ client = new Panoptes
 auth = client.api.auth
   
 render = (user) ->
+  projects = new Projects client.api
+  projects.fetch().then -> console.log projects.current()
   React.render <Profile user=user />, document.querySelector '#profile'
   React.render <UserStatus user=user auth=client.api.auth />, document.querySelector '#user-status'
   React.render <Classifier api=client.api />, document.querySelector '#classify'
