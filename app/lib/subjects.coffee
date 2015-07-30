@@ -6,7 +6,6 @@ class Subjects
     sort: 'queued'
   
   constructor: (@api)->
-    @fetch()
   
   current: ->
     @queue[0]

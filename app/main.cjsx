@@ -4,6 +4,7 @@ Classifier = require './classifier'
 Profile = require './profile'
 UserStatus = require './user-status'
 Panoptes = require 'panoptes-client'
+Projects = require './lib/projects'
 a11y = require 'react-a11y'
 
 a11y_options =
@@ -18,8 +19,7 @@ client = new Panoptes
 
 auth = client.api.auth
   
-render = (response) ->
-  user = response
+render = (user) ->
   React.render <Profile user=user />, document.querySelector '#profile'
   React.render <UserStatus user=user auth=client.api.auth />, document.querySelector '#user-status'
   React.render <Classifier api=client.api />, document.querySelector '#classify'
@@ -31,6 +31,6 @@ handleAuthChange = (e) ->
 
 auth.listen handleAuthChange
 
-handleAuthChange()
+auth.checkCurrent()
 
 window.React = React

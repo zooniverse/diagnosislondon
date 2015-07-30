@@ -22,6 +22,8 @@ module.exports = React.createClass
   componentWillMount: ->
     @subjects = new Subjects @props.api
     @classifications = new Classifications @props.api
+    @subjects.fetch()
+    .then @nextSubject
   
   componentWillReceiveProps: (newProps)->
     @reset()
