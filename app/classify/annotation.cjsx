@@ -19,7 +19,7 @@ module.exports = React.createClass
     <div>
       {@labels[@props.tool.type]} <button ref="delete" onClick={@delete}>X</button>
       <ul>
-      {@props.tool.ranges.map (range) =>
+      {for type, range of @props.tool.ranges
         <TextRange key={range.id} tool={range} />
       }
       </ul>

@@ -2,17 +2,18 @@ class AnnotationTool
   @count: 0
   
   type: 'health'
-  ranges: []
+  ranges: {}
   
   constructor: (@type) ->
     AnnotationTool.count++
     @id = "#{@type}-#{AnnotationTool.count}"
-    @ranges = []
+    @ranges = {}
   
   addRange: (rangeTool) ->
-    @ranges.push rangeTool
+    @ranges[rangeTool.type]?.destroy()
+    @ranges[rangeTool.type] = rangeTool
   
   destroy: ->
-    range.destroy() for range in @ranges
+    @ranges[type].destroy() for type of @ranges
   
 module.exports = AnnotationTool
