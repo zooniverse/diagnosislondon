@@ -2,15 +2,16 @@ class Subjects
   queue: []
   api: null
   query:
-    workflow_id: 1483 # test workflow on panoptes-staging
     sort: 'queued'
   
-  constructor: (@api)->
+  constructor: (@api, @project)->
+    @query.workflow_id = @project?.links.workflows[0]
   
   current: ->
     @queue[0]
     
   fetch: ->
+    return Promise.resolve [] unless @query.workflow_id?
     @api.type('subjects')
     .get @query
     .then (newSubjects) =>

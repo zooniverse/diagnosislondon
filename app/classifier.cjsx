@@ -20,12 +20,10 @@ module.exports = React.createClass
     currentSubject: null
   
   componentWillMount: ->
-    @subjects = new Subjects @props.api
-    @classifications = new Classifications @props.api
-    @subjects.fetch()
-    .then @nextSubject
   
   componentWillReceiveProps: (newProps)->
+    @subjects = new Subjects newProps.api, newProps.project
+    @classifications = new Classifications newProps.api, newProps.project
     @reset()
     @subjects.flush()
     @subjects.fetch()
@@ -39,7 +37,7 @@ module.exports = React.createClass
       </div>
       <div className="readymade-subject-viewer-container">
         <div className="readymade-subject-viewer">
-          <SubjectTools api={@props.api} subject={@state.currentSubject} />
+          <SubjectTools project={@props.project} api={@props.api} subject={@state.currentSubject} />
           <SubjectViewer subject={@state.currentSubject} ref='subject_viewer' />
         </div>
       </div>

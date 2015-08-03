@@ -12,27 +12,51 @@ a11y_options =
 
 # a11y React, a11y_options
 
-# let's try talking to panoptes by getting the current user and some subjects for a known workflow
-client = new Panoptes
-  appID: '535759b966935c297be11913acee7a9ca17c025f9f15520e7504728e71110a27'
-  host: 'https://panoptes-staging.zooniverse.org'
-
-auth = client.api.auth
+Main = React.createClass
+  displayName: 'Main'
   
-render = (user) ->
-  projects = new Projects client.api
-  projects.fetch().then -> console.log projects.current()
-  React.render <Profile user=user />, document.querySelector '#profile'
-  React.render <UserStatus user=user auth=client.api.auth />, document.querySelector '#user-status'
-  React.render <Classifier api=client.api />, document.querySelector '#classify'
+  projects: null
+  client: null
+  
+  getInitialState: ->
+    user: null
+    project: null
+  
+  componentWillMount: ->
+    @client = new Panoptes
+      appID: '535759b966935c297be11913acee7a9ca17c025f9f15520e7504728e71110a27'
+      host: 'https://panoptes-staging.zooniverse.org'
+      
+    @projects = new Projects @client.api
+    
+    @client.api.auth.listen @handleAuthChange
 
-handleAuthChange = (e) ->
-  auth
-    .checkCurrent()
-    .then( render )
+    @client.api.auth.checkCurrent()
+  
+  componentDidUpdate:->
+    React.render <Profile project={@state.project} user={@state.user} />, document.querySelector '#profile'
+    React.render <UserStatus user={@state.user} auth={@client.api.auth} />, document.querySelector '#user-status'
+    React.render <Classifier project={@state.project} user={@state.user} api={@client.api} />, document.querySelector '#classify'
+  
+  render: ->
+    <div className="readymade-home-page-content">
+      <div className="readymade-creator">
+          <div className="readymade-project-producer">Wellcome Library &amp; Zooniverse</div>
+          <h1 className="readymade-project-title">{@state.project?.display_name}</h1>
+      </div>
+      <div className="readymade-project-summary"> Mapping work and public health in the London MOH reports </div>
+      <div className="readymade-project-description"> Short description </div>
+      <div className="readymade-footer"> <a href="#/classify" className="readymade-call-to-action"> Get started! </a> </div>
+    </div>
+  
+  handleAuthChange: (e) ->
+    @client.api.auth
+      .checkCurrent()
+      .then (user) =>
+        @setState {user}
+    
+        @projects?.fetch().then =>
+          project = @projects.current()
+          @setState {project}
 
-auth.listen handleAuthChange
-
-auth.checkCurrent()
-
-window.React = React
+React.render <Main />, document.querySelector '#home'

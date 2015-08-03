@@ -2,14 +2,14 @@ class Favourites
   favourites: null
   api: null
   query:
-    project_id: 908
     favorite: true
   
-  constructor: (@api)->
+  constructor: (@api, @project)->
+    @query.project_id = @project?.id
     
   create: (subject)->
     display_name = 'Diagnosis London Favourites'
-    project = 908
+    project = @project?.id
     subjects = [subject.id]
     favorite = true
 

@@ -1,8 +1,12 @@
 class Classifications
   api: null
+  project: null
   classification: null
   
-  constructor: (@api)->
+  constructor: (@api, @project)->
+    @project?.get 'workflows'
+      .then ([workflow]) =>
+        @workflow = workflow
     
   current: ->
     @classification
@@ -19,8 +23,8 @@ class Classifications
           user_language: navigator.language
           utc_offset: ((new Date).getTimezoneOffset() * 60).toString() # In seconds
         links:
-          project: "908"
-          workflow: "1483"
+          project: @project?.id.toString()
+          workflow: @project?.links.workflows[0]
           subjects: [subject.id]
   
   set_annotations: (annotations) ->

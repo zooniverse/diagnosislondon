@@ -10,7 +10,7 @@ module.exports = React.createClass
     favourited: false
   
   componentWillMount: ->
-    @favourites = new Favourites @props.api
+    @favourites = new Favourites @props.api, @props.project
     @favourites.fetch()
       .then =>
         @checkFavourite @props.subject
