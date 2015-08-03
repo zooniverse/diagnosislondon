@@ -5,19 +5,10 @@ module.exports = React.createClass
   
   getDefaultProps: ->
     user: null
-    
-  getInitialState: ->
-    user: null
   
-  componentWillMount: ->
-    @setState user: @props.user
-  
-  componentWillReceiveProps: (newProps) ->
-    @setState user: newProps.user unless newProps.user is @props.user
-
   render: ->
     <div>
-      {if @state.user?
-        <p>Yo, {@state.user.display_name}!</p>
+      {if @props.user?
+        <p>Yo, {@props.user.display_name}!</p>
       }
     </div>
