@@ -4,9 +4,6 @@ class Classifications
   classification: null
   
   constructor: (@api, @project)->
-    @project?.get 'workflows'
-      .then ([workflow]) =>
-        @workflow = workflow
     
   current: ->
     @classification

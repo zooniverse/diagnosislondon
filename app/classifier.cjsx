@@ -36,10 +36,13 @@ module.exports = React.createClass
         <ClassificationSummary />
       </div>
       <div className="readymade-subject-viewer-container">
-        <div className="readymade-subject-viewer">
-          <SubjectTools project={@props.project} api={@props.api} subject={@state.currentSubject} />
-          <SubjectViewer subject={@state.currentSubject} ref='subject_viewer' />
-        </div>
+        {
+          if @state.currentSubject?
+            <div className="readymade-subject-viewer">
+              <SubjectTools project={@props.project} api={@props.api} subject={@state.currentSubject} />
+              <SubjectViewer subject={@state.currentSubject} ref='subject_viewer' />
+            </div>
+        }
       </div>
     </div>
   
