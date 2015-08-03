@@ -6,6 +6,7 @@ Page = require './page'
 UserStatus = require './user-status'
 Panoptes = require 'panoptes-client'
 Projects = require './lib/projects'
+Auth = require './lib/auth'
 a11y = require 'react-a11y'
 
 a11y_options =
@@ -30,9 +31,17 @@ Main = React.createClass
       
     @projects = new Projects @client.api
     
+    @auth = new Auth @client.api
+    
     @client.api.auth.listen @handleAuthChange
 
-    @client.api.auth.checkCurrent()
+    @auth.getUser()
+      .then (user) =>
+        @setState {user}
+    
+        @projects?.fetch().then =>
+          project = @projects.current()
+          @setState {project}
     
   componentDidUpdate:->
     @setBackground @state.project if @state.project?
