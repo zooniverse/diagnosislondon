@@ -32,8 +32,9 @@ Main = React.createClass
     @client.api.auth.listen @handleAuthChange
 
     @client.api.auth.checkCurrent()
-  
+    
   componentDidUpdate:->
+    @setBackground @state.project if @state.project?
     React.render <Profile project={@state.project} user={@state.user} />, document.querySelector '#profile'
     React.render <UserStatus user={@state.user} auth={@client.api.auth} />, document.querySelector '#user-status'
     React.render <Classifier project={@state.project} user={@state.user} api={@client.api} />, document.querySelector '#classify'
@@ -44,11 +45,17 @@ Main = React.createClass
           <div className="readymade-project-producer">Wellcome Library &amp; Zooniverse</div>
           <h1 className="readymade-project-title">{@state.project?.display_name}</h1>
       </div>
-      <div className="readymade-project-summary"> Mapping work and public health in the London MOH reports </div>
-      <div className="readymade-project-description"> Short description </div>
-      <div className="readymade-footer"> <a href="#/classify" className="readymade-call-to-action"> Get started! </a> </div>
+      <div className="readymade-project-summary"> {@state.project?.description} </div>
+      <div className="readymade-project-description"> {@state.project?.introduction} </div>
+      {<div className="readymade-footer"> <a href="#/classify" className="readymade-call-to-action"> Get started! </a> </div> if @state.project?}
     </div>
   
+  setBackground: (project) ->
+    project.get 'background'
+      .then (background) ->
+        document.querySelector '#site-background'
+          .style.backgroundImage = "url(#{background.src})"
+          
   handleAuthChange: (e) ->
     @client.api.auth
       .checkCurrent()
@@ -58,5 +65,6 @@ Main = React.createClass
         @projects?.fetch().then =>
           project = @projects.current()
           @setState {project}
-
+          
+            
 React.render <Main />, document.querySelector '#home'
