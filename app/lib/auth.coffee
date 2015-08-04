@@ -31,6 +31,10 @@ class Auth
       .catch (error) =>
         console.log error
   
+  signOut: ->
+    @_removeToken()
+    @api.auth.emit 'change'
+  
   _setupAuth: (token) ->
       @api.headers['Authorization'] = 'Bearer ' + token
       localStorage.setItem 'bearer_token', token
@@ -46,11 +50,11 @@ class Auth
     token
 
   _setToken: (token) ->
-    api.headers['Authorization'] = 'Bearer ' + token
+    @api.headers['Authorization'] = 'Bearer ' + token
     localStorage.setItem 'bearer_token', token
 
   _removeToken: ->
-    api.headers['Authorization'] = null
+    @api.headers['Authorization'] = null
     localStorage.removeItem 'bearer_token'
 
 module.exports = Auth

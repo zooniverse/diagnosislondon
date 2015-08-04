@@ -35,18 +35,12 @@ Main = React.createClass
     
     @client.api.auth.listen @handleAuthChange
 
-    @auth.getUser()
-      .then (user) =>
-        @setState {user}
-    
-        @projects?.fetch().then =>
-          project = @projects.current()
-          @setState {project}
+    @handleAuthChange()
     
   componentDidUpdate:->
     @setBackground @state.project if @state.project?
     React.render <Profile project={@state.project} user={@state.user} />, document.querySelector '#profile'
-    React.render <UserStatus user={@state.user} auth={@client.api.auth} />, document.querySelector '#user-status'
+    React.render <UserStatus user={@state.user} auth={@auth} />, document.querySelector '#user-status'
     React.render <Classifier project={@state.project} user={@state.user} api={@client.api} />, document.querySelector '#classify'
     React.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
   
@@ -68,8 +62,8 @@ Main = React.createClass
           .style.backgroundImage = "url(#{background.src})"
           
   handleAuthChange: (e) ->
-    @client.api.auth
-      .checkCurrent()
+    @auth
+      .getUser()
       .then (user) =>
         @projects?.fetch().then =>
           project = @projects.current()
