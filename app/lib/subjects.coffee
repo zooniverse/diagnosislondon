@@ -7,6 +7,9 @@ class Subjects
   constructor: (@api, @project)->
     @query.workflow_id = @project?.links.workflows[0]
   
+  update: (opts) ->
+    @[opt] = value for opt, value of opts
+    
   current: ->
     @queue[0]
     

@@ -60,11 +60,9 @@ Main = React.createClass
     @client.api.auth
       .checkCurrent()
       .then (user) =>
-        @setState {user}
-    
         @projects?.fetch().then =>
           project = @projects.current()
-          @setState {project}
+          @setState {user, project}
           
             
 React.render <Main />, document.querySelector '#home'

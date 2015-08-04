@@ -7,6 +7,9 @@ class Classifications
     
   current: ->
     @classification
+  
+  update: (opts) ->
+    @[opt] = value for opt, value of opts
     
   create: (subject)->
     @classification = @api
