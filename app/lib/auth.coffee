@@ -25,16 +25,9 @@ class Auth
   getUser: ->
     token = @_getToken()
 
-    fetch(@api.root + '/me', {
-      method: 'GET'
-      headers:
-        'Authorization': 'Bearer ' + token
-        'Accept': 'Accept: application/vnd.api+json; version=1'
-      })
-      .then checkStatus
-      .then parseJson
-      .then (data) =>
-        data.users[0]
+    @api.get '/me'
+      .then ([user]) =>
+        user
       .catch (error) =>
         console.log error
   

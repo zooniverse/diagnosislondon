@@ -4,8 +4,8 @@ LoginDialog = require './login-dialog'
 
 module.exports = React.createClass
   displayName: 'LoginBar'
-  client_id: '400ef4a4e543a717d370c4304a460eeb1ac4c9fc1b00897b92a67da5818a1603'
-  app_uri: 'http://preview.zooniverse.org/wellcome'
+  client_id: '324bbe871acddc1457878b111a6772e25556928644c5ef9ee1784035ad0b0554'
+  app_uri: window.location
 
   render: ->
     <div className="login-bar">
