@@ -95,4 +95,5 @@ module.exports = React.createClass
     annotations = @state.annotations
     annotation.destroy() for annotation in annotations
     annotations = []
-    @setState {annotations}
+    currentSubject = null
+    @setState {annotations, currentSubject}
