@@ -1,4 +1,5 @@
 init = require './init'
+config = require './config'
 React = require 'react'
 Classifier = require './classifier'
 Profile = require './profile'
@@ -25,9 +26,7 @@ Main = React.createClass
     project: null
   
   componentWillMount: ->
-    @client = new Panoptes
-      appID: '324bbe871acddc1457878b111a6772e25556928644c5ef9ee1784035ad0b0554'
-      host: 'https://panoptes.zooniverse.org'
+    @client = new Panoptes config.panoptes
       
     @projects = new Projects @client.api
     
