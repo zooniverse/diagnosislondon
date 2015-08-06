@@ -1,5 +1,9 @@
 React = require 'react'
-{Markdown} = require 'markdownz'
+MarkdownIt = require 'markdown-it'
+
+md = new MarkdownIt
+  linkify: true
+  breaks: true
 
 module.exports = React.createClass
   displayName: 'PanoptesPage'
@@ -16,10 +20,7 @@ module.exports = React.createClass
       .then @update
   
   render: ->
-    console.log @state
-    <Markdown className="column">
-      {@state.content}
-    </Markdown>
+    <div className="column" dangerouslySetInnerHTML={{__html: md.render @state.content}} />
   
   update: (page) ->
     content = page?.content

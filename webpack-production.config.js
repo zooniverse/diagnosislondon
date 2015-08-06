@@ -22,7 +22,6 @@ module.exports = {
       { test: /\.jsx$/, loader: 'jsx-loader'},
       { test: /\.coffee$/, loader: 'coffee-loader' },
       { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.js$/, loader: 'babel-loader' },
     ],
     noParse: [
       /^react$/
