@@ -2,6 +2,7 @@ init = require './init'
 React = require 'react'
 Classifier = require './classifier'
 Profile = require './profile'
+Page = require './page'
 UserStatus = require './user-status'
 Panoptes = require 'panoptes-client'
 Projects = require './lib/projects'
@@ -38,6 +39,7 @@ Main = React.createClass
     React.render <Profile project={@state.project} user={@state.user} />, document.querySelector '#profile'
     React.render <UserStatus user={@state.user} auth={@client.api.auth} />, document.querySelector '#user-status'
     React.render <Classifier project={@state.project} user={@state.user} api={@client.api} />, document.querySelector '#classify'
+    React.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
   
   render: ->
     <div className="readymade-home-page-content">
