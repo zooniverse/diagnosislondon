@@ -48,8 +48,9 @@ class TabSet
   add: (tab, panel, active = false) =>
     tab = tab[0] if tab[0]?
     panel = panel[0] if panel[0]?
-    tab_control = new TabControl tab, panel, active
+    tab_control = new TabControl tab, panel
     @tabcontrols.push tab_control
+    @activate tab if active
     tab.addEventListener 'click', @handleClick
     tab.addEventListener 'keydown', @handleKeydown
     tab.addEventListener 'focus', @handleFocus

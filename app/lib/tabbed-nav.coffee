@@ -17,8 +17,8 @@ for link, i in nav_links
       # home is a special case
       href = '#' if href == '#home'
       hash = href.replace '#', '#/'
-      tabset.add tab, panel, hash == current_location
-      console.log panel
+      active = (hash == current_location) || (hash == '#/')
+      tabset.add tab, panel, active
       
       do (href) ->
         link.addEventListener 'click', (e) ->
