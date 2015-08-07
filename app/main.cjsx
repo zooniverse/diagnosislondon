@@ -11,7 +11,7 @@ a11y = require 'react-a11y'
 a11y_options =
   includeSrcNode: true
 
-# a11y React, a11y_options
+a11y React, a11y_options
 
 Main = React.createClass
   displayName: 'Main'

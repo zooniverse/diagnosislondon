@@ -1,10 +1,6 @@
 {
   "name": "wellcome",
   "version": "0.0.1",
-  "dependencies": {
-    "marking-surface": "0.6.4",
-    "zooniverse-readymade": "zooniverse/zooniverse-readymade#a11y"
-  },
   "scripts": {
     "start": "gulp",
     "deploy-to-staging": "gulp clean && gulp build && publisssh ./public/build zooniverse-static/preview.zooniverse.org/wellcome && gulp clean",
