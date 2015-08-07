@@ -31,15 +31,5 @@ module.exports = {
     fs: 'empty'
   },
   watchDelay: 0,
-  devtool: 'eval-source-map',
-  plugins: [
-    function() {
-      this.plugin("done", function(stats) {
-        require("fs").writeFileSync(
-          path.join(__dirname, "public/build", "stats.json"),
-          JSON.stringify(stats.toJson())
-        );
-      });
-    }
-  ]
+  plugins: []
 };
