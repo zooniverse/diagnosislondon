@@ -9,6 +9,7 @@
     "postinstall": "npm run get-fallback-polyfills && npm run get-font-awesome"
   },
   "devDependencies": {
+    "babel-loader": "^5.3.2",
     "babel-runtime": "^5.1.11",
     "cjsx-loader": "^1.0.0",
     "coffee-loader": "^0.7.2",
@@ -25,7 +26,6 @@
     "gulp-util": "^3.0.1",
     "gulp-watch": "^1.1.0",
     "json-loader": "^0.5.2",
-    "jsx-loader": "^0.12.2",
     "nib": "^1.0.4",
     "panoptes-client": "^0.1.1",
     "react-a11y": "^0.2.6",
