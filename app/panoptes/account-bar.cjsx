@@ -21,7 +21,7 @@ module.exports = React.createClass
         <a href="#" className="message-link"><i className="fa fa-envelope#{if @state.unread then '' else '-o'}" /></a>
       </div>
       <div aria-hidden={!@state.expanded} aria-label="account menu" className="account-menu" ref="accountMenu">
-        <a href="https://zooniverse.org/#/settings">Account</a>
+        <a className="secret-button" href="https://zooniverse.org/#/settings">Account</a>
         <button className="secret-button sign-out-button" type="button" onClick={@handleSignOutClick}>Sign out</button>
       </div>
     </div>
