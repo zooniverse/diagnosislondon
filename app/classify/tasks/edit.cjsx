@@ -1,16 +1,14 @@
 React = require 'react'
-annotation_tools = require './annotation-tools'
+{tasks} = require '../../config'
 
 module.exports = React.createClass
   displayName: 'EditTask'
-  
-  tools: annotation_tools
   
   getInitialState: ->
     selections: {}
   
   render: ->
-    tools = @tools[@props.type]
+    {tools} = tasks[@props.type]
     <div className="decision-tree-task">
       <div className="decision-tree-question">Select text and mark it by clicking a button:</div>
       <div className="decision-tree-choices">

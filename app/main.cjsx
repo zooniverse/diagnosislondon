@@ -1,4 +1,5 @@
 init = require './init'
+config = require './config'
 React = require 'react'
 Classifier = require './classifier'
 Profile = require './profile'
@@ -6,6 +7,7 @@ Page = require './page'
 UserStatus = require './user-status'
 Panoptes = require 'panoptes-client'
 Projects = require './lib/projects'
+Auth = require './lib/auth'
 a11y = require 'react-a11y'
 
 a11y_options =
@@ -24,20 +26,24 @@ Main = React.createClass
     project: null
   
   componentWillMount: ->
-    @client = new Panoptes
-      appID: '535759b966935c297be11913acee7a9ca17c025f9f15520e7504728e71110a27'
-      host: 'https://panoptes-staging.zooniverse.org'
+    @client = switch config.auth_mode
+      when 'panoptes' then new Panoptes config.panoptes_staging
+      when 'oauth' then new Panoptes config.panoptes
       
     @projects = new Projects @client.api
     
+    @auth = switch config.auth_mode
+      when 'oauth' then new Auth @client.api
+      when 'panoptes' then @client.api.auth
+    
     @client.api.auth.listen @handleAuthChange
 
-    @client.api.auth.checkCurrent()
+    @handleAuthChange()
     
   componentDidUpdate:->
     @setBackground @state.project if @state.project?
     React.render <Profile project={@state.project} user={@state.user} />, document.querySelector '#profile'
-    React.render <UserStatus user={@state.user} auth={@client.api.auth} />, document.querySelector '#user-status'
+    React.render <UserStatus user={@state.user} auth={@auth} />, document.querySelector '#user-status'
     React.render <Classifier project={@state.project} user={@state.user} api={@client.api} />, document.querySelector '#classify'
     React.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
   
@@ -59,7 +65,7 @@ Main = React.createClass
           .style.backgroundImage = "url(#{background.src})"
           
   handleAuthChange: (e) ->
-    @client.api.auth
+    @auth
       .checkCurrent()
       .then (user) =>
         @projects?.fetch().then =>
