@@ -1,14 +1,3 @@
-checkStatus = (response) ->
-  if response.status >= 200 && response.status < 300
-    return response
-  else
-    error = new Error response.statusText
-    error.response = response
-    throw error
-
-parseJson = (response) ->
-  response.json()
-
 extractToken = (hash) ->
   match = hash.match(/access_token=(\w+)/)
   if !!match && match[1]
@@ -23,13 +12,11 @@ class Auth
       @_setupAuth token
     
   getUser: ->
-    token = @_getToken()
-
     @api.get '/me'
       .then ([user]) =>
         user
       .catch (error) =>
-        console.log error
+        null
   
   signOut: ->
     @_removeToken()
