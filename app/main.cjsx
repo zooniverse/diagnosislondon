@@ -26,11 +26,15 @@ Main = React.createClass
     project: null
   
   componentWillMount: ->
-    @client = new Panoptes config.panoptes
+    @client = switch config.auth_mode
+      when 'panoptes' then new Panoptes config.panoptes_staging
+      when 'oauth' then new Panoptes config.panoptes
       
     @projects = new Projects @client.api
     
-    @auth = new Auth @client.api
+    @auth = switch config.auth_mode
+      when 'oauth' then new Auth @client.api
+      when 'panoptes' then @client.api.auth
     
     @client.api.auth.listen @handleAuthChange
 
@@ -62,7 +66,7 @@ Main = React.createClass
           
   handleAuthChange: (e) ->
     @auth
-      .getUser()
+      .checkCurrent()
       .then (user) =>
         @projects?.fetch().then =>
           project = @projects.current()

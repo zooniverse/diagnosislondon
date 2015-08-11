@@ -11,7 +11,7 @@ class Auth
     if token = @_tokenExists()
       @_setupAuth token
     
-  getUser: ->
+  checkCurrent: ->
     @api.get '/me'
       .then ([user]) =>
         user
