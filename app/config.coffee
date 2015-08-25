@@ -8,26 +8,112 @@ module.exports =
     host: 'https://panoptes-staging.zooniverse.org'
   tasks:
     health: 
-      label: 'New Health Issue'
+      label: 'Environmental Health'
       tools: [{
-        label: 'Business'
-        value: 'business'
+        label: 'What is the environmental health issue?'
+        value: 'issue'
+        required: true
       },{
-        label: 'Health issue'
-        value: 'health'
+        label: 'Who did it affect?'
+        value: 'who'
       },{
-        label: 'Action taken'
+        label: 'How did it affect them?'
+        value: 'how'
+      },{
+        label: 'Who or what caused it?'
+        value: 'cause'
+      },{
+        label: 'Was anything done about it?'
         value: 'action'
+      },{
+        label: 'Is there any place information?'
+        value: 'place'
       }]
-    welfare: 
-      label: 'New Welfare Issue'
+    work: 
+      label: 'Work'
       tools: [{
-        label: 'Welfare 1'
-        value: 'welfare1'
+        label: 'What type of work is described?'
+        value: 'type'
+        required: true
       },{
-        label: 'Welfare 2'
-        value: 'welfare2'
+        label: 'What health issue, or potential hazard, is it causing?'
+        value: 'issue'
       },{
-        label: 'Welfare 3'
-        value: 'welfare3'
+        label: 'Did it affect anyone?'
+        value: 'who'
+      },{
+        label: 'Who or what caused it?'
+        value: 'cause'
+      },{
+        label: 'Was anything done about it?'
+        value: 'action'
+      },{
+        label: 'Is there any place information?'
+        value: 'place'
+      }]
+    disease:
+      label: 'Disease'
+      tools: [{
+        label: 'Is a specific disease or type of disease named?'
+        value: 'type'
+        required: true
+      },{
+        label: 'Who did it affect?'
+        value: 'who'
+      },{
+        label: 'How did it affect them?'
+        value: 'how'
+      },{
+        label: 'Who or what caused it?'
+        value: 'cause'
+      },{
+        label: 'Was anything done about it?'
+        value: 'action'
+      },{
+        label: 'Is there any place information?'
+        value: 'place'
+      }]
+    food:
+      label: 'Food'
+      tools: [{
+        label: 'What is the food or drink?'
+        value: 'food'
+        required: true
+      },{
+        label: 'What is wrong with it?'
+        value: 'issue'
+      },{
+        label: 'Did it affect anyone?'
+        value: 'who'
+      },{
+        label: 'Who or what caused it?'
+        value: 'cause'
+      },{
+        label: 'Was anything done about it?'
+        value: 'action'
+      },{
+        label: 'Is there any place information?'
+        value: 'place'
+      }]
+    housing:
+      label: 'Housing'
+      tools: [{
+        label: 'What is the housing problem?'
+        value: 'type'
+        required: true
+      },{
+        label: 'Did it cause a health issue?'
+        value: 'issue'
+      },{
+        label: 'Did it affect anyone?'
+        value: 'who'
+      },{
+        label: 'Did anyone cause it?'
+        value: 'cause'
+      },{
+        label: 'Was anything done about it?'
+        value: 'action'
+      },{
+        label: 'Is there any place information?'
+        value: 'place'
       }]
