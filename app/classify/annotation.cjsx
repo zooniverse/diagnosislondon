@@ -16,7 +16,7 @@ module.exports = React.createClass
   tasks: tasks
   
   render: ->
-    <div>
+    <div className="annotation">
       {@tasks[@props.tool.type].label} <button ref="delete" onClick={@delete}>X</button>
       <ul>
       {for type, range of @props.tool.ranges
