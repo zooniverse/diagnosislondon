@@ -7,16 +7,16 @@ module.exports = React.createClass
   render: ->
     <div className="decision-tree-task">
       <div className="decision-tree-question">Add annotations to this page.</div>
-      <div className="decision-tree-choices">
+      <ul className="decision-tree-choices">
         {for key, task of tasks
-          <div key={key} className="decision-tree-choice">
+          <li key={key} className="decision-tree-choice">
             <button className="readymade-choice-clickable" value={key} onClick={@edit}>
               <span className="readymade-choice-label">{task.label}</span>
             </button> 
-          </div>
+          </li>
         }
         <button type="button" name="decision-tree-confirm-task" onClick={@finish}>Finish page</button>
-      </div>
+      </ul>
     </div>
   
   edit: (e) ->

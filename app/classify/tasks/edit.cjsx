@@ -11,17 +11,16 @@ module.exports = React.createClass
     {tools} = tasks[@props.type]
     <div className="decision-tree-task">
       <div className="decision-tree-question">Select text and mark it by clicking a button:</div>
-      <div className="decision-tree-choices">
+      <ul className="decision-tree-choices">
         {tools.map (tool) =>
           label = @state.selections[tool.value] ? tool.label
-          <div key={tool.value} className="decision-tree-choice">
+          <li key={tool.value} className="decision-tree-choice">
             <button className="readymade-choice-clickable" value={tool.value} onClick={@selectText}>
-              <span className="readymade-choice-label">{label}</span> 
-              <span className="readymade-choice-color #{tool.value}"></span> 
+              <span className="readymade-choice-label">{label}</span>
             </button> 
-          </div>
+          </li>
         }
-      </div>
+      </ul>
       <div className="decision-tree-confirmation">
         <button type="button" name="decision-tree-confirm-task" onClick={@done}>Done</button>
       </div>
