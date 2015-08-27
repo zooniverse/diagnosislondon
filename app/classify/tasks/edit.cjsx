@@ -1,30 +1,29 @@
 React = require 'react'
 {tasks} = require '../../config'
 
-module.exports = React.createClass
-  displayName: 'EditTask'
+ToolList = React.createClass
+  displayName: 'ToolList'
   
   getInitialState: ->
     selections: {}
+    
+  getDefaultProps: ->
+    disabled: false
+    tools: []
   
   render: ->
-    {tools} = tasks[@props.type]
-    <div className="decision-tree-task">
-      <div className="decision-tree-question">Select text and mark it by clicking a button:</div>
-      <ul className="decision-tree-choices">
-        {tools.map (tool) =>
-          label = @state.selections[tool.value] ? tool.label
-          <li key={tool.value} className="decision-tree-choice">
-            <button className="readymade-choice-clickable" value={tool.value} onClick={@selectText}>
-              <span className="readymade-choice-label">{label}</span>
-            </button> 
-          </li>
+    <ul className="decision-tree-choices">
+    {@props.tools.map (tool) =>
+      label = @state.selections[tool.value] ? tool.label
+      <li key={tool.value} className="decision-tree-choice">
+        <button className="readymade-choice-clickable" value={tool.value} disabled={@props.disabled} onClick={@selectText}>
+          <span className="readymade-choice-label">{label}</span>
+        </button>
+        {if tool.subtasks
+          <ToolList tools={tool.subtasks} disabled={label == tool.label} onClick={@props.onClick} />
         }
-      </ul>
-      <div className="decision-tree-confirmation">
-        <button type="button" name="decision-tree-confirm-task" onClick={@done}>Done</button>
-      </div>
-    </div>
+      </li>}
+    </ul>
   
   selectText: (e) ->
     selection = window.getSelection().toString() ? null
@@ -35,6 +34,23 @@ module.exports = React.createClass
     @setState {selections}
     
     @props.onClick e
+
+module.exports = React.createClass
+  displayName: 'EditTask'
+  
+  getInitialState: ->
+    selections: {}
+  
+  render: ->
+    {tools} = tasks[@props.type]
+    <div className="decision-tree-task">
+      <div className="decision-tree-question">Select text and mark it by clicking a button:</div>
+      <ToolList tools={tools} onClick={@props.onClick}>
+      </ToolList>
+      <div className="decision-tree-confirmation">
+        <button type="button" name="decision-tree-confirm-task" onClick={@done}>Done</button>
+      </div>
+    </div>
     
   done: (e) ->
     @props.onComplete()
