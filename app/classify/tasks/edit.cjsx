@@ -14,13 +14,15 @@ ToolList = React.createClass
   render: ->
     <ul className="decision-tree-choices">
     {@props.tools.map (tool) =>
-      label = @state.selections[tool.value] ? tool.label
       <li key={tool.value} className="decision-tree-choice">
         <button className="readymade-choice-clickable" value={tool.value} disabled={@props.disabled} onClick={@selectText}>
-          <span className="readymade-choice-label">{label}</span>
+          <span className="readymade-choice-label">{tool.label}</span>
         </button>
+        {if @state.selections[tool.value]?
+          <p>{selection}</p> for selection in @state.selections[tool.value]
+        }
         {if tool.subtasks
-          <ToolList tools={tool.subtasks} disabled={label == tool.label} onClick={@props.onClick} />
+          <ToolList tools={tool.subtasks} disabled={!@state.selections[tool.value]?} onClick={@props.onClick} />
         }
       </li>}
     </ul>
@@ -30,7 +32,8 @@ ToolList = React.createClass
     return unless selection
     selections = @state.selections
     type = e.currentTarget.value
-    selections[type] = selection
+    selections[type] ?= []
+    selections[type].push selection
     @setState {selections}
     
     @props.onClick e

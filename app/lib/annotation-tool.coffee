@@ -10,10 +10,12 @@ class AnnotationTool
     @ranges = {}
   
   addRange: (rangeTool) ->
-    @ranges[rangeTool.type]?.destroy()
-    @ranges[rangeTool.type] = rangeTool
+    @ranges[rangeTool.type] ?= []
+    @ranges[rangeTool.type].push rangeTool
   
   destroy: ->
-    @ranges[type].destroy() for type of @ranges
+    for type of @ranges
+      @ranges[type].map (range) ->
+        range.destroy()
   
 module.exports = AnnotationTool

@@ -33,7 +33,8 @@ module.exports = React.createClass
   
   choose: ->
     @props.annotations.map (annotation) ->
-      range.el.classList.add 'complete' for range in annotation.ranges
+      for ranges in annotation.ranges
+        ranges.map (range) -> range.el.classList.add 'complete'
       
     @setState step: 'choose'
   
