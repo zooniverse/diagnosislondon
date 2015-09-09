@@ -6,6 +6,8 @@
 
 **Merged pull requests:**
 
+- Hierarchical workflows and multiple answers per task/question [\#5](https://github.com/zooniverse/wellcome/pull/5) ([eatyourgreens](https://github.com/eatyourgreens))
+
 - Add OAuth authorisation flow as an option for sign-in [\#4](https://github.com/zooniverse/wellcome/pull/4) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Favourites button [\#3](https://github.com/zooniverse/wellcome/pull/3) ([eatyourgreens](https://github.com/eatyourgreens))
