@@ -1,41 +1,68 @@
 React = require 'react'
 {tasks} = require '../../config'
 
+TextSelection = React.createClass
+  displayName: 'TextSelection'
+  
+  getDefaultProps: ->
+    range: {}
+  
+  render: ->
+    <p>{@props.range.annotation.text} <button aria-label='Delete' onClick={@delete}>X</button></p>
+  
+  delete: (e) ->
+    @props.onDelete @props.range
+
+ToolList = React.createClass
+  displayName: 'ToolList'
+    
+  getInitialState: ->
+    ranges: []
+    
+  getDefaultProps: ->
+    disabled: false
+    tools: []
+    annotation: {}
+  
+  componentWillMount: ->
+    @setState ranges: @props.annotation.ranges
+  
+  render: ->
+    <ul className="decision-tree-choices">
+    {@props.tools.map (tool) =>
+      <li key={tool.value} className="decision-tree-choice">
+        <button className="readymade-choice-clickable" value={tool.value} disabled={@props.disabled} onClick={@selectText}>
+          <span className="readymade-choice-label">{tool.label}</span>
+        </button>
+        {if @state.ranges[tool.value]?
+          <TextSelection key="selection-#{i}" range={range} onDelete={@deleteText}/> for range, i in @state.ranges[tool.value]
+        }
+        {if tool.subtasks
+          <ToolList annotation={@props.annotation} tools={tool.subtasks} disabled={!@state.ranges[tool.value]?} onClick={@props.onClick} />
+        }
+      </li>}
+    </ul>
+  
+  selectText: (e) ->
+    @props.onClick e
+  
+  deleteText: (range) ->
+    @props.annotation.deleteRange range
+    @setState ranges: @props.annotation.ranges
+
 module.exports = React.createClass
   displayName: 'EditTask'
   
-  getInitialState: ->
-    selections: {}
-  
   render: ->
-    {tools} = tasks[@props.type]
+    {tools} = tasks[@props.annotation.type]
     <div className="decision-tree-task">
       <div className="decision-tree-question">Select text and mark it by clicking a button:</div>
-      <div className="decision-tree-choices">
-        {tools.map (tool) =>
-          label = @state.selections[tool.value] ? tool.label
-          <div key={tool.value} className="decision-tree-choice">
-            <button className="readymade-choice-clickable" value={tool.value} onClick={@selectText}>
-              <span className="readymade-choice-label">{label}</span> 
-              <span className="readymade-choice-color #{tool.value}"></span> 
-            </button> 
-          </div>
-        }
-      </div>
+      <ToolList annotation={@props.annotation} tools={tools} onClick={@props.onClick}>
+      </ToolList>
       <div className="decision-tree-confirmation">
         <button type="button" name="decision-tree-confirm-task" onClick={@done}>Done</button>
       </div>
     </div>
-  
-  selectText: (e) ->
-    selection = window.getSelection().toString() ? null
-    return unless selection
-    selections = @state.selections
-    type = e.currentTarget.value
-    selections[type] = selection
-    @setState {selections}
-    
-    @props.onClick e
     
   done: (e) ->
     @props.onComplete()

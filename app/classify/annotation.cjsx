@@ -1,9 +1,11 @@
 React = require 'react'
+{tasks} = require '../config'
+
 TextRange = React.createClass
   displayName: 'TextRange'
   
   render: ->
-    annotation = @props.tool.annotation
+    annotation = @props.range.annotation
     <li className="highlight #{annotation.type}">
       {annotation.text} 
     </li>
@@ -11,16 +13,15 @@ TextRange = React.createClass
 module.exports = React.createClass
   displayName: 'Annotation'
   
-  labels:
-    health: 'Health Issue'
-    welfare: 'Welfare Issue'
+  tasks: tasks
   
   render: ->
-    <div>
-      {@labels[@props.tool.type]} <button ref="delete" onClick={@delete}>X</button>
+    <div className="annotation">
+      {@tasks[@props.tool.type].label} <button ref="delete" onClick={@delete}>X</button>
       <ul>
-      {for type, range of @props.tool.ranges
-        <TextRange key={range.id} tool={range} />
+      {for type, selections of @props.tool.ranges
+        selections.map (range) ->
+          <TextRange key={range.id} range={range} />
       }
       </ul>
     </div>

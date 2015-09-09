@@ -10,10 +10,18 @@ class AnnotationTool
     @ranges = {}
   
   addRange: (rangeTool) ->
-    @ranges[rangeTool.type]?.destroy()
-    @ranges[rangeTool.type] = rangeTool
+    @ranges[rangeTool.type] ?= []
+    @ranges[rangeTool.type].push rangeTool
+  
+  deleteRange: (rangeTool) ->
+    index = @ranges[rangeTool.type].indexOf rangeTool
+    @ranges[rangeTool.type].splice index, 1
+    delete @ranges[rangeTool.type] unless @ranges[rangeTool.type].length
+    rangeTool.destroy()
   
   destroy: ->
-    @ranges[type].destroy() for type of @ranges
+    for type of @ranges
+      @ranges[type].map (range) ->
+        range.destroy()
   
 module.exports = AnnotationTool

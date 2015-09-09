@@ -56,7 +56,8 @@ module.exports = React.createClass
     tasks = {}
     @state.annotations.map (annotation, i) ->
       tasks[annotation.type] ?= []
-      tasks[annotation.type].push (annotation.ranges[type].annotation for type of annotation.ranges)
+      for type of annotation.ranges
+        tasks[annotation.type].push (annotation.ranges[type].map (range) -> range.annotation)
     @classifications?.set_annotations ({task: key, value: value} for key, value of tasks)
     
   onToolbarClick: (e) ->

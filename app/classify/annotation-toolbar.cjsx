@@ -21,7 +21,7 @@ module.exports = React.createClass
               }
             </div>
           when 'edit'
-            <EditTask type={@state.type} onClick={@selectText} onComplete={@choose}/>
+            <EditTask annotation={@props.annotations[0]} onClick={@selectText} onComplete={@choose}/>
         }
     </div>
   
@@ -33,7 +33,8 @@ module.exports = React.createClass
   
   choose: ->
     @props.annotations.map (annotation) ->
-      range.el.classList.add 'complete' for range in annotation.ranges
+      for ranges in annotation.ranges
+        ranges.map (range) -> range.el.classList.add 'complete'
       
     @setState step: 'choose'
   
