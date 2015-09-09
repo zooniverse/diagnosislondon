@@ -21,7 +21,7 @@ module.exports = React.createClass
               }
             </div>
           when 'edit'
-            <EditTask type={@state.type} onClick={@selectText} onComplete={@choose}/>
+            <EditTask annotation={@props.annotations[0]} onClick={@selectText} onComplete={@choose}/>
         }
     </div>
   
