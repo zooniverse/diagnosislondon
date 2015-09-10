@@ -19,6 +19,9 @@ class AnnotationTool
     delete @ranges[rangeTool.type] unless @ranges[rangeTool.type].length
     rangeTool.destroy()
   
+  empty: ->
+    Object.keys(@ranges).length is 0
+  
   destroy: ->
     for type of @ranges
       @ranges[type].map (range) ->

@@ -32,7 +32,8 @@ module.exports = React.createClass
       type: type
   
   choose: ->
-    @props.annotations.map (annotation) ->
+    @props.annotations.map (annotation) =>
+      @props.deleteTool annotation if annotation.empty()
       for ranges in annotation.ranges
         ranges.map (range) -> range.el.classList.add 'complete'
       
