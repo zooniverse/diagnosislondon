@@ -56,30 +56,30 @@ module.exports =
           value: 'place'
         }]
       }]
-    disease:
-      label: 'Disease'
-      description: 'The central role of the Medical Officer was to identify and contain significant outbreaks of disease across the city. They gathered statistics on specific infectious diseases. These were usually presented in the form of tables, but they also described specific disease outbreaks in detail, identifying who they affected and where and how they were treated.'
-      tools: [{
-        label: 'Is a specific disease or type of disease named?'
-        value: 'type'
-        required: true
-        subtasks: [{
-          label: 'Who did it affect?'
-          value: 'who'
-        },{
-          label: 'How did it affect them?'
-          value: 'how'
-        },{
-          label: 'Who or what caused it?'
-          value: 'cause'
-        },{
-          label: 'Was anything done about it?'
-          value: 'action'
-        },{
-          label: 'Is there any place information?'
-          value: 'place'
-        }]
-      }]
+    # disease:
+ #      label: 'Disease'
+ #      description: 'The central role of the Medical Officer was to identify and contain significant outbreaks of disease across the city. They gathered statistics on specific infectious diseases. These were usually presented in the form of tables, but they also described specific disease outbreaks in detail, identifying who they affected and where and how they were treated.'
+ #      tools: [{
+ #        label: 'Is a specific disease or type of disease named?'
+ #        value: 'type'
+ #        required: true
+ #        subtasks: [{
+ #          label: 'Who did it affect?'
+ #          value: 'who'
+ #        },{
+ #          label: 'How did it affect them?'
+ #          value: 'how'
+ #        },{
+ #          label: 'Who or what caused it?'
+ #          value: 'cause'
+ #        },{
+ #          label: 'Was anything done about it?'
+ #          value: 'action'
+ #        },{
+ #          label: 'Is there any place information?'
+ #          value: 'place'
+ #        }]
+ #      }]
     food:
       label: 'Food'
       description: 'The health aspects of food production and sales came under the remit of the Medical Officer. His team of food inspectors investigated all aspects of the city’s food supply, from food importers and manufacturers to abattoirs, from butchers and bakers shops to street vendors. They were particularly concerned with food adulteration – identifying hidden substances that shouldn’t be there – and incidents of food poisoning.'
