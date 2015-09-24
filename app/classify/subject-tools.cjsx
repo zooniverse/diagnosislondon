@@ -7,17 +7,4 @@ module.exports = React.createClass
   render: ->
     <div className="drawing-controls">
       {<Favourite project={@props.project} api={@props.api} subject={@props.subject} /> if @props.subject? && @props.user?}
-      <label className="readymade-has-clickable"> 
-        <input type="checkbox" name="hide-old-marks" /> 
-        <span className="readymade-clickable"> 
-          <span className="fa fa-eye-slash"></span>
-          <span>Hide old marks</span> 
-        </span> 
-      </label>
-      <button name="restart-tutorial"> 
-        <span className="readymade-clickable"> 
-          <i className="fa fa-graduation-cap"></i>
-          <span>Restart tutorial</span> 
-        </span> 
-      </button> 
     </div>
