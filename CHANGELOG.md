@@ -10,6 +10,8 @@
 
 **Merged pull requests:**
 
+- Grouped and prioritised workflow [\#10](https://github.com/zooniverse/wellcome/pull/10) ([eatyourgreens](https://github.com/eatyourgreens))
+
 - Link to Wellcome catalogue [\#9](https://github.com/zooniverse/wellcome/pull/9) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Add category descriptions [\#6](https://github.com/zooniverse/wellcome/pull/6) ([eatyourgreens](https://github.com/eatyourgreens))
