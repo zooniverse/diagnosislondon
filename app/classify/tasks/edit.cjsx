@@ -77,7 +77,7 @@ module.exports = React.createClass
       <ToolList annotation={@props.annotation} tools={tools} onClick={@props.onClick}>
       </ToolList>
       <div className="decision-tree-confirmation">
-        <button type="button" name="decision-tree-confirm-task" onClick={@done}>Done</button>
+        <button type="button" className="major-button" onClick={@done}>Done</button>
       </div>
     </div>
   

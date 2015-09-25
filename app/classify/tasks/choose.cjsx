@@ -15,7 +15,7 @@ module.exports = React.createClass
             </button> 
           </li>
         }
-        <button type="button" name="decision-tree-confirm-task" onClick={@finish}>Finish page</button>
+        <button type="button" className="major-button" onClick={@finish}>Finish page</button>
       </ul>
     </div>
   
