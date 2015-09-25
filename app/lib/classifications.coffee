@@ -2,8 +2,9 @@ class Classifications
   api: null
   project: null
   classification: null
+  workflow: null
   
-  constructor: (@api, @project)->
+  constructor: (@api, @project, @workflow)->
     
   current: ->
     @classification
@@ -17,14 +18,14 @@ class Classifications
       .create
         annotations: []
         metadata:
-          workflow_version: "1.1"
+          workflow_version: @workflow?.version
           started_at: (new Date).toISOString()
           user_agent: navigator.userAgent
           user_language: navigator.language
           utc_offset: ((new Date).getTimezoneOffset() * 60).toString() # In seconds
         links:
           project: @project?.id.toString()
-          workflow: @project?.links.workflows[0]
+          workflow: @workflow?.id
           subjects: [subject.id]
   
   set_annotations: (annotations) ->
