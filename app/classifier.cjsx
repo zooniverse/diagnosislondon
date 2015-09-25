@@ -2,7 +2,6 @@ React = require 'react'
 
 SubjectTools = require './classify/subject-tools'
 SubjectViewer = require './classify/subject-viewer'
-SubjectComments = require './classify/subject-comments'
 Annotation = require './classify/annotation'
 AnnotationToolbar = require './classify/annotation-toolbar'
 ClassificationSummary = require './classify/summary'
@@ -44,11 +43,10 @@ module.exports = React.createClass
       <div className="readymade-subject-viewer-container">
         {
           if @state.currentSubject?
-            [<div key="viewer" className="readymade-subject-viewer">
-              <SubjectTools project={@props.project} api={@props.api} user={@props.user} subject={@state.currentSubject} />
+            <div className="readymade-subject-viewer">
+              <SubjectTools project={@props.project} api={@props.api} talk={@props.talk} user={@props.user} subject={@state.currentSubject} />
               <SubjectViewer subject={@state.currentSubject} ref='subject_viewer' />
             </div>
-            <SubjectComments key="comments" subject={@state.currentSubject} talk={@props.talk} />]
         }
       </div>
     </div>
