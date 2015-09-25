@@ -8,6 +8,7 @@ ClassificationSummary = require './classify/summary'
 AnnotationTool = require './lib/annotation-tool'
 Subjects = require './lib/subjects'
 Classifications = require './lib/classifications'
+{tasks} = require './config'
 
 module.exports = React.createClass
   displayName: 'Classifier'
@@ -53,12 +54,13 @@ module.exports = React.createClass
   componentDidUpdate: ->
     #update classifications here
     annotations = []
-    tasks = {}
+    task_annotations = {}
     @state.annotations.map (annotation, i) ->
-      tasks[annotation.type] ?= []
+      task_annotations[annotation.type] ?= []
       for type of annotation.ranges
-        tasks[annotation.type].push (annotation.ranges[type].map (range) -> range.annotation)
-    @classifications?.set_annotations ({task: key, value: value} for key, value of tasks)
+        task_annotations[annotation.type].push (annotation.ranges[type].map (range) -> range.annotation)
+    task_annotations[task] ?= [] for task of tasks
+    @classifications?.set_annotations ({task: key, value: value} for key, value of task_annotations)
     
   onToolbarClick: (e) ->
     @addText @refs.subject_viewer.createAnnotation e.currentTarget.value
