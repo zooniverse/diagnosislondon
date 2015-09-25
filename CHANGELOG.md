@@ -4,7 +4,13 @@
 
 [Full Changelog](https://github.com/zooniverse/wellcome/compare/0.0.1...HEAD)
 
+**Closed issues:**
+
+- Link back to pages on the Wellcome site [\#7](https://github.com/zooniverse/wellcome/issues/7)
+
 **Merged pull requests:**
+
+- Link to Wellcome catalogue [\#9](https://github.com/zooniverse/wellcome/pull/9) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Add category descriptions [\#6](https://github.com/zooniverse/wellcome/pull/6) ([eatyourgreens](https://github.com/eatyourgreens))
 
