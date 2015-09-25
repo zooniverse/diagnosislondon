@@ -22,13 +22,13 @@ module.exports = React.createClass
   
   componentWillMount: ->
     @subjects = new Subjects @props.api, @props.project
-    @classifications = new Classifications @props.api, @props.project
+    @classifications = new Classifications @props.api, @props.project, @props.workflow
     @subjects.fetch()
     .then @nextSubject
   
   componentWillReceiveProps: (newProps)->
     @subjects.update newProps.api, newProps.project
-    @classifications.update newProps.api, newProps.project
+    @classifications.update newProps.api, newProps.project, newProps.workflow
     @reset()
     @subjects.flush()
     @subjects.fetch()

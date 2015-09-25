@@ -24,6 +24,7 @@ Main = React.createClass
   getInitialState: ->
     user: null
     project: null
+    workflow: null
   
   componentWillMount: ->
     @client = switch config.auth_mode
@@ -44,7 +45,7 @@ Main = React.createClass
     @setBackground @state.project if @state.project?
     React.render <Profile project={@state.project} user={@state.user} />, document.querySelector '#profile'
     React.render <UserStatus user={@state.user} auth={@auth} />, document.querySelector '#user-status'
-    React.render <Classifier project={@state.project} user={@state.user} api={@client.api} />, document.querySelector '#classify'
+    React.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client.api} />, document.querySelector '#classify'
     React.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
   
   render: ->
@@ -70,7 +71,10 @@ Main = React.createClass
       .then (user) =>
         @projects?.fetch().then =>
           project = @projects.current()
-          @setState {user, project}
+          @client.api.type 'workflows'
+            .get project.links.workflows[0]
+            .then (workflow) =>
+              @setState {user, project, workflow}
           
             
 React.render <Main />, document.querySelector '#home'
