@@ -3,6 +3,8 @@ class Subjects
   api: null
   query:
     sort: 'queued'
+    subject_set_id: "1890"
+    page_size: "30"
   
   constructor: (@api, @project)->
     @query.workflow_id = @project?.links.workflows[0]
