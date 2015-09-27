@@ -10,6 +10,7 @@ class AnnotationTool
     @ranges = {}
   
   addRange: (rangeTool) ->
+    rangeTool.el.classList.add @type
     @ranges[rangeTool.type] ?= []
     @ranges[rangeTool.type].push rangeTool
   

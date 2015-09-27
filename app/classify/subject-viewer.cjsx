@@ -23,7 +23,7 @@ module.exports = React.createClass
       {<img  className="subject-image" src={image} alt="" /> if image}
     </div>
   
-  createAnnotation: (type) ->
+  createSelection: (type) ->
     sel = document.getSelection()
     if sel.rangeCount
       options =

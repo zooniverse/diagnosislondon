@@ -63,7 +63,7 @@ module.exports = React.createClass
     @classifications?.set_annotations ({task: key, value: value} for key, value of task_annotations)
     
   onToolbarClick: (e) ->
-    @addText @refs.subject_viewer.createAnnotation e.currentTarget.value
+    @addText @refs.subject_viewer.createSelection e.currentTarget.value
   
   onFinishPage: ->
     @classifications.finish()
