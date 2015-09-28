@@ -3,11 +3,11 @@ class Subjects
   api: null
   query:
     sort: 'queued'
-    subject_set_id: "1890"
     page_size: "30"
   
-  constructor: (@api, @project)->
+  constructor: (@api, @project, subject_set_id = "1899")->
     @query.workflow_id = @project?.links.workflows[0]
+    @query.subject_set_id = subject_set_id
   
   update: (opts) ->
     @[opt] = value for opt, value of opts

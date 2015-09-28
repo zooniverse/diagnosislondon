@@ -26,8 +26,12 @@ Main = React.createClass
     user: null
     project: null
     workflow: null
+    subject_set_id: null
   
   componentWillMount: ->
+    subject_set_id = window.location.hash.split('/')[2]
+    @setState {subject_set_id}
+    
     @client = switch config.auth_mode
       when 'panoptes' then new Panoptes config.panoptes_staging
       when 'oauth' then new Panoptes config.panoptes
@@ -48,7 +52,7 @@ Main = React.createClass
     @setBackground @state.project if @state.project?
     React.render <Profile project={@state.project} user={@state.user} />, document.querySelector '#profile'
     React.render <UserStatus user={@state.user} auth={@auth} />, document.querySelector '#user-status'
-    React.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client.api} talk={@talk.api} />, document.querySelector '#classify'
+    React.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client.api} talk={@talk.api} subject_set_id={@state.subject_set_id} />, document.querySelector '#classify'
     React.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
   
   render: ->
