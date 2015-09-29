@@ -27,8 +27,9 @@ module.exports = React.createClass
     .then @nextSubject
   
   componentWillReceiveProps: (newProps)->
-    @subjects.update newProps.api, newProps.project, newProps.subject_set_id
-    @classifications.update newProps.api, newProps.project, newProps.workflow
+    {api, project, subject_set_id, workflow} = newProps
+    @subjects.update {api, project, subject_set_id}
+    @classifications.update {api, project, workflow}
     @reset()
     @subjects.flush()
     @subjects.fetch()

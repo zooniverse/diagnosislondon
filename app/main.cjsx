@@ -1,6 +1,7 @@
 init = require './init'
 config = require './config'
 React = require 'react'
+ChooseSubjectSet = require './choose-subject-set'
 Classifier = require './classifier'
 Profile = require './profile'
 Page = require './page'
@@ -52,6 +53,7 @@ Main = React.createClass
     @setBackground @state.project if @state.project?
     React.render <Profile project={@state.project} user={@state.user} />, document.querySelector '#profile'
     React.render <UserStatus user={@state.user} auth={@auth} />, document.querySelector '#user-status'
+    React.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#reports'
     React.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client.api} talk={@talk.api} subject_set_id={@state.subject_set_id} />, document.querySelector '#classify'
     React.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
   
@@ -63,7 +65,7 @@ Main = React.createClass
       </div>
       <div className="readymade-project-summary"> {@state.project?.description} </div>
       <div className="readymade-project-description"> {@state.project?.introduction} </div>
-      {<div className="readymade-footer"> <a href="#/classify" className="readymade-call-to-action"> Get started! </a> </div> if @state.project?}
+      {<div className="readymade-footer"> <a href="#/#{ if @state.subject_set_id then 'classify' else 'reports'}" className="readymade-call-to-action"> Get started! </a> </div> if @state.project?}
     </div>
   
   setBackground: (project) ->
@@ -83,6 +85,9 @@ Main = React.createClass
             .get project.links.workflows[0]
             .then (workflow) =>
               @setState {user, project, workflow}
+  
+  changeSubjectSet: (subject_set_id) ->
+    @setState {subject_set_id}
           
             
 React.render <Main />, document.querySelector '#home'
