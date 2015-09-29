@@ -6,9 +6,13 @@
 
 **Closed issues:**
 
+- Post to the Talk API from the classifier [\#8](https://github.com/zooniverse/wellcome/issues/8)
+
 - Link back to pages on the Wellcome site [\#7](https://github.com/zooniverse/wellcome/issues/7)
 
 **Merged pull requests:**
+
+- List Talk comments and comment on a subject [\#11](https://github.com/zooniverse/wellcome/pull/11) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Grouped and prioritised workflow [\#10](https://github.com/zooniverse/wellcome/pull/10) ([eatyourgreens](https://github.com/eatyourgreens))
 
