@@ -61,14 +61,16 @@
   .readymade-marking-surface-container
     vertical-align: top
     
-    .text-viewer
+    div
       display: inline-block
-      vertical-align: top
+    
+      &.text-viewer
+        div
+          vertical-align: top
   
-    .subject-image
-      vertical-align: top
-      display: inline-block
-      width: 45%
+      &.subject-image
+        img
+          vertical-align: top
 
   .marking-surface-svg
     color: lime

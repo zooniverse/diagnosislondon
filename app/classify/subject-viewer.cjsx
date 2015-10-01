@@ -19,8 +19,14 @@ module.exports = React.createClass
   render: ->
     image = @mediaSrcs['image/jpeg']
     <div className="readymade-marking-surface-container">
-      <div ref = 'textViewer' className="text-viewer">{@state.text}</div>
-      {<img  className="subject-image" src={image} alt="" /> if image}
+      <div className="text-viewer">
+        <h3>Page text</h3>
+        <div ref = 'textViewer'>{@state.text}</div>
+      </div>
+      <div className="subject-image">
+        <h3>Scanned page</h3>
+        {<img src={image} alt="" /> if image}
+      </div>
     </div>
   
   createSelection: (type) ->
