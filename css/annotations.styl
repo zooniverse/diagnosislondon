@@ -1,6 +1,24 @@
 .readymade-subject-viewer-container
   
   .readymade-subject-viewer
+    width: 75vw
+    max-width: 950px
+    background: #eee
+    background: rgba(256,256,230,0.75)
+    
+    .drawing-controls
+      display: block
+      background: #283f45
+      text-align: right
+      margin: 0
+      
+      .readymade-clickable
+        background: rgba(0, 0, 0, 0.1)
+        
+        &:hover
+        &:focus
+          background: rgba(0, 0, 0, 0.3)
+        
     
     h3
       background: #283f45
@@ -15,8 +33,6 @@
 .text-viewer
   width: 30vw
   min-height: 60vh
-  background: #eee
-  background: rgba(256,256,230,0.75)
   color: #222
   max-width: 30em
   margin: 0
@@ -70,14 +86,28 @@ button[disabled]
   position: absolute
   background: #222
   background: rgba(32,32,32,0.75)
-  min-width: 10em
-  max-width: 15em
-  padding: 1em
+  min-width: 15em
+  max-width: 20em
+  padding: 0
   border-radius: 6px
+  text-align: left
+  
+  h4
+    text-align: center
   
   ul
     list-style-type: none
     margin: 0
-    padding: 0
+    padding: 1em
     text-indent: 0
+  
+  textarea
+    width: 100%
+  
+  button
+    margin: 0
+    width: 100%
+    
+  form
+    margin: 0
 
