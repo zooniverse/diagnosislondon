@@ -52,7 +52,7 @@ Main = React.createClass
     
   componentDidUpdate:->
     @setBackground @state.project if @state.project?
-    React.render <Profile project={@state.project} workflow={@state.workflow} user={@state.user} />, document.querySelector '#profile'
+    React.render <Profile project={@state.project} workflow={@state.workflow} user={@state.user} api={@client.api} />, document.querySelector '#profile'
     React.render <UserStatus user={@state.user} auth={@auth} />, document.querySelector '#user-status'
     React.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#reports'
     React.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
