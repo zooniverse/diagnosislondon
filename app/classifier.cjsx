@@ -21,14 +21,14 @@ module.exports = React.createClass
     currentSubject: null
   
   componentWillMount: ->
-    @subjects = new Subjects @props.api, @props.project, @props.subject_set_id
+    @subjects = new Subjects @props.api, @props.project, @props.subject_set?.id
     @classifications = new Classifications @props.api, @props.project, @props.workflow
     @subjects.fetch()
     .then @nextSubject
   
   componentWillReceiveProps: (newProps)->
-    {api, project, subject_set_id, workflow} = newProps
-    @subjects.update {api, project, subject_set_id}
+    {api, project, subject_set, workflow} = newProps
+    @subjects.update {api, project, subject_set_id: subject_set.id}
     @classifications.update {api, project, workflow}
     @reset()
     @subjects.flush()
@@ -45,7 +45,7 @@ module.exports = React.createClass
         {
           if @state.currentSubject?
             <div className="readymade-subject-viewer">
-              <SubjectTools project={@props.project} api={@props.api} talk={@props.talk} user={@props.user} subject={@state.currentSubject} />
+              <SubjectTools project={@props.project} api={@props.api} talk={@props.talk} user={@props.user} subject_set={@props.subject_set} subject={@state.currentSubject} />
               <SubjectViewer subject={@state.currentSubject} ref='subject_viewer' />
             </div>
         }

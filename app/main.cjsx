@@ -27,11 +27,10 @@ Main = React.createClass
     user: null
     project: null
     workflow: null
-    subject_set_id: null
+    subject_set: null
   
   componentWillMount: ->
     subject_set_id = window.location.hash.split('/')[2]
-    @setState {subject_set_id}
     
     @client = switch config.auth_mode
       when 'panoptes' then new Panoptes config.panoptes_staging
@@ -49,12 +48,14 @@ Main = React.createClass
 
     @handleAuthChange()
     
+    @changeSubjectSet subject_set_id if subject_set_id?
+    
   componentDidUpdate:->
     @setBackground @state.project if @state.project?
     React.render <Profile project={@state.project} user={@state.user} />, document.querySelector '#profile'
     React.render <UserStatus user={@state.user} auth={@auth} />, document.querySelector '#user-status'
     React.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#reports'
-    React.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client.api} talk={@talk.api} subject_set_id={@state.subject_set_id} />, document.querySelector '#classify'
+    React.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client.api} talk={@talk.api} subject_set={@state.subject_set} />, document.querySelector '#classify'
     React.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
   
   render: ->
@@ -87,7 +88,11 @@ Main = React.createClass
               @setState {user, project, workflow}
   
   changeSubjectSet: (subject_set_id) ->
-    @setState {subject_set_id}
+    console.log subject_set_id
+    @client.api.type 'subject_sets'
+    .get subject_set_id
+    .then (subject_set) =>
+      @setState {subject_set}
           
             
 React.render <Main />, document.querySelector '#home'

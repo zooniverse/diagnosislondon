@@ -7,7 +7,7 @@ module.exports = React.createClass
     subject_sets: []
     
   componentWillMount: ->
-    @props.workflow.get 'subject_sets'
+    @props.workflow?.get 'subject_sets'
       .then (subject_sets) =>
         @setState {subject_sets}
   
