@@ -12,7 +12,7 @@ module.exports = React.createClass
         @setState {subject_sets}
   
   render: ->
-    <div>
+    <div className="reports">
       <h2>Choose a report to work on</h2>
       <ul>
         {<li key="set-#{subject_set.id}"><a onClick={@update} href="#/classify/#{subject_set.id}">{subject_set.display_name}</a></li> for subject_set in @state.subject_sets}
