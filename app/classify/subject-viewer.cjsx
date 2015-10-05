@@ -34,7 +34,6 @@ module.exports = React.createClass
     if sel.rangeCount
       options =
         type: type
-        text: @refs.textViewer.getDOMNode()
       tool = new SelectionTool options
   
   fetchOCR: (url) ->

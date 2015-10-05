@@ -28,6 +28,7 @@ class SelectionTool
     range = range.cloneRange()
     range.surroundContents @el
     sel.removeAllRanges()
+    @text = range.startContainer
   
   unwrapHTML: () ->
     text = @annotation.text
