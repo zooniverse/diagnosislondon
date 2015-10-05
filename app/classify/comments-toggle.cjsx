@@ -13,7 +13,7 @@ module.exports = React.createClass
     @loadComments @props.subject?.id
   
   componentWillReceiveProps: (newProps) ->
-    @loadComments newProps.subject?.id
+    @loadComments newProps.subject?.id unless newProps.subject == @props.subject
   
   render: ->
     <div style={display: 'inline-block', position: 'relative'}>
