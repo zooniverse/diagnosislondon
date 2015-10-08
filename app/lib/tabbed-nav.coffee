@@ -16,8 +16,8 @@ for link, i in nav_links
     if panel?
       # home is a special case
       href = '#' if href == '#home'
-      hash = href.replace '#', '#/'
-      active = (hash == current_location) || (hash == '#/')
+      hash = href.replace '#', ''
+      active = (hash == current_location.split('/')[1]) || (hash == '')
       tabset.add tab, panel, active
       
       do (href) ->
@@ -29,5 +29,5 @@ window.addEventListener 'hashchange', (e) ->
   if window.location.hash[0..1] == '#/'
     hash = window.location.hash.replace '#/', '#'
     hash = '#home' if hash == '#'
-    panel = document.querySelector hash
+    panel = document.querySelector hash.split('/').shift()
     tabset.activate panel

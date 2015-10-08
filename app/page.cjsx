@@ -16,7 +16,7 @@ module.exports = React.createClass
     content: ''
   
   componentWillMount: ->
-    @props.project.get('pages', url_key: @props.url_key).index(0)
+    @props.project?.get('pages', url_key: @props.url_key).index(0)
       .then @update
   
   render: ->

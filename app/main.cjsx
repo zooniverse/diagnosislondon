@@ -1,6 +1,7 @@
 init = require './init'
 config = require './config'
 React = require 'react'
+ChooseSubjectSet = require './choose-subject-set'
 Classifier = require './classifier'
 Profile = require './profile'
 Page = require './page'
@@ -26,8 +27,12 @@ Main = React.createClass
     user: null
     project: null
     workflow: null
+    subject_set: null
   
   componentWillMount: ->
+    subject_set_id = window.location.hash.split('/')[2]
+    subject_set_id ?= localStorage.getItem 'subject-set-id'
+    
     @client = switch config.auth_mode
       when 'panoptes' then new Panoptes config.panoptes_staging
       when 'oauth' then new Panoptes config.panoptes
@@ -42,14 +47,16 @@ Main = React.createClass
     
     @client.api.auth.listen @handleAuthChange
 
-    @handleAuthChange()
+    @handleAuthChange().then =>
+      @changeSubjectSet subject_set_id if subject_set_id?
     
   componentDidUpdate:->
     @setBackground @state.project if @state.project?
     React.render <Profile project={@state.project} user={@state.user} />, document.querySelector '#profile'
     React.render <UserStatus user={@state.user} auth={@auth} />, document.querySelector '#user-status'
-    React.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client.api} talk={@talk.api} />, document.querySelector '#classify'
+    React.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#reports'
     React.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
+    @renderClassifier()
   
   render: ->
     <div className="readymade-home-page-content">
@@ -59,7 +66,7 @@ Main = React.createClass
       </div>
       <div className="readymade-project-summary"> {@state.project?.description} </div>
       <div className="readymade-project-description"> {@state.project?.introduction} </div>
-      {<div className="readymade-footer"> <a href="#/classify" className="readymade-call-to-action"> Get started! </a> </div> if @state.project?}
+      {<div className="readymade-footer"> <a href="#/#{ if @state.subject_set? then 'classify' else 'reports'}" className="readymade-call-to-action"> Get started! </a> </div> if @state.project?}
     </div>
   
   setBackground: (project) ->
@@ -79,6 +86,19 @@ Main = React.createClass
             .get project.links.workflows[0]
             .then (workflow) =>
               @setState {user, project, workflow}
+  
+  changeSubjectSet: (subject_set_id) ->
+    @client.api.type 'subject_sets'
+    .get subject_set_id
+    .then (subject_set) =>
+      localStorage.setItem 'subject-set-id', subject_set.id
+      @setState {subject_set}
+  
+  renderClassifier: ->
+    if @state.subject_set?
+      React.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client.api} talk={@talk.api} subject_set={@state.subject_set} />, document.querySelector '#classify'
+    else
+      React.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#classify'
           
             
 React.render <Main />, document.querySelector '#home'
