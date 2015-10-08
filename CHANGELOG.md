@@ -12,6 +12,10 @@
 
 **Merged pull requests:**
 
+- Style the subject viewer [\#14](https://github.com/zooniverse/wellcome/pull/14) ([eatyourgreens](https://github.com/eatyourgreens))
+
+- Add subject set selection [\#13](https://github.com/zooniverse/wellcome/pull/13) ([eatyourgreens](https://github.com/eatyourgreens))
+
 - List Talk comments and comment on a subject [\#11](https://github.com/zooniverse/wellcome/pull/11) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Grouped and prioritised workflow [\#10](https://github.com/zooniverse/wellcome/pull/10) ([eatyourgreens](https://github.com/eatyourgreens))
