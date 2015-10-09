@@ -66,7 +66,7 @@ Main = React.createClass
       </div>
       <div className="readymade-project-summary"> {@state.project?.description} </div>
       <div className="readymade-project-description"> {@state.project?.introduction} </div>
-      {<div className="readymade-footer"> <a href="#/#{ if @state.subject_set? then 'classify' else 'reports'}" className="readymade-call-to-action"> Get started! </a> </div> if @state.project?}
+      {<div className="readymade-footer"> <a href="#/#{ if @state.subject_set? then 'classify' else 'reports'}" className="major-button"> Get started! </a> </div> if @state.project?}
     </div>
   
   setBackground: (project) ->
