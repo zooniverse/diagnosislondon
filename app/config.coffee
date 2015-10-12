@@ -92,7 +92,7 @@ module.exports =
         value: 'food'
         required: true
         subtasks: [{
-          label: 'What's wrong with it'
+          label: 'What\'s wrong with it'
           value: 'issue'
           subtasks: [{
             label: 'People affected'
