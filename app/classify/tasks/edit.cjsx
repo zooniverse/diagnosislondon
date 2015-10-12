@@ -24,7 +24,7 @@ TextSelection = React.createClass
     range: {}
   
   render: ->
-    <p>{@props.range.annotation.text} <button aria-label='Delete' onClick={@delete}>X</button></p>
+    <p className="text-selection"><button className="secret-button" aria-label='Delete' onClick={@delete}>X</button> {@props.range.annotation.text}</p>
   
   delete: (e) ->
     @props.onDelete @props.range
@@ -47,7 +47,7 @@ ToolList = React.createClass
     <ul className="decision-tree-choices">
     {@props.tools.map (tool) =>
       <li key={tool.value} className="decision-tree-choice">
-        <button className="readymade-choice-clickable" value={tool.value} disabled={@props.disabled} onClick={@selectText}>
+        <button className="readymade-choice-clickable standard-button" value={tool.value} disabled={@props.disabled} onClick={@selectText}>
           <span className="readymade-choice-label">{tool.label}</span>
         </button>
         {if @state.ranges[tool.value]?

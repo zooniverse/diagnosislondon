@@ -25,6 +25,10 @@
       
       .readymade-clickable
         background: rgba(0, 0, 0, 0.1)
+        text-decoration: none
+        
+        &:focus
+          border: 1px solid white
         
         &:hover
         &:focus
@@ -61,8 +65,26 @@
     width: 100%
     max-width: 500px
     
+.text-selection
+  background: #283f45
+  margin: 0
+  padding: .5em .2em
+  
+  button
+    float: right
+    padding: 0 .2em
+    background: rgba(0, 0, 0, 0.1)
+    font-size: 1em
     
+    &:hover
+      background: rgba(0, 0, 0, 0.3)
 
+.decision-tree-choice
+  margin-bottom: .5em
+  
+  .decision-tree-choices
+    margin-top: .5em
+    
 .readymade-choice-clickable
   color: white
   font-size: 1em

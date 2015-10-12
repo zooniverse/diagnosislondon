@@ -21,37 +21,26 @@
     input:focus + .readymade-clickable
     button:focus .readymade-clickable
     a:focus
-      border: 1px solid gold
       outline: 0
   
     button
       // @extends #_RESET_BUTTON
-    
+
       &:focus
         outline: 0
-  
-    .small
-      display: block
-      width: 15px
-      height: 15px
-      overflow: hidden
-      display: inline-block
-      margin: .2em .05em
-      font-size: 1em
-    
-      span
-        font-size: 1em
-        line-height: 2
-  
-    label
-    button[name="restart-tutorial"]
-    a
-      &:hover
-      &:focus
-        color: gold
-      
-        .small
-          color: gold
+
+.small
+  display: block
+  width: 15px
+  height: 15px
+  overflow: hidden
+  display: inline-block
+  margin: .2em .05em
+  font-size: 1em
+
+  span
+    font-size: 1em
+    line-height: 2
 
   button[name="restart-tutorial"]
     @extends #_RESET_BUTTON
