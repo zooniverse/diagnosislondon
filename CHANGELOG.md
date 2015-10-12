@@ -22,6 +22,8 @@
 
 - Add subject set selection [\#13](https://github.com/zooniverse/wellcome/pull/13) ([eatyourgreens](https://github.com/eatyourgreens))
 
+- Add recents and favourites to the profile page [\#12](https://github.com/zooniverse/wellcome/pull/12) ([eatyourgreens](https://github.com/eatyourgreens))
+
 - List Talk comments and comment on a subject [\#11](https://github.com/zooniverse/wellcome/pull/11) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Grouped and prioritised workflow [\#10](https://github.com/zooniverse/wellcome/pull/10) ([eatyourgreens](https://github.com/eatyourgreens))
@@ -39,6 +41,8 @@
 - List all annotations after editing one [\#2](https://github.com/zooniverse/wellcome/pull/2) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Expandable menu [\#1](https://github.com/zooniverse/wellcome/pull/1) ([eatyourgreens](https://github.com/eatyourgreens))
+
+- More concise text for tag buttons [\#18](https://github.com/zooniverse/wellcome/pull/18) ([eatyourgreens](https://github.com/eatyourgreens))
 
 ## [0.0.1](https://github.com/zooniverse/wellcome/tree/0.0.1) (2015-06-29)
 
