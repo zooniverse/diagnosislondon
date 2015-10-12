@@ -14,6 +14,8 @@
 
 - Updated text from Lalita [\#17](https://github.com/zooniverse/wellcome/pull/17) ([eatyourgreens](https://github.com/eatyourgreens))
 
+- Updated instructions for decision tree question [\#16](https://github.com/zooniverse/wellcome/pull/16) ([eatyourgreens](https://github.com/eatyourgreens))
+
 - Updated edit instructions from Lalita [\#15](https://github.com/zooniverse/wellcome/pull/15) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Style the subject viewer [\#14](https://github.com/zooniverse/wellcome/pull/14) ([eatyourgreens](https://github.com/eatyourgreens))
