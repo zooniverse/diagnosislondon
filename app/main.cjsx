@@ -6,6 +6,7 @@ Classifier = require './classifier'
 Profile = require './profile'
 Page = require './page'
 UserStatus = require './user-status'
+ProjectStatistics = require './project-statistics'
 Panoptes = require 'panoptes-client'
 Projects = require './lib/projects'
 Auth = require './lib/auth'
@@ -67,6 +68,7 @@ Main = React.createClass
       <div className="readymade-project-summary"> {@state.project?.description} </div>
       <div className="readymade-project-description"> {@state.project?.introduction} </div>
       {<div className="readymade-footer"> <a href="#/#{ if @state.subject_set? then 'classify' else 'reports'}" className="major-button"> Get started! </a> </div> if @state.project?}
+      <ProjectStatistics project={@state.project} workflow={@state.workflow} />
     </div>
   
   setBackground: (project) ->
