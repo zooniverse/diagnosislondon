@@ -12,6 +12,8 @@
 
 **Merged pull requests:**
 
+- Add a stats banner to the home page [\#19](https://github.com/zooniverse/wellcome/pull/19) ([eatyourgreens](https://github.com/eatyourgreens))
+
 - Updated text from Lalita [\#17](https://github.com/zooniverse/wellcome/pull/17) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Updated instructions for decision tree question [\#16](https://github.com/zooniverse/wellcome/pull/16) ([eatyourgreens](https://github.com/eatyourgreens))
