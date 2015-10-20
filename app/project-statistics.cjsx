@@ -30,7 +30,5 @@ module.exports = React.createClass
     </div>
   
   completion: ->
-    retired = @props.project.retired_subjects_count / @props.project.subjects_count
-    activeCount = @props.project.subjects_count - @props.project.retired_subjects_count
-    active = (@props.project.classifications_count / (activeCount * @props.workflow.retirement.options.count))
-    ((retired + active) * 100).toFixed(0)
+    fraction = (@props.project.classifications_count / (@props.project.subjects_count * @props.workflow.retirement.options.count))
+    (fraction * 100).toFixed(0)
