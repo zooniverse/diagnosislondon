@@ -35,7 +35,8 @@ module.exports = React.createClass
       .get({focus_id: subject_id, focus_type: 'Subject'})
       .then ([discussion]) =>
         if discussion?
-          discussion.get('comments')
+          @props.talk.type('comments')
+            .get({discussion_id: discussion.id})
             .then (comments) =>
               console.log comments
               @setState {discussion, comments}
