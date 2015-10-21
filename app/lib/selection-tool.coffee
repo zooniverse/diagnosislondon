@@ -12,6 +12,7 @@ class SelectionTool
     {start, end} = @getNodePosition()
     @annotation =
       type: @type
+      subject: @text.getAttribute 'data-subject'
       text: @el.textContent
       start: start
       end: end

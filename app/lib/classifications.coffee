@@ -12,7 +12,7 @@ class Classifications
   update: (opts) ->
     @[opt] = value for opt, value of opts
     
-  create: (subject)->
+  create: (subjects)->
     @classification = @api
       .type('classifications')
       .create
@@ -26,7 +26,7 @@ class Classifications
         links:
           project: @project?.id.toString()
           workflow: @workflow?.id
-          subjects: [subject.id]
+          subjects: (subject.id for subject in subjects)
   
   set_annotations: (annotations) ->
     @classification?.annotations = annotations
