@@ -4,6 +4,12 @@
 
 [Full Changelog](https://github.com/zooniverse/wellcome/compare/0.0.1...HEAD)
 
+**Implemented enhancements:**
+
+- Tag button text change [\#29](https://github.com/zooniverse/wellcome/issues/29)
+
+- Text changes from Alex [\#22](https://github.com/zooniverse/wellcome/issues/22)
+
 **Closed issues:**
 
 - Post to the Talk API from the classifier [\#8](https://github.com/zooniverse/wellcome/issues/8)
@@ -11,6 +17,8 @@
 - Link back to pages on the Wellcome site [\#7](https://github.com/zooniverse/wellcome/issues/7)
 
 **Merged pull requests:**
+
+- Text edits from Alex [\#25](https://github.com/zooniverse/wellcome/pull/25) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Add a stats banner to the home page [\#19](https://github.com/zooniverse/wellcome/pull/19) ([eatyourgreens](https://github.com/eatyourgreens))
 
