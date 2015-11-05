@@ -47,7 +47,9 @@ module.exports = React.createClass
           if @state.currentSubjects.length
             <div className="readymade-subject-viewer">
               <SubjectTools project={@props.project} api={@props.api} talk={@props.talk} user={@props.user} subject_set={@props.subject_set} subject={@state.currentSubjects[0]} />
-              {<SubjectViewer subject={subject} key={subject.id} /> for subject in @state.currentSubjects}
+              <div className="scroll-container">
+                {<SubjectViewer subject={subject} key={subject.id} /> for subject in @state.currentSubjects}
+              </div>
             </div>
         }
       </div>
