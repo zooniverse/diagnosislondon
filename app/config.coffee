@@ -45,16 +45,15 @@ module.exports =
         subtasks: [{
           label: 'Related health issue or hazard'
           value: 'issue'
-          subtasks: [{
-            label: 'People affected'
-            value: 'who'
-          },{
-            label: 'The cause of the problem'
-            value: 'cause'
-          },{
-            label: 'Action taken'
-            value: 'action'
-          }]
+        },{
+          label: 'People affected'
+          value: 'who'
+        },{
+          label: 'The cause of the problem'
+          value: 'cause'
+        },{
+          label: 'Action taken'
+          value: 'action'
         },{
           label: 'Place or location'
           value: 'place'
@@ -94,16 +93,15 @@ module.exports =
         subtasks: [{
           label: 'Related health issue or hazard'
           value: 'issue'
-          subtasks: [{
-            label: 'People affected'
-            value: 'who'
-          },{
-            label: 'The cause of the problem'
-            value: 'cause'
-          },{
-            label: 'Action taken'
-            value: 'action'
-          }]
+        },{
+          label: 'People affected'
+          value: 'who'
+        },{
+          label: 'The cause of the problem'
+          value: 'cause'
+        },{
+          label: 'Action taken'
+          value: 'action'
         },{
           label: 'Place or location'
           value: 'place'
@@ -119,16 +117,15 @@ module.exports =
         subtasks: [{
           label: 'Related health issue or hazard'
           value: 'issue'
-          subtasks: [{
-            label: 'People affected'
-            value: 'who'
-          },{
-            label: 'The cause of the problem'
-            value: 'cause'
-          },{
-            label: 'Action taken'
-            value: 'action'
-          }]
+        },{
+          label: 'People affected'
+          value: 'who'
+        },{
+          label: 'The cause of the problem'
+          value: 'cause'
+        },{
+          label: 'Action taken'
+          value: 'action'
         },{
           label: 'Place or location'
           value: 'place'
