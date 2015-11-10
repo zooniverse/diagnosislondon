@@ -28,7 +28,7 @@ module.exports =
           label: 'The cause of the problem'
           value: 'cause'
         },{
-          label: 'Action taken'
+          label: 'Action suggested or taken'
           value: 'action'
         },{
           label: 'Place or location'
@@ -52,7 +52,7 @@ module.exports =
           label: 'The cause of the problem'
           value: 'cause'
         },{
-          label: 'Action taken'
+          label: 'Action suggested or taken'
           value: 'action'
         },{
           label: 'Place or location'
@@ -100,7 +100,7 @@ module.exports =
           label: 'The cause of the problem'
           value: 'cause'
         },{
-          label: 'Action taken'
+          label: 'Action suggested or taken'
           value: 'action'
         },{
           label: 'Place or location'
@@ -124,7 +124,7 @@ module.exports =
           label: 'The cause of the problem'
           value: 'cause'
         },{
-          label: 'Action taken'
+          label: 'Action suggested or taken'
           value: 'action'
         },{
           label: 'Type of housing, place or location'
