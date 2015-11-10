@@ -74,7 +74,7 @@ module.exports = React.createClass
     <div className="decision-tree-task">
       <h3>{tasks[@props.annotation.type].label} <button className="secret-button" aria-label="More information" onClick={@toggleDescription}><span className="fa fa-info-circle"></span></button></h3>
       <div className="decision-tree-question">
-        To collect all the information about this health issue, highlight a piece of relevant text and click on the buttons to tag it. You don't have to use all of the tags.
+        To collect all the information about this health issue, highlight a piece of relevant text and click on the tag below to select it. You can use the tags more than once, but you don't have to use them all if they don’t apply.
       </div>
       <ToolList annotation={@props.annotation} tools={tools} onClick={@props.onClick}>
       </ToolList>
