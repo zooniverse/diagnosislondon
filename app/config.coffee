@@ -127,7 +127,7 @@ module.exports =
           label: 'Action taken'
           value: 'action'
         },{
-          label: 'Place or location'
+          label: 'Type of housing, place or location'
           value: 'place'
         }]
       }]
