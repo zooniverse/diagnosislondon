@@ -28,7 +28,7 @@ module.exports =
           label: 'The cause of the problem'
           value: 'cause'
         },{
-          label: 'Action taken'
+          label: 'Action suggested or taken'
           value: 'action'
         },{
           label: 'Place or location'
@@ -45,16 +45,15 @@ module.exports =
         subtasks: [{
           label: 'Related health issue or hazard'
           value: 'issue'
-          subtasks: [{
-            label: 'People affected'
-            value: 'who'
-          },{
-            label: 'The cause of the problem'
-            value: 'cause'
-          },{
-            label: 'Action taken'
-            value: 'action'
-          }]
+        },{
+          label: 'People affected'
+          value: 'who'
+        },{
+          label: 'The cause of the problem'
+          value: 'cause'
+        },{
+          label: 'Action suggested or taken'
+          value: 'action'
         },{
           label: 'Place or location'
           value: 'place'
@@ -94,16 +93,15 @@ module.exports =
         subtasks: [{
           label: 'Related health issue or hazard'
           value: 'issue'
-          subtasks: [{
-            label: 'People affected'
-            value: 'who'
-          },{
-            label: 'The cause of the problem'
-            value: 'cause'
-          },{
-            label: 'Action taken'
-            value: 'action'
-          }]
+        },{
+          label: 'People affected'
+          value: 'who'
+        },{
+          label: 'The cause of the problem'
+          value: 'cause'
+        },{
+          label: 'Action suggested or taken'
+          value: 'action'
         },{
           label: 'Place or location'
           value: 'place'
@@ -119,18 +117,17 @@ module.exports =
         subtasks: [{
           label: 'Related health issue or hazard'
           value: 'issue'
-          subtasks: [{
-            label: 'People affected'
-            value: 'who'
-          },{
-            label: 'The cause of the problem'
-            value: 'cause'
-          },{
-            label: 'Action taken'
-            value: 'action'
-          }]
         },{
-          label: 'Place or location'
+          label: 'People affected'
+          value: 'who'
+        },{
+          label: 'The cause of the problem'
+          value: 'cause'
+        },{
+          label: 'Action suggested or taken'
+          value: 'action'
+        },{
+          label: 'Type of housing, place or location'
           value: 'place'
         }]
       }]
