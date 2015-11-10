@@ -3,6 +3,15 @@ ChooseTask = require './tasks/choose'
 EditTask = require './tasks/edit'
 Annotation = require './annotation'
 
+TaskInstructions = React.createClass
+  displayName: 'TaskInstructions'
+  
+  render: ->
+    <div className="task-instructions">
+      <h2>{@props.task?.label}</h2>
+      <p>{@props.task?.description}</p>
+    </div>
+
 AnnotationsSummary = React.createClass
   displayName: 'AnnotationsSummary'
   
@@ -25,16 +34,20 @@ module.exports = React.createClass
   getInitialState: ->
     step: 'choose'
     type: 'health'
-  
+    
+  componentDidUpdate: ->
+    React.render <TaskInstructions task={@refs.currentTask.instructions} />, document.querySelector '#task-instructions'
+    
   render: ->
     <div className="decision-tree">
         {switch @state.step
           when 'choose'
-            <ChooseTask onChooseTask={@edit} onFinish={@finish}>
+            <div>
+              <ChooseTask ref="currentTask" onChooseTask={@edit} onFinish={@finish} />
               <AnnotationsSummary annotations={@props.annotations} deleteTool={@props.deleteTool} />
-            </ChooseTask>
+            </div>
           when 'edit'
-            <EditTask annotation={@props.annotations[0]} onClick={@selectText} onComplete={@choose}/>
+            <EditTask ref="currentTask" annotation={@props.annotations[0]} onClick={@selectText} onComplete={@choose}/>
         }
     </div>
   

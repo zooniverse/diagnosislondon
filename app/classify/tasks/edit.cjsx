@@ -54,20 +54,26 @@ ToolList = React.createClass
 module.exports = React.createClass
   displayName: 'EditTask'
   
+  instructions: {}
+  
+  componentWillMount: ->
+    @instructions = tasks[@props.annotation.type]
+  
   render: ->
     {tools} = tasks[@props.annotation.type]
     <div className="decision-tree-task">
-      <h3>{tasks[@props.annotation.type].label}</h3>
-      <p>{tasks[@props.annotation.type].description}</p>
       <div className="decision-tree-question">
         To collect all the information about this health issue, highlight a piece of relevant text and click on the tag below to select it. You can use the tags more than once, but you don't have to use them all if they don’t apply.
       </div>
-      <ToolList annotation={@props.annotation} tools={tools} onClick={@props.onClick}>
+      <ToolList annotation={@props.annotation} tools={tools} onClick={@onClick}>
       </ToolList>
       <div className="decision-tree-confirmation">
         <button type="button" className="major-button" onClick={@done}>Done</button>
       </div>
     </div>
+    
+  onClick: (e) ->
+    @props.onClick e
     
   done: (e) ->
     @props.onComplete()
