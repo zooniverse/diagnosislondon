@@ -12,11 +12,25 @@
 
 **Closed issues:**
 
+- Update task text on issue pages [\#38](https://github.com/zooniverse/wellcome/issues/38)
+
+- Update logic on tag buttons [\#35](https://github.com/zooniverse/wellcome/issues/35)
+
+- The first tag button should only allow one tagged piece of text to be collected [\#34](https://github.com/zooniverse/wellcome/issues/34)
+
+- Change subtitle on homepage [\#33](https://github.com/zooniverse/wellcome/issues/33)
+
+- Change tag button "Place or location" for category housing [\#31](https://github.com/zooniverse/wellcome/issues/31)
+
+- Change tag button text for "Action taken" [\#30](https://github.com/zooniverse/wellcome/issues/30)
+
 - Post to the Talk API from the classifier [\#8](https://github.com/zooniverse/wellcome/issues/8)
 
 - Link back to pages on the Wellcome site [\#7](https://github.com/zooniverse/wellcome/issues/7)
 
 **Merged pull requests:**
+
+- Task edits [\#39](https://github.com/zooniverse/wellcome/pull/39) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Text edits from Alex [\#25](https://github.com/zooniverse/wellcome/pull/25) ([eatyourgreens](https://github.com/eatyourgreens))
 
