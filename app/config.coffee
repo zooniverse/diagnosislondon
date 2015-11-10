@@ -37,7 +37,7 @@ module.exports =
       }]
     work: 
       label: 'Work'
-      description: 'The MOH and his team inspected the health impact of London’s trades and industries. From reporting on the working conditions of homeworkers to the effects of tanneries and factories on their surroundings, they had the power to issue fines for breaking local by-laws and public health laws.'
+      description: 'The medical officer inspected the health impact of London’s trades and industries. From reporting on the working conditions of homeworkers to the effects of tanneries and factories on their surroundings, they had the power to issue fines for breaking local by-laws and public health laws.'
       tools: [{
         label: 'Type of work'
         value: 'type'
@@ -85,7 +85,7 @@ module.exports =
     #   }]
     food:
       label: 'Food'
-      description: 'The health aspects of food production and sales came under the remit of the Medical Officer. His team of food inspectors investigated all aspects of the city’s food supply, from food importers and manufacturers to abattoirs, from butchers and bakers shops to street vendors. They were particularly concerned with food adulteration – identifying hidden substances that shouldn’t be there – and incidents of food poisoning.'
+      description: 'The medical officer inspected all aspects of the city’s food supply, from food importers and manufacturers to abattoirs, from butchers and bakers shops to street vendors. He was particularly concerned with food adulteration – identifying hidden substances that shouldn’t be there – and incidents of food poisoning.'
       tools: [{
         label: 'Type of food or drink'
         value: 'food'
@@ -109,7 +109,7 @@ module.exports =
       }]
     housing:
       label: 'Housing'
-      description: 'Much of the information about housing in the MOH reports is about the living conditions of London’s poor. The Medical Officers were well aware that poverty played a role in the health of Londoners. They reported on overcrowded slums and the results of poor construction such as leaking sewers, poor ventilation and lack of sunlight due to closely packed houses. They recommended measures such as fumigation after infestations and cleaning and whitewashing after disease outbreaks.'
+      description: 'Much of the information about housing in the reports is about the living conditions of London’s poor. The medical officers reported on overcrowded slums and the results of poor construction such as leaking sewers, poor ventilation and lack of sunlight due to closely packed houses. They recommended measures such as fumigation after infestations and cleaning after disease outbreaks.'
       tools: [{
         label: 'Housing problem'
         value: 'type'
