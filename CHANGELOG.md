@@ -18,6 +18,8 @@
 
 - Update task text on issue pages [\#38](https://github.com/zooniverse/wellcome/issues/38)
 
+- Need to work out how to include descriptions of categories without pushing task and buttons right down the page [\#36](https://github.com/zooniverse/wellcome/issues/36)
+
 - Update logic on tag buttons [\#35](https://github.com/zooniverse/wellcome/issues/35)
 
 - The first tag button should only allow one tagged piece of text to be collected [\#34](https://github.com/zooniverse/wellcome/issues/34)
@@ -35,6 +37,8 @@
 **Merged pull requests:**
 
 - Task edits [\#39](https://github.com/zooniverse/wellcome/pull/39) ([eatyourgreens](https://github.com/eatyourgreens))
+
+- Remove the category description popup [\#37](https://github.com/zooniverse/wellcome/pull/37) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Make classification subjects an array [\#28](https://github.com/zooniverse/wellcome/pull/28) ([eatyourgreens](https://github.com/eatyourgreens))
 
