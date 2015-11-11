@@ -8,7 +8,11 @@
 
 - Tag button text change [\#29](https://github.com/zooniverse/wellcome/issues/29)
 
+- Tag issues that span pages [\#27](https://github.com/zooniverse/wellcome/issues/27)
+
 - Text changes from Alex [\#22](https://github.com/zooniverse/wellcome/issues/22)
+
+- Clarify marking "no issues on this page" [\#20](https://github.com/zooniverse/wellcome/issues/20)
 
 **Closed issues:**
 
@@ -31,6 +35,10 @@
 **Merged pull requests:**
 
 - Task edits [\#39](https://github.com/zooniverse/wellcome/pull/39) ([eatyourgreens](https://github.com/eatyourgreens))
+
+- Make classification subjects an array [\#28](https://github.com/zooniverse/wellcome/pull/28) ([eatyourgreens](https://github.com/eatyourgreens))
+
+- Nothing to see [\#26](https://github.com/zooniverse/wellcome/pull/26) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Text edits from Alex [\#25](https://github.com/zooniverse/wellcome/pull/25) ([eatyourgreens](https://github.com/eatyourgreens))
 
