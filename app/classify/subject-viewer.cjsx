@@ -1,7 +1,5 @@
 React = require 'react'
 
-SelectionTool = require '../lib/selection-tool'
-
 module.exports = React.createClass
   displayName: 'SubjectViewer'
   
@@ -21,20 +19,13 @@ module.exports = React.createClass
     <div className="readymade-marking-surface-container">
       <div className="text-viewer">
         <h3>Page text</h3>
-        <div ref = 'textViewer'>{@state.text}</div>
+        <div data-subject={@props.subject.id}>{@state.text}</div>
       </div>
       <div className="subject-image">
         <h3>Scanned page</h3>
         {<img src={image} alt="" /> if image}
       </div>
     </div>
-  
-  createSelection: (type) ->
-    sel = document.getSelection()
-    if sel.rangeCount
-      options =
-        type: type
-      tool = new SelectionTool options
   
   fetchOCR: (url) ->
     fetch url
