@@ -3,6 +3,22 @@ ChooseTask = require './tasks/choose'
 EditTask = require './tasks/edit'
 Annotation = require './annotation'
 
+AnnotationsSummary = React.createClass
+  displayName: 'AnnotationsSummary'
+  
+  getDefaultProps: ->
+    annotations: []
+    
+  render: ->
+    <div className="annotation-summary">
+      <h2>Health issues on this page</h2>
+    {if @props.annotations.length then @props.annotations.map (tool) =>
+      <Annotation key={tool.id} tool={tool} delete={@props.deleteTool} />
+    else
+      <p>No issues on this page.</p>
+    }
+    </div>
+
 module.exports = React.createClass
   displayName: 'AnnotationToolbar'
   
@@ -14,12 +30,9 @@ module.exports = React.createClass
     <div className="decision-tree">
         {switch @state.step
           when 'choose'
-            <div>
-              <ChooseTask onChooseTask={@edit} onFinish={@finish} />
-              {@props.annotations.map (tool) =>
-                <Annotation key={tool.id} tool={tool} delete={@props.deleteTool} />
-              }
-            </div>
+            <ChooseTask onChooseTask={@edit} onFinish={@finish}>
+              <AnnotationsSummary annotations={@props.annotations} deleteTool={@props.deleteTool} />
+            </ChooseTask>
           when 'edit'
             <EditTask annotation={@props.annotations[0]} onClick={@selectText} onComplete={@choose}/>
         }

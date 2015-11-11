@@ -17,6 +17,7 @@ module.exports = React.createClass
             </button> 
           </li>
         }
+        {@props.children}
         <button type="button" className="major-button" onClick={@finish}>Finish page</button>
       </ul>
     </div>
