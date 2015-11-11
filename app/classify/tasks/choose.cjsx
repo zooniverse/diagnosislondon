@@ -4,11 +4,15 @@ React = require 'react'
 module.exports = React.createClass
   displayName: 'ChooseTask'
   
+  instructions:
+    label: 'Identify Health Issues'
+    description: "Find a health issue on this page that fits one of the categories below. Your task is to collect all the information on the page about the issue you've found."
+  
   render: ->
     <div className="decision-tree-task">
       <div className="decision-tree-question">
-        Find a health issue on this page that fits one of the categories below. Your task is to collect all the information on the page about the issue you've found. To get started first select the category
-        </div>
+        To get started first select the category
+      </div>
       <ul className="decision-tree-choices">
         {for key, task of tasks
           <li key={key} className="decision-tree-choice">

@@ -37,21 +37,24 @@ module.exports = React.createClass
     .then @nextSubject
 
   render: ->
-    <div className="readymade-classification-interface">
-      <div className="readymade-decision-tree-container">
-        <AnnotationToolbar annotations={@state.annotations} onClick={@onToolbarClick} addTool={@newAnnotation} deleteTool={@deleteAnnotation} onFinish={@onFinishPage} />
-        <ClassificationSummary />
-      </div>
-      <div className="readymade-subject-viewer-container">
-        {
-          if @state.currentSubjects.length
-            <div className="readymade-subject-viewer">
-              <SubjectTools project={@props.project} api={@props.api} talk={@props.talk} user={@props.user} subject_set={@props.subject_set} subject={@state.currentSubjects[0]} />
-              <div className="scroll-container">
-                {<SubjectViewer subject={subject} key={subject.id} /> for subject in @state.currentSubjects}
+    <div>
+      <div id="task-instructions" />
+      <div className="readymade-classification-interface">
+        <div className="readymade-decision-tree-container">
+          <AnnotationToolbar annotations={@state.annotations} onClick={@onToolbarClick} addTool={@newAnnotation} deleteTool={@deleteAnnotation} onFinish={@onFinishPage} setTask={@setTask} />
+          <ClassificationSummary />
+        </div>
+        <div className="readymade-subject-viewer-container">
+          {
+            if @state.currentSubjects.length
+              <div className="readymade-subject-viewer">
+                <SubjectTools project={@props.project} api={@props.api} talk={@props.talk} user={@props.user} subject_set={@props.subject_set} subject={@state.currentSubjects[0]} />
+                <div className="scroll-container">
+                  {<SubjectViewer subject={subject} key={subject.id} /> for subject in @state.currentSubjects}
+                </div>
               </div>
-            </div>
-        }
+          }
+        </div>
       </div>
     </div>
   
