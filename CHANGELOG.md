@@ -36,6 +36,8 @@
 
 **Merged pull requests:**
 
+- Expand the toolbar into a classification task component [\#40](https://github.com/zooniverse/wellcome/pull/40) ([eatyourgreens](https://github.com/eatyourgreens))
+
 - Task edits [\#39](https://github.com/zooniverse/wellcome/pull/39) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Remove the category description popup [\#37](https://github.com/zooniverse/wellcome/pull/37) ([eatyourgreens](https://github.com/eatyourgreens))
