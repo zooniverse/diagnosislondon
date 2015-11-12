@@ -1,5 +1,4 @@
 React = require 'react'
-alert = require '../../panoptes/alert'
 {tasks} = require '../../config'
 
 TextSelection = React.createClass
@@ -53,11 +52,6 @@ ToolList = React.createClass
 
 module.exports = React.createClass
   displayName: 'EditTask'
-  
-  instructions: {}
-  
-  componentWillMount: ->
-    @instructions = tasks[@props.annotation.type]
   
   render: ->
     {tools} = tasks[@props.annotation.type]
