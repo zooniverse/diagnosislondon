@@ -54,7 +54,7 @@ module.exports = React.createClass
                   <AnnotationsSummary annotations={@props.annotations} deleteTool={@props.deleteTool} />
                 </div>
               when 'edit'
-                <EditTask annotation={@props.annotations[0]} onClick={@selectText} onComplete={@choose}/>
+                <EditTask annotation={@props.annotations[0]} addText={@props.addText} deleteText={@props.deleteText} onComplete={@choose}/>
             }
           </div>
         </div>
@@ -72,7 +72,8 @@ module.exports = React.createClass
   choose: ->
     @props.annotations.map (annotation) =>
       @props.deleteTool annotation if annotation.empty()
-      for ranges in annotation.ranges
+      annotation.issue?.el.classList.add 'complete'
+      for ranges in annotation.subtasks
         ranges.map (range) -> range.el.classList.add 'complete'
       
     @setState 
@@ -82,7 +83,4 @@ module.exports = React.createClass
   
   finish: ->
     @props.onFinish()
-  
-  selectText: (e) ->
-    @props.onClick e
     

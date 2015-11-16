@@ -36,7 +36,7 @@ module.exports = React.createClass
     .then @nextSubject
 
   render: ->
-    <ClassificationTask annotations={@state.annotations} onClick={@onToolbarClick} addTool={@newAnnotation} deleteTool={@deleteAnnotation} onFinish={@onFinishPage} setTask={@setTask}>
+    <ClassificationTask annotations={@state.annotations} addText={@onToolbarClick} deleteText={@deleteText} addTool={@newAnnotation} deleteTool={@deleteAnnotation} onFinish={@onFinishPage}>
       <div className="readymade-subject-viewer-container">
         {
           if @state.currentSubjects.length
@@ -56,8 +56,7 @@ module.exports = React.createClass
     task_annotations = {}
     @state.annotations.map (annotation, i) ->
       task_annotations[annotation.type] ?= []
-      for type of annotation.ranges
-        task_annotations[annotation.type].push (annotation.ranges[type].map (range) -> range.annotation)
+      task_annotations[annotation.type].push annotation.value()
     task_annotations[task] ?= [] for task of tasks
     @classifications?.set_annotations ({task: key, value: value} for key, value of task_annotations)
     
@@ -78,9 +77,24 @@ module.exports = React.createClass
     @setState {annotations}
     
   addText: (textRange) ->
+    return unless textRange?
     annotations = @state.annotations
     currentAnnotation = annotations.shift()
-    currentAnnotation.addRange textRange if textRange?
+    if textRange.type == 'issue'
+      currentAnnotation.addIssue textRange
+    else
+      currentAnnotation.addSubtask textRange
+    annotations.unshift currentAnnotation
+    @setState {annotations}
+  
+  deleteText: (textRange) ->
+    return unless textRange?
+    annotations = @state.annotations
+    currentAnnotation = annotations.shift()
+    if textRange.type == 'issue'
+      currentAnnotation.deleteIssue textRange
+    else
+      currentAnnotation.deleteSubtask textRange
     annotations.unshift currentAnnotation
     @setState {annotations}
 

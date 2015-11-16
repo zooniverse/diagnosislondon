@@ -19,10 +19,7 @@ module.exports = React.createClass
     <div className="annotation">
       {@tasks[@props.tool.type].label} <button className="secret-button" aria-label='Delete' ref="delete" onClick={@delete}>X</button>
       <ul>
-      {for type, selections of @props.tool.ranges
-        selections.map (range) ->
-          <TextRange key={range.id} range={range} />
-      }
+        <TextRange range={@props.tool.issue} />
       </ul>
     </div>
   
