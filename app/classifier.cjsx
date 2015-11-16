@@ -4,11 +4,8 @@ SubjectTools = require './classify/subject-tools'
 SubjectViewer = require './classify/subject-viewer'
 Annotation = require './classify/annotation'
 ClassificationTask = require './classify/classification-task'
-AnnotationTool = require './lib/annotation-tool'
-SelectionTool = require './lib/selection-tool'
 Subjects = require './lib/subjects'
 Classifications = require './lib/classifications'
-{tasks} = require './config'
 
 module.exports = React.createClass
   displayName: 'Classifier'
@@ -17,7 +14,6 @@ module.exports = React.createClass
   classifications: null
   
   getInitialState: ->
-    annotations: []
     currentSubjects: []
   
   componentWillMount: ->
@@ -36,7 +32,7 @@ module.exports = React.createClass
     .then @nextSubject
 
   render: ->
-    <ClassificationTask annotations={@state.annotations} addText={@onToolbarClick} deleteText={@deleteText} addTool={@newAnnotation} deleteTool={@deleteAnnotation} onFinish={@onFinishPage}>
+    <ClassificationTask onFinish={@onFinishPage}>
       <div className="readymade-subject-viewer-container">
         {
           if @state.currentSubjects.length
@@ -50,60 +46,13 @@ module.exports = React.createClass
       </div>
     </ClassificationTask>
   
-  componentDidUpdate: ->
-    #update classifications here
-    annotations = []
-    task_annotations = {}
-    @state.annotations.map (annotation, i) ->
-      task_annotations[annotation.type] ?= []
-      task_annotations[annotation.type].push annotation.value()
-    task_annotations[task] ?= [] for task of tasks
+  onFinishPage: (task_annotations) ->
     @classifications?.set_annotations ({task: key, value: value} for key, value of task_annotations)
-    
-  onToolbarClick: (e) ->
-    @addText @createSelection e.currentTarget.value
-  
-  onFinishPage: ->
     @classifications.finish()
     console.log JSON.stringify @classifications.current()
     console.log @state.currentSubjects[0]?.metadata.image
     @classifications.current().save()
-    @reset()
     @nextSubject()
-  
-  newAnnotation: (type) ->
-    annotations = @state.annotations
-    annotations.unshift new AnnotationTool type
-    @setState {annotations}
-    
-  addText: (textRange) ->
-    return unless textRange?
-    annotations = @state.annotations
-    currentAnnotation = annotations.shift()
-    if textRange.type == 'issue'
-      currentAnnotation.addIssue textRange
-    else
-      currentAnnotation.addSubtask textRange
-    annotations.unshift currentAnnotation
-    @setState {annotations}
-  
-  deleteText: (textRange) ->
-    return unless textRange?
-    annotations = @state.annotations
-    currentAnnotation = annotations.shift()
-    if textRange.type == 'issue'
-      currentAnnotation.deleteIssue textRange
-    else
-      currentAnnotation.deleteSubtask textRange
-    annotations.unshift currentAnnotation
-    @setState {annotations}
-
-  deleteAnnotation: (annotation) ->
-    annotations = @state.annotations
-    index = annotations.indexOf annotation
-    annotations.splice index, 1
-    annotation.destroy()
-    @setState {annotations}
     
   nextSubject: ->
     currentSubjects = [@subjects.next(), @subjects.queue[0]]
@@ -111,16 +60,3 @@ module.exports = React.createClass
     @classifications.create currentSubjects if currentSubjects.length
     @setState {currentSubjects}
 
-  reset: ->
-    annotations = @state.annotations
-    annotation.destroy() for annotation in annotations
-    annotations = []
-    currentSubjects = []
-    @setState {annotations, currentSubjects}
-  
-  createSelection: (type) ->
-    sel = document.getSelection()
-    if sel.rangeCount
-      options =
-        type: type
-      tool = new SelectionTool options

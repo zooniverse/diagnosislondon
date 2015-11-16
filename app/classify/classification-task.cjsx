@@ -2,6 +2,8 @@ React = require 'react'
 ChooseTask = require './tasks/choose'
 EditTask = require './tasks/edit'
 Annotation = require './annotation'
+SelectionTool = require '../lib/selection-tool'
+AnnotationTool = require '../lib/annotation-tool'
 {tasks} = require '../config'
 
 TaskInstructions = React.createClass
@@ -40,6 +42,7 @@ module.exports = React.createClass
     step: 'choose'
     type: 'health'
     instructions: @defaultInstructions
+    annotations: []
     
   render: ->
     <div>
@@ -50,11 +53,11 @@ module.exports = React.createClass
             {switch @state.step
               when 'choose'
                 <div>
-                  <ChooseTask onChooseTask={@edit} onFinish={@finish} />
-                  <AnnotationsSummary annotations={@props.annotations} deleteTool={@props.deleteTool} />
+                  <ChooseTask onChooseTask={@create} onFinish={@finish} />
+                  <AnnotationsSummary annotations={@state.annotations} deleteTool={@deleteAnnotation} />
                 </div>
               when 'edit'
-                <EditTask annotation={@props.annotations[0]} addText={@props.addText} deleteText={@props.deleteText} onComplete={@choose}/>
+                <EditTask annotation={@state.annotations[0]} addText={@addText} deleteText={@deleteText} onComplete={@choose}/>
             }
           </div>
         </div>
@@ -62,18 +65,18 @@ module.exports = React.createClass
       </div>
     </div>
   
-  edit: (type) ->
-    @props.addTool type
+  create: (type) ->
+    @newAnnotation type
     @setState 
       step: 'edit'
       type: type
       instructions: tasks[type]
-  
+
   choose: ->
-    @props.annotations.map (annotation) =>
-      @props.deleteTool annotation if annotation.empty()
+    @state.annotations.map (annotation) =>
+      @deleteAnnotation annotation if annotation.empty()
       annotation.issue?.el.classList.add 'complete'
-      for ranges in annotation.subtasks
+      for type, ranges of annotation.subtasks
         ranges.map (range) -> range.el.classList.add 'complete'
       
     @setState 
@@ -82,5 +85,63 @@ module.exports = React.createClass
       instructions: @defaultInstructions
   
   finish: ->
-    @props.onFinish()
+    task_annotations = {}
+    @state.annotations.map (annotation, i) ->
+      task_annotations[annotation.type] ?= []
+      task_annotations[annotation.type].push annotation.value()
+    task_annotations[task] ?= [] for task of tasks
+    @props.onFinish task_annotations
+    annotations = @state.annotations
+    annotation.destroy() for annotation in annotations
+    annotations = []
+    @setState {annotations}
+  
+  addText: (e) ->
+    textRange = @createSelection e.currentTarget.value
+    return unless textRange?
+    annotations = @state.annotations
+    currentAnnotation = annotations.shift()
+    if textRange.type == 'issue'
+      currentAnnotation.addIssue textRange
+    else
+      currentAnnotation.addSubtask textRange
+    annotations.unshift currentAnnotation
+    @setState {annotations}
+  
+  deleteText: (textRange) ->
+    return unless textRange?
+    annotations = @state.annotations
+    currentAnnotation = annotations.shift()
+    if textRange.type == 'issue'
+      currentAnnotation.deleteIssue textRange
+    else
+      currentAnnotation.deleteSubtask textRange
+    annotations.unshift currentAnnotation
+    @setState {annotations}
+  
+  newAnnotation: (type) ->
+    annotations = @state.annotations
+    annotations.unshift new AnnotationTool type
+    @setState {annotations}
+  
+  editAnnotation: (annotation) ->
+    annotations = @state.annotations
+    index = annotations.indexOf annotation
+    annotations.splice index, 1
+    annotations.unshift annotation
+    @setState {annotations}
+  
+  deleteAnnotation: (annotation) ->
+    annotations = @state.annotations
+    index = annotations.indexOf annotation
+    annotations.splice index, 1
+    annotation.destroy()
+    @setState {annotations}
+  
+  createSelection: (type) ->
+    sel = document.getSelection()
+    if sel.rangeCount
+      options =
+        type: type
+      tool = new SelectionTool options
     
