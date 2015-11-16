@@ -71,7 +71,7 @@ module.exports = React.createClass
       <ToolList annotation={@props.annotation} tools={tools} addText={@addText} deleteText={@deleteText}>
       </ToolList>
       <div className="decision-tree-confirmation">
-        <button type="button" className="major-button" onClick={@done}>Done</button>
+        <button type="button" className="major-button" disabled={@invalid()} onClick={@done}>Done</button>
       </div>
     </div>
     
@@ -83,3 +83,6 @@ module.exports = React.createClass
     
   done: (e) ->
     @props.onComplete()
+  
+  invalid: ->
+    !@props.annotation.issue? && Object.keys(@props.annotation.subtasks).length != 0
