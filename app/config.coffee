@@ -20,10 +20,10 @@ module.exports =
         required: true
         subtasks: [{
           label: 'Related health issue or hazard'
-          value: 'how'
+          value: 'hazard'
         },{
           label: 'People affected'
-          value: 'who'
+          value: 'people'
         },{
           label: 'The cause of the problem'
           value: 'cause'
@@ -40,14 +40,14 @@ module.exports =
       description: 'The medical officer inspected the health impact of London’s trades and industries. From reporting on the working conditions of homeworkers to the effects of tanneries and factories on their surroundings, they had the power to issue fines for breaking local by-laws and public health laws.'
       tools: [{
         label: 'Type of work'
-        value: 'type'
+        value: 'issue'
         required: true
         subtasks: [{
           label: 'Related health issue or hazard'
-          value: 'issue'
+          value: 'hazard'
         },{
           label: 'People affected'
-          value: 'who'
+          value: 'people'
         },{
           label: 'The cause of the problem'
           value: 'cause'
@@ -88,14 +88,14 @@ module.exports =
       description: 'The medical officer inspected all aspects of the city’s food supply, from food importers and manufacturers to abattoirs, from butchers and bakers shops to street vendors. He was particularly concerned with food adulteration – identifying hidden substances that shouldn’t be there – and incidents of food poisoning.'
       tools: [{
         label: 'Type of food or drink'
-        value: 'food'
+        value: 'issue'
         required: true
         subtasks: [{
           label: 'Related health issue or hazard'
-          value: 'issue'
+          value: 'hazard'
         },{
           label: 'People affected'
-          value: 'who'
+          value: 'people'
         },{
           label: 'The cause of the problem'
           value: 'cause'
@@ -112,14 +112,14 @@ module.exports =
       description: 'Much of the information about housing in the reports is about the living conditions of London’s poor. The medical officers reported on overcrowded slums and the results of poor construction such as leaking sewers, poor ventilation and lack of sunlight due to closely packed houses. They recommended measures such as fumigation after infestations and cleaning after disease outbreaks.'
       tools: [{
         label: 'Housing problem'
-        value: 'type'
+        value: 'issue'
         required: true
         subtasks: [{
           label: 'Related health issue or hazard'
-          value: 'issue'
+          value: 'hazard'
         },{
           label: 'People affected'
-          value: 'who'
+          value: 'people'
         },{
           label: 'The cause of the problem'
           value: 'cause'
