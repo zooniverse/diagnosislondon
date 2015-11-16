@@ -5,7 +5,7 @@ class Favourites
     favorite: true
   
   constructor: (@api, @project)->
-    @query.project_id = @project?.id
+    @query.project_ids = [@project?.id]
     
   create: (subject)->
     display_name = 'Diagnosis London Favourites'
