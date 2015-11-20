@@ -25,11 +25,14 @@ AnnotationsSummary = React.createClass
     <div className="annotation-summary">
       <h2>Health issues on this page</h2>
     {if @props.annotations.length then @props.annotations.map (tool) =>
-      <Annotation key={tool.id} tool={tool} delete={@props.deleteTool} />
+      <Annotation key={tool.id} tool={tool} delete={@props.deleteTool} edit={@edit} />
     else
       <p>No issues on this page.</p>
     }
     </div>
+  
+  edit: (tool) ->
+    @props.onEdit tool
 
 module.exports = React.createClass
   displayName: 'ClassificationTask'
@@ -54,7 +57,7 @@ module.exports = React.createClass
               when 'choose'
                 <div>
                   <ChooseTask onChooseTask={@create} onFinish={@finish} />
-                  <AnnotationsSummary annotations={@state.annotations} deleteTool={@deleteAnnotation} />
+                  <AnnotationsSummary annotations={@state.annotations} deleteTool={@deleteAnnotation} onEdit={@edit} />
                 </div>
               when 'edit'
                 <EditTask annotation={@state.annotations[0]} addText={@addText} deleteText={@deleteText} onComplete={@choose}/>
@@ -71,7 +74,17 @@ module.exports = React.createClass
       step: 'edit'
       type: type
       instructions: tasks[type]
-
+  
+  edit: (tool) ->
+    tool.issue?.el.classList.remove 'complete'
+    for type, ranges of tool.subtasks
+      ranges.map (range) -> range.el.classList.remove 'complete'
+    @editAnnotation tool
+    @setState 
+      step: 'edit'
+      type: tool.type
+      instructions: tasks[tool.type]
+  
   choose: ->
     @state.annotations.map (annotation) =>
       @deleteAnnotation annotation if annotation.empty()

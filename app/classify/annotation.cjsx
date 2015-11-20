@@ -17,11 +17,14 @@ module.exports = React.createClass
   
   render: ->
     <div className="annotation">
-      {@tasks[@props.tool.type].label} <button className="secret-button" aria-label='Delete' ref="delete" onClick={@delete}>X</button>
+      {@tasks[@props.tool.type].label} <button className="secret-button" aria-label='Edit' onClick={@edit}><span className="fa fa-pencil-square-o"></span></button>
       <ul>
         <TextRange range={@props.tool.issue} />
       </ul>
     </div>
   
+  edit: (e) ->
+    @props.edit @props.tool
+    
   delete: (e) ->
     @props.delete @props.tool
