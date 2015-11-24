@@ -1,4 +1,5 @@
 React = require 'react'
+SelectionTool = require '../../lib/selection-tool'
 {tasks} = require '../../config'
 
 TextSelection = React.createClass
@@ -25,7 +26,17 @@ ToolList = React.createClass
     annotation: {}
   
   componentWillMount: ->
-    @setState ranges: @props.annotation.ranges
+    ranges = {}
+    ranges[key] = @props.annotation.subtasks[key] for key of @props.annotation.subtasks
+    ranges.issue = [@props.annotation.issue] if @props.annotation.issue?
+    @setState {ranges}
+  
+  componentWillReceiveProps: (newprops) ->
+    ranges = {}
+    ranges[key] = newprops.annotation.subtasks[key] for key of newprops.annotation.subtasks
+    ranges.issue = [newprops.annotation.issue] if newprops.annotation.issue?
+    @setState {ranges}
+    
   
   render: ->
     <ul className="decision-tree-choices">
@@ -38,20 +49,26 @@ ToolList = React.createClass
           <TextSelection key="selection-#{i}" range={range} onDelete={@deleteText}/> for range, i in @state.ranges[tool.value]
         }
         {if tool.subtasks
-          <ToolList annotation={@props.annotation} tools={tool.subtasks} disabled={!@state.ranges[tool.value]?} onClick={@props.onClick} />
+          <ToolList annotation={@props.annotation} tools={tool.subtasks} disabled={!@state.ranges[tool.value]?} addText={@props.addText} deleteText={@props.deleteText} />
         }
       </li>}
     </ul>
   
   selectText: (e) ->
-    @props.onClick e
+    @props.addText e
   
   deleteText: (range) ->
-    @props.annotation.deleteRange range
-    @setState ranges: @props.annotation.ranges
+    @props.deleteText range
 
 module.exports = React.createClass
   displayName: 'EditTask'
+  
+  getInitialState: ->
+    annotation: {}
+  
+  componentWillMount: ->
+    annotation = @props.annotation
+    @setState {annotation}
   
   render: ->
     {tools} = tasks[@props.annotation.type]
@@ -59,15 +76,42 @@ module.exports = React.createClass
       <div className="decision-tree-question">
         To collect all the information about this health issue, highlight a piece of relevant text and click on the tag below to select it. You can use the tags more than once, but you don't have to use them all if they don’t apply.
       </div>
-      <ToolList annotation={@props.annotation} tools={tools} onClick={@onClick}>
+      <ToolList annotation={@state.annotation} tools={tools} addText={@addText} deleteText={@deleteText}>
       </ToolList>
       <div className="decision-tree-confirmation">
-        <button type="button" className="major-button" onClick={@done}>Done</button>
+        <button type="button" className="major-button" disabled={@invalid()} onClick={@done}>Done</button>
       </div>
     </div>
     
-  onClick: (e) ->
-    @props.onClick e
+  addText: (e) ->
+    textRange = @createSelection e.currentTarget.value
+    return unless textRange?
+    annotation = @state.annotation
+    if textRange.type == 'issue'
+      annotation.addIssue textRange
+    else
+      annotation.addSubtask textRange
+    @setState {annotation}
+  
+  deleteText: (textRange) ->
+    return unless textRange?
+    annotation = @state.annotation
+    if textRange.type == 'issue'
+      annotation.deleteIssue textRange
+    else
+      annotation.deleteSubtask textRange
+    @setState {annotation}
     
   done: (e) ->
-    @props.onComplete()
+    @props.onComplete @state.annotation
+  
+  invalid: ->
+    !@state.annotation.issue? && Object.keys(@state.annotation.subtasks).length != 0
+  
+  createSelection: (type) ->
+    sel = document.getSelection()
+    if sel.rangeCount
+      options =
+        type: type
+      tool = new SelectionTool options
+
