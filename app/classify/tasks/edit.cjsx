@@ -1,4 +1,5 @@
 React = require 'react'
+SelectionTool = require '../../lib/selection-tool'
 {tasks} = require '../../config'
 
 TextSelection = React.createClass
@@ -62,13 +63,20 @@ ToolList = React.createClass
 module.exports = React.createClass
   displayName: 'EditTask'
   
+  getInitialState: ->
+    annotation: {}
+  
+  componentWillMount: ->
+    annotation = @props.annotation
+    @setState {annotation}
+  
   render: ->
     {tools} = tasks[@props.annotation.type]
     <div className="decision-tree-task">
       <div className="decision-tree-question">
         To collect all the information about this health issue, highlight a piece of relevant text and click on the tag below to select it. You can use the tags more than once, but you don't have to use them all if they don’t apply.
       </div>
-      <ToolList annotation={@props.annotation} tools={tools} addText={@addText} deleteText={@deleteText}>
+      <ToolList annotation={@state.annotation} tools={tools} addText={@addText} deleteText={@deleteText}>
       </ToolList>
       <div className="decision-tree-confirmation">
         <button type="button" className="major-button" disabled={@invalid()} onClick={@done}>Done</button>
@@ -76,13 +84,34 @@ module.exports = React.createClass
     </div>
     
   addText: (e) ->
-    @props.addText e
+    textRange = @createSelection e.currentTarget.value
+    return unless textRange?
+    annotation = @state.annotation
+    if textRange.type == 'issue'
+      annotation.addIssue textRange
+    else
+      annotation.addSubtask textRange
+    @setState {annotation}
   
-  deleteText: (range) ->
-    @props.deleteText range
+  deleteText: (textRange) ->
+    return unless textRange?
+    annotation = @state.annotation
+    if textRange.type == 'issue'
+      annotation.deleteIssue textRange
+    else
+      annotation.deleteSubtask textRange
+    @setState {annotation}
     
   done: (e) ->
-    @props.onComplete()
+    @props.onComplete @state.annotation
   
   invalid: ->
-    !@props.annotation.issue? && Object.keys(@props.annotation.subtasks).length != 0
+    !@state.annotation.issue? && Object.keys(@state.annotation.subtasks).length != 0
+  
+  createSelection: (type) ->
+    sel = document.getSelection()
+    if sel.rangeCount
+      options =
+        type: type
+      tool = new SelectionTool options
+

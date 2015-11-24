@@ -2,7 +2,6 @@ React = require 'react'
 ChooseTask = require './tasks/choose'
 EditTask = require './tasks/edit'
 Annotation = require './annotation'
-SelectionTool = require '../lib/selection-tool'
 AnnotationTool = require '../lib/annotation-tool'
 {tasks} = require '../config'
 
@@ -60,7 +59,7 @@ module.exports = React.createClass
                   <AnnotationsSummary annotations={@state.annotations} deleteTool={@deleteAnnotation} onEdit={@edit} />
                 </div>
               when 'edit'
-                <EditTask annotation={@state.annotations[0]} addText={@addText} deleteText={@deleteText} onComplete={@choose}/>
+                <EditTask annotation={@state.annotations[0]} onComplete={@choose}/>
             }
           </div>
         </div>
@@ -85,17 +84,23 @@ module.exports = React.createClass
       type: tool.type
       instructions: tasks[tool.type]
   
-  choose: ->
-    @state.annotations.map (annotation) =>
-      @deleteAnnotation annotation if annotation.empty()
+  choose: (annotation) ->
+    annotations = @state.annotations
+    annotations.shift()
+    
+    if annotation.empty()
+      annotation.destroy()
+    else
       annotation.issue?.el.classList.add 'complete'
       for type, ranges of annotation.subtasks
         ranges.map (range) -> range.el.classList.add 'complete'
+      annotations.unshift annotation
       
     @setState 
       step: 'choose'
       type: null
       instructions: @defaultInstructions
+      annotations: annotations
   
   finish: ->
     task_annotations = {}
@@ -107,29 +112,6 @@ module.exports = React.createClass
     annotations = @state.annotations
     annotation.destroy() for annotation in annotations
     annotations = []
-    @setState {annotations}
-  
-  addText: (e) ->
-    textRange = @createSelection e.currentTarget.value
-    return unless textRange?
-    annotations = @state.annotations
-    currentAnnotation = annotations.shift()
-    if textRange.type == 'issue'
-      currentAnnotation.addIssue textRange
-    else
-      currentAnnotation.addSubtask textRange
-    annotations.unshift currentAnnotation
-    @setState {annotations}
-  
-  deleteText: (textRange) ->
-    return unless textRange?
-    annotations = @state.annotations
-    currentAnnotation = annotations.shift()
-    if textRange.type == 'issue'
-      currentAnnotation.deleteIssue textRange
-    else
-      currentAnnotation.deleteSubtask textRange
-    annotations.unshift currentAnnotation
     @setState {annotations}
   
   newAnnotation: (type) ->
@@ -150,11 +132,4 @@ module.exports = React.createClass
     annotations.splice index, 1
     annotation.destroy()
     @setState {annotations}
-  
-  createSelection: (type) ->
-    sel = document.getSelection()
-    if sel.rangeCount
-      options =
-        type: type
-      tool = new SelectionTool options
     
