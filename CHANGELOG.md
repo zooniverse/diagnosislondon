@@ -10,9 +10,15 @@
 
 - Tag issues that span pages [\#27](https://github.com/zooniverse/wellcome/issues/27)
 
+- Limit the ranges array for annotation tools [\#23](https://github.com/zooniverse/wellcome/issues/23)
+
 - Text changes from Alex [\#22](https://github.com/zooniverse/wellcome/issues/22)
 
 - Clarify marking "no issues on this page" [\#20](https://github.com/zooniverse/wellcome/issues/20)
+
+**Fixed bugs:**
+
+- Validate annotations for reasonable tag values [\#21](https://github.com/zooniverse/wellcome/issues/21)
 
 **Closed issues:**
 
@@ -35,6 +41,8 @@
 - Link back to pages on the Wellcome site [\#7](https://github.com/zooniverse/wellcome/issues/7)
 
 **Merged pull requests:**
+
+- Split classification data into issues and details [\#42](https://github.com/zooniverse/wellcome/pull/42) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Expand the toolbar into a classification task component [\#40](https://github.com/zooniverse/wellcome/pull/40) ([eatyourgreens](https://github.com/eatyourgreens))
 
