@@ -63,6 +63,8 @@ ToolList = React.createClass
 module.exports = React.createClass
   displayName: 'EditTask'
   
+  instructions: "To collect all the information about this health issue, highlight a piece of relevant text and click on the tag below to select it. You can use the tags more than once, but you don’t have to use them all if they don’t apply."
+  
   getInitialState: ->
     annotation: {}
   
@@ -74,7 +76,7 @@ module.exports = React.createClass
     {tools} = tasks[@props.annotation.type]
     <div className="decision-tree-task">
       <div className="decision-tree-question">
-        To collect all the information about this health issue, highlight a piece of relevant text and click on the tag below to select it. You can use the tags more than once, but you don't have to use them all if they don’t apply.
+        {@instructions}
       </div>
       <ToolList annotation={@state.annotation} tools={tools} addText={@addText} deleteText={@deleteText}>
       </ToolList>
