@@ -29,7 +29,7 @@ class SelectionTool
     range = range.cloneRange()
     range.surroundContents @el
     sel.removeAllRanges()
-    @text = range.startContainer
+    @text = @el.parentNode
   
   unwrapHTML: () ->
     text = @annotation.text
@@ -46,7 +46,7 @@ class SelectionTool
         break
       else
         start += node.textContent.length
-  
+
     end = start + node.textContent.length
     start += 1
     {start, end}
