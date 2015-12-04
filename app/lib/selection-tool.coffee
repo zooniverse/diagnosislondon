@@ -35,7 +35,7 @@ class SelectionTool
     text = @annotation.text
     @el.insertAdjacentHTML 'afterend', text
     @text.removeChild @el
-    @text.normalize()
+    # @text.normalize()
     
   
   getNodePosition: () ->
