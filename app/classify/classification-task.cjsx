@@ -22,11 +22,10 @@ AnnotationsSummary = React.createClass
     
   render: ->
     <div className="annotation-summary">
-      <h2>Health issues on this page</h2>
     {if @props.annotations.length then @props.annotations.map (tool) =>
       <Annotation key={tool.id} tool={tool} delete={@props.deleteTool} edit={@edit} />
     else
-      <p>No issues on this page.</p>
+      <p>No issues on this page yet.</p>
     }
     </div>
   
