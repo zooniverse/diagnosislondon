@@ -18,9 +18,19 @@
 
 **Fixed bugs:**
 
+- Bug in IE 11.0.9600 [\#47](https://github.com/zooniverse/wellcome/issues/47)
+
 - Validate annotations for reasonable tag values [\#21](https://github.com/zooniverse/wellcome/issues/21)
 
 **Closed issues:**
+
+- remove 'Health issues on this page' title from above the list of tagged issues [\#46](https://github.com/zooniverse/wellcome/issues/46)
+
+- Change text 'no issues on this page' to 'no issues on this page yet' [\#45](https://github.com/zooniverse/wellcome/issues/45)
+
+- Change label of tag 'Environmental problem' to 'Pollution, sanitation and waste problems' [\#44](https://github.com/zooniverse/wellcome/issues/44)
+
+- Remove 'Related health issue or hazard' tag from Housing and Environment categories [\#43](https://github.com/zooniverse/wellcome/issues/43)
 
 - Update task text on issue pages [\#38](https://github.com/zooniverse/wellcome/issues/38)
 
