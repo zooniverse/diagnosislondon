@@ -1,5 +1,4 @@
 React = require 'react'
-SelectionTool = require '../../lib/selection-tool'
 {tasks} = require '../../config'
 
 TextSelection = React.createClass
@@ -86,13 +85,11 @@ module.exports = React.createClass
     </div>
     
   addText: (e) ->
-    textRange = @createSelection e.currentTarget.value
-    return unless textRange?
     annotation = @state.annotation
-    if textRange.type == 'issue'
-      annotation.addIssue textRange
+    if e.currentTarget.value == 'issue'
+      annotation.addIssue e.currentTarget.value
     else
-      annotation.addSubtask textRange
+      annotation.addSubtask e.currentTarget.value
     @setState {annotation}
   
   deleteText: (textRange) ->

@@ -34,9 +34,8 @@ class SelectionTool
   unwrapHTML: () ->
     text = @annotation.text
     @el.insertAdjacentHTML 'afterend', text
-    parent = @el.parentNode
-    parent.removeChild @el
-    parent.normalize()
+    @text.removeChild @el
+    @text.normalize()
     
   
   getNodePosition: () ->

@@ -1,3 +1,5 @@
+SelectionTool = require './selection-tool'
+
 class AnnotationTool
   @count: 0
   
@@ -10,10 +12,12 @@ class AnnotationTool
     @id = "#{@type}-#{AnnotationTool.count}"
     @subtasks = {}
   
-  addIssue: (rangeTool) ->
+  addIssue: (type) ->
     if @issue?
-      rangeTool.destroy()
+      document.getSelection().removeAllRanges()
     else
+      rangeTool = @createSelection type
+      return unless rangeTool?
       rangeTool.el.classList.add @type
       @issue = rangeTool
     
@@ -21,7 +25,8 @@ class AnnotationTool
     rangeTool.destroy()
     @issue = null
     
-  addSubtask: (rangeTool) ->
+  addSubtask: (type) ->
+    rangeTool = @createSelection type
     rangeTool.el.classList.add @type
     @subtasks[rangeTool.type] ?= []
     @subtasks[rangeTool.type].push rangeTool
@@ -45,5 +50,12 @@ class AnnotationTool
     for type of @subtasks
       @subtasks[type].map (subtask) ->
         subtask.destroy()
+  
+  createSelection: (type) ->
+    sel = document.getSelection()
+    if sel.rangeCount
+      options =
+        type: type
+      tool = new SelectionTool options
   
 module.exports = AnnotationTool
