@@ -9,6 +9,12 @@ module.exports = React.createClass
   componentWillMount: ->
     @props.workflow?.get 'subject_sets', page_size: 40
       .then (subject_sets) =>
+        subject_sets.sort (a, b) ->
+          return 1 if a.metadata.BOROUGH > b.metadata.BOROUGH
+          return -1 if a.metadata.BOROUGH < b.metadata.BOROUGH
+          return 1 if a.metadata['File prefix'] > b.metadata['File prefix']
+          return -1 if a.metadata['File prefix'] < b.metadata['File prefix']
+          return 0
         @setState {subject_sets}
   
   render: ->
