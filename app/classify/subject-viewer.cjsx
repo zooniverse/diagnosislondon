@@ -18,7 +18,7 @@ module.exports = React.createClass
     image = @mediaSrcs['image/jpeg']
     <div className="readymade-marking-surface-container">
       <div className="text-viewer">
-        <h3>Page text</h3>
+        <h3>Page {@props.subject.metadata.page} {@props.subject.metadata.filename}</h3>
         <div data-subject={@props.subject.id}>{@state.text}</div>
       </div>
       <div className="subject-image">

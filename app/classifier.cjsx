@@ -26,7 +26,6 @@ module.exports = React.createClass
     {api, project, subject_set, workflow} = newProps
     @subjects.update {api, project, subject_set_id: subject_set.id}
     @classifications.update {api, project, workflow}
-    @reset()
     @subjects.flush()
     @subjects.fetch()
     .then @nextSubject
