@@ -52,6 +52,8 @@
 
 **Merged pull requests:**
 
+- Load subject set data from Wellcome's CSV file [\#51](https://github.com/zooniverse/wellcome/pull/51) ([eatyourgreens](https://github.com/eatyourgreens))
+
 - Split classification data into issues and details [\#42](https://github.com/zooniverse/wellcome/pull/42) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Expand the toolbar into a classification task component [\#40](https://github.com/zooniverse/wellcome/pull/40) ([eatyourgreens](https://github.com/eatyourgreens))
