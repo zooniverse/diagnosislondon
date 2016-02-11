@@ -6,6 +6,8 @@
 
 **Implemented enhancements:**
 
+- Change 'Environmental Health' [\#50](https://github.com/zooniverse/wellcome/issues/50)
+
 - Tag button text change [\#29](https://github.com/zooniverse/wellcome/issues/29)
 
 - Tag issues that span pages [\#27](https://github.com/zooniverse/wellcome/issues/27)
@@ -53,6 +55,8 @@
 **Merged pull requests:**
 
 - Load subject set data from Wellcome's CSV file [\#51](https://github.com/zooniverse/wellcome/pull/51) ([eatyourgreens](https://github.com/eatyourgreens))
+
+- Queue unsent classifications [\#49](https://github.com/zooniverse/wellcome/pull/49) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Split classification data into issues and details [\#42](https://github.com/zooniverse/wellcome/pull/42) ([eatyourgreens](https://github.com/eatyourgreens))
 
