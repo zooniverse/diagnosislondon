@@ -32,11 +32,31 @@ class Classifications
     @classification?.annotations = annotations
   
   finish: ->
+    queue = JSON.parse localStorage.getItem 'classifications'
+    queue ?= []
+    
     @classification.update
       completed: true
       'metadata.finished_at': (new Date).toISOString()
       'metadata.viewport':
         width: innerWidth
         height: innerHeight
+    
+    newQueue = []
+    for classificationData in queue
+      @api.type 'classifications'
+        .create classificationData
+        .save()
+        .catch (e) ->
+          newQueue.push classificationData
+          localStorage.setItem 'classifications', JSON.stringify newQueue
+    
+    @classification.save()
+      .then ->
+        @classification.destroy()
+      .catch (e) ->
+        newQueue.push @classification
+        localStorage.setItem 'classifications', JSON.stringify newQueue
+
 
 module.exports = Classifications
