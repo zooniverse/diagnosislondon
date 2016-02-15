@@ -12,14 +12,14 @@ module.exports =
     root: ''
   tasks:
     health: 
-      label: 'Pollution, Sanitation & Waste'
+      label: 'Pollution and Waste'
       description: 'Monitoring environmental health and sanitation was a major part of the Medical Officer’s role. They reported on contaminated water, noxious fumes and smells and sewerage and drainage. They monitored the health effects of seasonal changes in temperature and smog levels. They also directed the clean-up of areas that were a potential health hazard, removing piles of rubbish, stopping effluent run-off.'
       tools: [{
-        label: 'Pollution, sanitation and waste problems'
+        label: 'Pollution or waste problems'
         value: 'issue'
         required: true
         subtasks: [{
-          label: 'People affected'
+          label: 'People affected, include any names'
           value: 'people'
         },{
           label: 'The cause of the problem'
@@ -28,8 +28,11 @@ module.exports =
           label: 'Action suggested or taken'
           value: 'action'
         },{
-          label: 'Place or location'
+          label: 'Type of premises, include business names'
           value: 'place'
+        },{
+          label: 'Location, include place or street names'
+          value: 'location'
         }]
       }]
     work: 
@@ -43,7 +46,7 @@ module.exports =
           label: 'Related health issue or hazard'
           value: 'hazard'
         },{
-          label: 'People affected'
+          label: 'People affected, include any names'
           value: 'people'
         },{
           label: 'The cause of the problem'
@@ -52,8 +55,11 @@ module.exports =
           label: 'Action suggested or taken'
           value: 'action'
         },{
-          label: 'Place or location'
+          label: 'Type of premises, include business names'
           value: 'place'
+        },{
+          label: 'Location, include place or street names'
+          value: 'location'
         }]
       }]
     # disease:
@@ -91,7 +97,7 @@ module.exports =
           label: 'Related health issue or hazard'
           value: 'hazard'
         },{
-          label: 'People affected'
+          label: 'People affected, include any names'
           value: 'people'
         },{
           label: 'The cause of the problem'
@@ -100,8 +106,11 @@ module.exports =
           label: 'Action suggested or taken'
           value: 'action'
         },{
-          label: 'Place or location'
+          label: 'Type of premises, include business names'
           value: 'place'
+        },{
+          label: 'Location, include place or street names'
+          value: 'location'
         }]
       }]
     housing:
@@ -112,7 +121,7 @@ module.exports =
         value: 'issue'
         required: true
         subtasks: [{
-          label: 'People affected'
+          label: 'People affected, include any names'
           value: 'people'
         },{
           label: 'The cause of the problem'
@@ -123,5 +132,8 @@ module.exports =
         },{
           label: 'Type of housing, place or location'
           value: 'place'
+        },{
+          label: 'Location, include place or street names'
+          value: 'location'
         }]
       }]
