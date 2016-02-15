@@ -26,6 +26,16 @@
 
 **Closed issues:**
 
+- Change all 'Place or location' tags to 'Type of premises, include business names' [\#57](https://github.com/zooniverse/wellcome/issues/57)
+
+- In 'Pollution and Waste' category change 'Pollution, sanitation and waste problems' to Pollution or waste problem' [\#56](https://github.com/zooniverse/wellcome/issues/56)
+
+- In each category change 'People affected' to 'People affected, include any names' [\#55](https://github.com/zooniverse/wellcome/issues/55)
+
+- Change 'Pollution, Sanitation and Waste' category button to 'Pollution and Waste' [\#54](https://github.com/zooniverse/wellcome/issues/54)
+
+- Add additional tag button to each category labelled 'Location, include place or street names'  [\#53](https://github.com/zooniverse/wellcome/issues/53)
+
 - remove 'Health issues on this page' title from above the list of tagged issues [\#46](https://github.com/zooniverse/wellcome/issues/46)
 
 - Change text 'no issues on this page' to 'no issues on this page yet' [\#45](https://github.com/zooniverse/wellcome/issues/45)
@@ -53,6 +63,8 @@
 - Link back to pages on the Wellcome site [\#7](https://github.com/zooniverse/wellcome/issues/7)
 
 **Merged pull requests:**
+
+- Changes to tag labels and new Location tag [\#59](https://github.com/zooniverse/wellcome/pull/59) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Load subject set data from Wellcome's CSV file [\#51](https://github.com/zooniverse/wellcome/pull/51) ([eatyourgreens](https://github.com/eatyourgreens))
 
