@@ -50,7 +50,6 @@ module.exports = React.createClass
     @classifications.finish()
     console.log JSON.stringify @classifications.current()
     console.log @state.currentSubjects[0]?.metadata.image
-    @classifications.current().save()
     @nextSubject()
     
   nextSubject: ->

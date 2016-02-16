@@ -49,7 +49,8 @@ SubjectCommentsForm = React.createClass
             .then (discussion) =>
               @props.onUpdate()
               @refs.comment.getDOMNode().value = ''
-              
+        .catch (e) ->
+          console.log e      
 
 module.exports = React.createClass
   displayName: 'SubjectComments'

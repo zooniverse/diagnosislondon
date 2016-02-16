@@ -34,26 +34,29 @@ Main = React.createClass
     subject_set_id = window.location.hash.split('/')[2]
     subject_set_id ?= localStorage.getItem 'subject-set-id'
     
-    @client = switch config.auth_mode
-      when 'panoptes' then new Panoptes config.panoptes_staging
-      when 'oauth' then new Panoptes config.panoptes
+    @client = Panoptes.apiClient
+    @client.root = switch config.auth_mode
+      when 'oauth' then config.panoptes.host + '/api'
+      when 'panoptes' then config.panoptes_staging.host + '/api'
     
-    @talk = new Panoptes config.talk
+    @talk = Panoptes.talkClient
+    @talk.root = switch config.auth_mode
+      when 'oauth' then config.talk.host
       
-    @projects = new Projects @client.api
+    @projects = new Projects @client
     
     @auth = switch config.auth_mode
-      when 'oauth' then new Auth @client.api
-      when 'panoptes' then @client.api.auth
+      when 'oauth' then new Auth @client, Panoptes.auth
+      when 'panoptes' then Panoptes.auth
     
-    @client.api.auth.listen @handleAuthChange
+    Panoptes.auth.listen @handleAuthChange
 
     @handleAuthChange().then =>
       @changeSubjectSet subject_set_id if subject_set_id?
     
   componentDidUpdate:->
     @setBackground @state.project if @state.project?
-    React.render <Profile project={@state.project} workflow={@state.workflow} user={@state.user} api={@client.api} />, document.querySelector '#profile'
+    React.render <Profile project={@state.project} workflow={@state.workflow} user={@state.user} api={@client} />, document.querySelector '#profile'
     React.render <UserStatus user={@state.user} auth={@auth} />, document.querySelector '#user-status'
     React.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#reports'
     React.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
@@ -78,19 +81,18 @@ Main = React.createClass
           .style.backgroundImage = "url(#{background.src})"
           
   handleAuthChange: (e) ->
-    @talk.api.auth.checkCurrent()
     @auth
       .checkCurrent()
       .then (user) =>
         @projects?.fetch().then =>
           project = @projects.current()
-          @client.api.type 'workflows'
+          @client.type 'workflows'
             .get project.links.workflows[0]
             .then (workflow) =>
               @setState {user, project, workflow}
   
   changeSubjectSet: (subject_set_id) ->
-    @client.api.type 'subject_sets'
+    @client.type 'subject_sets'
     .get subject_set_id
     .then (subject_set) =>
       localStorage.setItem 'subject-set-id', subject_set.id
@@ -98,7 +100,7 @@ Main = React.createClass
   
   renderClassifier: ->
     if @state.subject_set?
-      React.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client.api} talk={@talk.api} subject_set={@state.subject_set} />, document.querySelector '#classify'
+      React.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client} talk={@talk} subject_set={@state.subject_set} />, document.querySelector '#classify'
     else
       React.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#classify'
           

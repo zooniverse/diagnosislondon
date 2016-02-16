@@ -42,6 +42,9 @@ module.exports = React.createClass
               @setState {discussion, comments}
         else
           @setState {discussion: null, comments: []}
+      .catch (e) =>
+        console.log e
+        @setState {discussion: null, comments: []}
   
   update: (comment)->
     if comment?

@@ -44,19 +44,23 @@ class Classifications
     
     newQueue = []
     for classificationData in queue
-      @api.type 'classifications'
-        .create classificationData
-        .save()
-        .catch (e) ->
-          newQueue.push classificationData
-          localStorage.setItem 'classifications', JSON.stringify newQueue
+      if classificationData?
+        @api.type 'classifications'
+          .create classificationData
+          .save()
+          .then (classification) ->
+            classification.destroy()
+          .catch (e) ->
+            newQueue.push classificationData
+            localStorage.setItem 'classifications', JSON.stringify newQueue
     
     @classification.save()
-      .then ->
-        @classification.destroy()
-      .catch (e) ->
+      .then (classification) ->
+        classification.destroy()
+      .catch (e) =>
         newQueue.push @classification
         localStorage.setItem 'classifications', JSON.stringify newQueue
+    localStorage.setItem 'classifications', JSON.stringify newQueue
 
 
 module.exports = Classifications
