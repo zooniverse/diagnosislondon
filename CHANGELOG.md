@@ -20,6 +20,8 @@
 
 **Fixed bugs:**
 
+- IE11: Removing a selection deletes page text [\#48](https://github.com/zooniverse/wellcome/issues/48)
+
 - Bug in IE 11.0.9600 [\#47](https://github.com/zooniverse/wellcome/issues/47)
 
 - Validate annotations for reasonable tag values [\#21](https://github.com/zooniverse/wellcome/issues/21)
@@ -63,6 +65,8 @@
 - Link back to pages on the Wellcome site [\#7](https://github.com/zooniverse/wellcome/issues/7)
 
 **Merged pull requests:**
+
+- Fix classifications [\#60](https://github.com/zooniverse/wellcome/pull/60) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Changes to tag labels and new Location tag [\#59](https://github.com/zooniverse/wellcome/pull/59) ([eatyourgreens](https://github.com/eatyourgreens))
 
