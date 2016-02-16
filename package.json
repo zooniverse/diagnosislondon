@@ -28,7 +28,7 @@
     "gulp-watch": "^1.1.0",
     "json-loader": "^0.5.2",
     "nib": "^1.0.4",
-    "panoptes-client": "^0.1.1",
+    "panoptes-client": "~2.0.0",
     "react-a11y": "^0.2.6",
     "run-sequence": "^1.0.2",
     "stylus": "^0.49.3",

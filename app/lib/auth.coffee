@@ -7,7 +7,7 @@ extractToken = (hash) ->
     
 class Auth
   
-  constructor: (@api) ->
+  constructor: (@api, @auth) ->
     if token = @_tokenExists()
       @_setupAuth token
     
@@ -20,7 +20,7 @@ class Auth
   
   signOut: ->
     @_removeToken()
-    @api.auth.emit 'change'
+    @auth.emit 'change'
   
   _setupAuth: (token) ->
       @api.headers['Authorization'] = 'Bearer ' + token
