@@ -53,8 +53,14 @@ module.exports = React.createClass
     @nextSubject()
     
   nextSubject: ->
-    currentSubjects = [@subjects.next(), @subjects.queue[0]]
+    currentSubjects = @state.currentSubjects
+    if currentSubjects.length is 0
+      currentSubjects.push @subjects.next(), @subjects.queue[0]
+    else
+      @subjects.next()
+      currentSubjects.push @subjects.queue[0]
+      currentSubjects.shift() if currentSubjects.length > 3
     # create a new classification here
-    @classifications.create currentSubjects if currentSubjects.length
+    @classifications.create [@subjects.current]
     @setState {currentSubjects}
 
