@@ -28,6 +28,8 @@
 
 **Closed issues:**
 
+- Add text to Profile page when not signed in and provide sign in dialog [\#58](https://github.com/zooniverse/wellcome/issues/58)
+
 - Change all 'Place or location' tags to 'Type of premises, include business names' [\#57](https://github.com/zooniverse/wellcome/issues/57)
 
 - In 'Pollution and Waste' category change 'Pollution, sanitation and waste problems' to Pollution or waste problem' [\#56](https://github.com/zooniverse/wellcome/issues/56)
@@ -56,6 +58,8 @@
 
 - Change subtitle on homepage [\#33](https://github.com/zooniverse/wellcome/issues/33)
 
+- Add a link to the blog to the top nav [\#32](https://github.com/zooniverse/wellcome/issues/32)
+
 - Change tag button "Place or location" for category housing [\#31](https://github.com/zooniverse/wellcome/issues/31)
 
 - Change tag button text for "Action taken" [\#30](https://github.com/zooniverse/wellcome/issues/30)
@@ -65,6 +69,8 @@
 - Link back to pages on the Wellcome site [\#7](https://github.com/zooniverse/wellcome/issues/7)
 
 **Merged pull requests:**
+
+- Hide profile unless logged-in [\#62](https://github.com/zooniverse/wellcome/pull/62) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Fix classifications [\#60](https://github.com/zooniverse/wellcome/pull/60) ([eatyourgreens](https://github.com/eatyourgreens))
 
