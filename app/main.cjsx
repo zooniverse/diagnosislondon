@@ -79,6 +79,7 @@ Main = React.createClass
     @auth
       .checkCurrent()
       .then (user) =>
+        @toggleProfile user
         @projects?.fetch().then =>
           project = @projects.current()
           @client.type 'workflows'
@@ -86,6 +87,15 @@ Main = React.createClass
             .then (workflow) =>
               @setState {user, project, workflow}
   
+  toggleProfile: (user) ->
+    profile_link = document.querySelector '[href="#profile"]'
+    profile_link.setAttribute 'aria-hidden', !user?
+    if user?
+      profile_link.setAttribute 'tabindex', 0
+    else
+      profile_link.setAttribute 'tabindex', -1
+    window.location.hash = '#/' if window.location.hash == '#/profile' and !user?
+    
   changeSubjectSet: (subject_set_id) ->
     @client.type 'subject_sets'
     .get subject_set_id

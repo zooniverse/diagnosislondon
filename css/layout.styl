@@ -101,9 +101,13 @@ a
     margin: 0 auto
     max-width: 80%
 
-[role=tabPanel]
-  &[aria-selected=false]
-    display: none
+#wrapper
+  [role=tabPanel]
+    &[aria-selected=false]
+      display: none
 
-  &[aria-selected=true]
-    display: block
+    &[aria-selected=true]
+      display: block
+
+  [aria-hidden=true]
+    display:none
