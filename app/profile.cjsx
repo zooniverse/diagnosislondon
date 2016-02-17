@@ -47,7 +47,6 @@ module.exports = React.createClass
   render: ->
     if @props.user?
       <div>
-          <p>Yo, {@props.user.display_name}!</p>
           <h2>Your favourites</h2>
           <ul>
             {<li key="favourite-#{favourite.id}" className="item"><a href="https://www.zooniverse.org/projects/#{@props.project.slug}/talk/subjects/#{favourite.id}"><Thumbnail subject={favourite} /></a></li> for favourite in @state.favourites}
