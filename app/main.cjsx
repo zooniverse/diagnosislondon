@@ -35,19 +35,14 @@ Main = React.createClass
     subject_set_id ?= localStorage.getItem 'subject-set-id'
     
     @client = Panoptes.apiClient
-    @client.root = switch config.auth_mode
-      when 'oauth' then config.panoptes.host + '/api'
-      when 'panoptes' then config.panoptes_staging.host + '/api'
+    @client.root = config.panoptes.host + '/api'
     
     @talk = Panoptes.talkClient
-    @talk.root = switch config.auth_mode
-      when 'oauth' then config.talk.host
+    @talk.root = config.talk.host
       
     @projects = new Projects @client
     
-    @auth = switch config.auth_mode
-      when 'oauth' then new Auth @client, Panoptes.auth
-      when 'panoptes' then Panoptes.auth
+    @auth = new Auth @client, Panoptes.auth
     
     Panoptes.auth.listen @handleAuthChange
 
