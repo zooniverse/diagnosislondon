@@ -29,7 +29,8 @@ class Classifications
           subjects: (subject.id for subject in subjects)
   
   set_annotations: (annotations) ->
-    @classification?.annotations = annotations
+    @classification?.update
+      annotations: annotations
   
   finish: ->
     queue = JSON.parse localStorage.getItem 'classifications'
