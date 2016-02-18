@@ -35,7 +35,9 @@ class Classifications
     queue = JSON.parse localStorage.getItem 'classifications'
     queue ?= []
     
-    @classification.update
+    finished = @classification
+    
+    finished.update
       completed: true
       'metadata.finished_at': (new Date).toISOString()
       'metadata.viewport':
@@ -54,11 +56,11 @@ class Classifications
             newQueue.push classificationData
             localStorage.setItem 'classifications', JSON.stringify newQueue
     
-    @classification.save()
+    finished.save()
       .then (classification) ->
         classification.destroy()
       .catch (e) =>
-        newQueue.push @classification
+        newQueue.push finished
         localStorage.setItem 'classifications', JSON.stringify newQueue
     localStorage.setItem 'classifications', JSON.stringify newQueue
 
