@@ -29,7 +29,19 @@ module.exports = React.createClass
     @subjects.flush()
     @subjects.fetch()
     .then @nextSubject
-
+  
+  componentDidUpdate: ->
+    container = @refs.scrollContainer.getDOMNode()
+    subject_node = @refs["subject#{@subjects.current.id}"].getDOMNode()
+    distance = subject_node.offsetTop / 20
+    
+    move_subject = =>
+      container.scrollTop = container.scrollTop + distance
+      setTimeout move_subject, 50 unless container.scrollTop > subject_node.offsetTop - 50
+    
+    container.scrollTop -= subject_node.scrollHeight
+    setTimeout move_subject, 50
+      
   render: ->
     <ClassificationTask onFinish={@onFinishPage}>
       <div className="readymade-subject-viewer-container">
@@ -37,8 +49,8 @@ module.exports = React.createClass
           if @state.currentSubjects.length
             <div className="readymade-subject-viewer">
               <SubjectTools project={@props.project} api={@props.api} talk={@props.talk} user={@props.user} subject_set={@props.subject_set} subject={@state.currentSubjects[0]} />
-              <div className="scroll-container">
-                {<SubjectViewer subject={subject} key={subject.id} /> for subject in @state.currentSubjects}
+              <div className="scroll-container" ref="scrollContainer">
+                {<SubjectViewer subject={subject} key={subject.id} ref="subject#{subject.id}" /> for subject in @state.currentSubjects}
               </div>
             </div>
         }
