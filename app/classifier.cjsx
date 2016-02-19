@@ -26,13 +26,17 @@ module.exports = React.createClass
     {api, project, subject_set, workflow} = newProps
     @subjects.update {api, project, subject_set_id: subject_set.id}
     @classifications.update {api, project, workflow}
-    @subjects.flush()
-    @subjects.fetch()
-    .then @nextSubject
+    
+    @setState currentSubjects: [], =>
+      @subjects.flush()
+      @subjects.fetch()
+        .then @nextSubject
   
   componentDidUpdate: ->
-    container = @refs.scrollContainer.getDOMNode()
-    subject_node = @refs["subject#{@subjects.current.id}"].getDOMNode()
+    container = @refs.scrollContainer?.getDOMNode()
+    subject_node = @refs["subject#{@subjects.current.id}"]?.getDOMNode()
+    return unless container? && subject_node?
+    
     container.scrollTop -= subject_node.scrollHeight
     distance = subject_node.offsetTop / 20
     
