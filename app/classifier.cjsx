@@ -43,7 +43,7 @@ module.exports = React.createClass
     setTimeout move_subject, 50
       
   render: ->
-    <ClassificationTask onFinish={@onFinishPage}>
+    <ClassificationTask onChange={@onChangeAnnotation} onFinish={@onFinishPage}>
       <div className="readymade-subject-viewer-container">
         {
           if @state.currentSubjects.length
@@ -57,6 +57,12 @@ module.exports = React.createClass
       </div>
     </ClassificationTask>
   
+  onChangeAnnotation: (annotation) ->
+    if annotation.issue
+      @refs["subject#{subject.id}"].getDOMNode().classList.add 'active' for subject in @state.currentSubjects
+    else
+      @refs["subject#{subject.id}"].getDOMNode().classList.remove 'active' for subject in @state.currentSubjects
+
   onFinishPage: (task_annotations) ->
     @classifications?.set_annotations ({task: key, value: value} for key, value of task_annotations)
     @classifications.finish()

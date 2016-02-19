@@ -58,7 +58,7 @@ module.exports = React.createClass
                   <AnnotationsSummary annotations={@state.annotations} deleteTool={@deleteAnnotation} onEdit={@edit} />
                 </div>
               when 'edit'
-                <EditTask annotation={@state.annotations[0]} onComplete={@choose}/>
+                <EditTask annotation={@state.annotations[0]} onChange={@props.onChange} onComplete={@choose}/>
             }
           </div>
         </div>
@@ -82,6 +82,7 @@ module.exports = React.createClass
       step: 'edit'
       type: tool.type
       instructions: tasks[tool.type]
+    @props.onChange tool
   
   choose: (annotation) ->
     annotations = @state.annotations
@@ -100,6 +101,8 @@ module.exports = React.createClass
       type: null
       instructions: @defaultInstructions
       annotations: annotations
+    
+    @props.onChange new AnnotationTool
   
   finish: ->
     task_annotations = {}

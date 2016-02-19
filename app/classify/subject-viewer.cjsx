@@ -16,7 +16,7 @@ module.exports = React.createClass
   
   render: ->
     classList=["readymade-marking-surface-container"]
-    classList.push "active" if @props.isCurrent
+    classList.push "current" if @props.isCurrent
     image = @mediaSrcs['image/jpeg']
     <div className={classList.join ' '}>
       <div className="text-viewer">
