@@ -102,6 +102,20 @@ a
     max-width: 80%
 
 #wrapper
+  [role=tabList]
+    input[type=radio]
+      height: 0
+      width: 0
+      opacity: 0
+      
+      + span
+        padding: .5em 1em
+        background: #333
+        opacity: 0.5
+      
+      &:checked + span
+        opacity: 1
+  
   [role=tabPanel]
     &[aria-selected=false]
       display: none

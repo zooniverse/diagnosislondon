@@ -21,7 +21,7 @@ module.exports = React.createClass
     <div className="reports">
       <h2>Choose a report to work on</h2>
       <ul role="tabList">
-        {<li key=borough role="presentation"><label><input name="borough" type="radio" checked={@state.borough is borough} role="tab" aria-selected={@state.borough is borough} onChange={@selectBorough} value={borough}/>{borough}</label></li> for borough in BOROUGHS}</
+        {<li key=borough  role="presentation"><label><input name="borough" type="radio" checked={@state.borough is borough} role="tab" aria-selected={@state.borough is borough} onChange={@selectBorough} value={borough}/><span>{borough}</span></label></li> for borough in BOROUGHS}
       </ul>
       <ul>
         {<li key="set-#{subject_set.id}"><a onClick={@update} href="#/classify/#{subject_set.id}">{subject_set.metadata.BOROUGH.replace(' (London, England)', '')}<br/>{subject_set.metadata.Date}</a></li> for subject_set in @state.subject_sets}
