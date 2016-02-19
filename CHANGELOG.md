@@ -72,6 +72,8 @@
 
 **Merged pull requests:**
 
+- Filter reports by borough [\#64](https://github.com/zooniverse/wellcome/pull/64) ([eatyourgreens](https://github.com/eatyourgreens))
+
 - Hide profile unless logged-in [\#62](https://github.com/zooniverse/wellcome/pull/62) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Previous page [\#61](https://github.com/zooniverse/wellcome/pull/61) ([eatyourgreens](https://github.com/eatyourgreens))
