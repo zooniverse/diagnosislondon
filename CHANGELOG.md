@@ -28,6 +28,8 @@
 
 **Closed issues:**
 
+- "Pollution or waste problems" button should be "Pollution or waste problem" - singular [\#63](https://github.com/zooniverse/wellcome/issues/63)
+
 - Add text to Profile page when not signed in and provide sign in dialog [\#58](https://github.com/zooniverse/wellcome/issues/58)
 
 - Change all 'Place or location' tags to 'Type of premises, include business names' [\#57](https://github.com/zooniverse/wellcome/issues/57)
@@ -71,6 +73,8 @@
 **Merged pull requests:**
 
 - Hide profile unless logged-in [\#62](https://github.com/zooniverse/wellcome/pull/62) ([eatyourgreens](https://github.com/eatyourgreens))
+
+- Previous page [\#61](https://github.com/zooniverse/wellcome/pull/61) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Fix classifications [\#60](https://github.com/zooniverse/wellcome/pull/60) ([eatyourgreens](https://github.com/eatyourgreens))
 
