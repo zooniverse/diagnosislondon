@@ -15,8 +15,10 @@ module.exports = React.createClass
     @loadText newProps.subject?.locations
   
   render: ->
+    classList=["readymade-marking-surface-container"]
+    classList.push "current" if @props.isCurrent
     image = @mediaSrcs['image/jpeg']
-    <div className="readymade-marking-surface-container">
+    <div className={classList.join ' '}>
       <div className="text-viewer">
         <h3>Page {@props.subject.metadata.page} {@props.subject.metadata.filename}</h3>
         <div data-subject={@props.subject.id}>{@state.text}</div>

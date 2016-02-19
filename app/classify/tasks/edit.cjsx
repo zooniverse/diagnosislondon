@@ -91,6 +91,7 @@ module.exports = React.createClass
     else
       annotation.addSubtask e.currentTarget.value
     @setState {annotation}
+    @props.onChange annotation
   
   deleteText: (textRange) ->
     return unless textRange?
@@ -100,6 +101,7 @@ module.exports = React.createClass
     else
       annotation.deleteSubtask textRange
     @setState {annotation}
+    @props.onChange annotation
     
   done: (e) ->
     @props.onComplete @state.annotation

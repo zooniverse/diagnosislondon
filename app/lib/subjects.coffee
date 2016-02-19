@@ -1,6 +1,7 @@
 class Subjects
   queue: []
   api: null
+  current: null
   query:
     sort: 'queued'
     page_size: "30"
@@ -14,9 +15,6 @@ class Subjects
     @query.workflow_id = @project?.links.workflows[0]
     @query.subject_set_id = @subject_set_id
     
-  current: ->
-    @queue[0]
-    
   fetch: ->
     return Promise.resolve [] unless @query.workflow_id? && @query.subject_set_id?
     @api.type('subjects')
@@ -26,11 +24,12 @@ class Subjects
   
   flush: ->
     subject = null for subject in @queue
+    @current = null
     @queue = []
     
   next: ->
-    subject = @queue.shift()
+    @current = @queue.shift()
     @fetch() if @queue.length < 2
-    subject
+    @current
 
 module.exports = Subjects

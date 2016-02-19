@@ -47,6 +47,11 @@
 
 .readymade-marking-surface-container
   display: flex
+  opacity: 0.2
+  
+  &.current
+  &.active
+    opacity: 1
   
 .text-viewer
   flex: 5
@@ -224,6 +229,7 @@ button[disabled]
 .scroll-container
   max-height: 90vh
   overflow: scroll
+  position: relative
   
 .decision-tree-task
 .readymade-classification-summary
