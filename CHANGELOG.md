@@ -72,6 +72,8 @@
 
 **Merged pull requests:**
 
+- Add a slide tutorial for first-time visitors [\#66](https://github.com/zooniverse/wellcome/pull/66) ([eatyourgreens](https://github.com/eatyourgreens))
+
 - Add a field guide [\#65](https://github.com/zooniverse/wellcome/pull/65) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Filter reports by borough [\#64](https://github.com/zooniverse/wellcome/pull/64) ([eatyourgreens](https://github.com/eatyourgreens))
