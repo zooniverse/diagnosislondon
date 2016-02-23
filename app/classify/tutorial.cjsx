@@ -8,6 +8,25 @@ md = new MarkdownIt
 module.exports = React.createClass
   displayName: 'tutorial'
   
+  statics:
+    checkIfCompleted: (user, project) ->
+      getCompletedAt = if user?
+        user.get 'project_preferences', project_id: project.id
+          .catch =>
+            []
+          .then ([projectPreferences]) =>
+            new Date projectPreferences?.preferences?.tutorial_completed_at
+      else
+        Promise.resolve null
+
+      getCompletedAt.then (completedAt) =>
+        if isNaN completedAt?.valueOf()
+          false
+        else
+          # TODO: Check if the completion date is greater than the tutorial's modified_at date.
+          # Return `null` to mean "Completed, but not with the most recent version".
+          true
+  
   getInitialState: ->
     tutorial:
       steps: []
@@ -26,7 +45,7 @@ module.exports = React.createClass
   render: ->
     if @state.selected == @state.tutorial.steps.length - 1
       label = "Finish"
-      action = @props.onFinish
+      action = @onFinish
     else
       label = "Continue"
       action = @nextStep
@@ -40,3 +59,16 @@ module.exports = React.createClass
     selected = @state.selected
     selected++
     @setState {selected}
+  
+  onFinish: ->
+    @props.onFinish()
+    @props.user?.get('project_preferences', project_id: @props.project.id)
+      .then ([projectPreferences]) =>
+        projectPreferences ?= @props.api.type('project_preferences').create({
+          links: {
+            project: @props.project.id
+          },
+          preferences: {}
+        })
+        projectPreferences.update 'preferences.tutorial_completed_at': new Date().toISOString()
+        projectPreferences.save()

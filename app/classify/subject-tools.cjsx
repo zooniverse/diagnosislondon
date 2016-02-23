@@ -35,4 +35,4 @@ module.exports = React.createClass
   
   showTutorial: (e) ->
     alert (resolve) =>		
-     <Tutorial api={@props.api} project={@props.project} onFinish={resolve} />
+     <Tutorial api={@props.api} user={@props.user} project={@props.project} onFinish={resolve} />
