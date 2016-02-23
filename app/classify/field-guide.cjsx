@@ -24,6 +24,7 @@ module.exports = React.createClass
     @refs.container.getDOMNode().focus()
   
   render: ->
+    content = @state.fieldGuide.items[@state.selected]?.content ? ''
     <div ref="container" tabIndex="-1" className="readymade-field-guide">
       <div className="readymade-field-guide-tabs" role="tabList">
         {for item, i in @state.fieldGuide.items
@@ -33,11 +34,9 @@ module.exports = React.createClass
           </label>
         }
       </div>
-    {for item, i in @state.fieldGuide.items
-      <div className="readymade-field-guide-page" role="tabPanel" aria-selected={i is @state.selected} key="fg-item-#{i}">
-        <div dangerouslySetInnerHTML={{__html: md.render item.content}}></div>
+      <div className="readymade-field-guide-page">
+        <div dangerouslySetInnerHTML={{__html: md.render content}}></div>
       </div>
-    }
     </div>
   
   selectTab: (e) ->
