@@ -27,7 +27,7 @@ module.exports = React.createClass
     @subjects.update {api, project, subject_set_id: subject_set.id}
     @classifications.update {api, project, workflow}
     
-    if newProps.user != @props.user
+    if newProps.user != @props.user || newProps.subject_set.id != @props.subject_set.id
       @setState currentSubjects: [], =>
         @subjects.flush()
         @subjects.fetch()
