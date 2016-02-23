@@ -4,6 +4,8 @@ MarkdownIt = require 'markdown-it'
 md = new MarkdownIt
   linkify: true
   breaks: true
+  
+completedThisSession = false
 
 module.exports = React.createClass
   displayName: 'tutorial'
@@ -21,7 +23,7 @@ module.exports = React.createClass
 
       getCompletedAt.then (completedAt) =>
         if isNaN completedAt?.valueOf()
-          false
+          completedThisSession
         else
           # TODO: Check if the completion date is greater than the tutorial's modified_at date.
           # Return `null` to mean "Completed, but not with the most recent version".
@@ -62,6 +64,7 @@ module.exports = React.createClass
   
   onFinish: ->
     @props.onFinish()
+    completedThisSession = true
     @props.user?.get('project_preferences', project_id: @props.project.id)
       .then ([projectPreferences]) =>
         projectPreferences ?= @props.api.type('project_preferences').create({
