@@ -20,8 +20,11 @@ module.exports = React.createClass
       .then ([fieldGuide]) =>
         @setState {fieldGuide}
   
+  componentDidMount: ->
+    @refs.container.getDOMNode().focus()
+  
   render: ->
-    <div className="readymade-field-guide">
+    <div ref="container" tabIndex="-1" className="readymade-field-guide">
       <div className="readymade-field-guide-tabs" role="tabList">
         {for item, i in @state.fieldGuide.items
           <label key="fg-tab-#{i}">
