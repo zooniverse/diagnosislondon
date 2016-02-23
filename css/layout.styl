@@ -101,27 +101,27 @@ a
     margin: 0 auto
     max-width: 80%
 
-#wrapper
-  [role=tabList]
-    input[type=radio]
-      height: 0
-      width: 0
-      opacity: 0
-      
-      + span
-        padding: .5em 1em
-        background: #333
-        opacity: 0.5
-      
-      &:checked + span
-        opacity: 1
-  
-  [role=tabPanel]
-    &[aria-selected=false]
-      display: none
 
-    &[aria-selected=true]
-      display: block
+[role=tabList]
+  input[type=radio]
+    height: 0
+    width: 0
+    opacity: 0
+    
+    + span
+      padding: .5em 1em
+      background: #333
+      opacity: 0.5
+    
+    &:checked + span
+      opacity: 1
 
-  [aria-hidden=true]
-    display:none
+[role=tabPanel]
+  &[aria-selected=false]
+    display: none
+
+  &[aria-selected=true]
+    display: block
+
+[aria-hidden=true]
+  display:none
