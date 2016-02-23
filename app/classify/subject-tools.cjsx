@@ -3,6 +3,7 @@ Favourite = require './favourite'
 CommentsToggle = require './comments-toggle'
 OriginalPage = require './original-page'
 FieldGuide = require './field-guide'
+Tutorial = require './tutorial'
 alert = require '../panoptes/alert'
 
 module.exports = React.createClass
@@ -18,6 +19,10 @@ module.exports = React.createClass
             <span>Examples</span> 
           </button> 
         </label>
+        <button className="readymade-clickable" onClick={@showTutorial}>
+          <span className="fa fa-graduation-cap"></span>
+          Tutorial
+        </button>
         {<Favourite project={@props.project} api={@props.api} subject={@props.subject} /> if @props.subject? && @props.user?}
         {<CommentsToggle project={@props.project} api={@props.api} talk={@props.talk} user={@props.user} subject={@props.subject} /> if @props.subject?}
         {<OriginalPage subject={@props.subject} /> if @props.subject?}
@@ -27,3 +32,7 @@ module.exports = React.createClass
   showFieldGuide: (e) ->
     alert (resolve) =>		
      <FieldGuide api={@props.api} project={@props.project}/>
+  
+  showTutorial: (e) ->
+    alert (resolve) =>		
+     <Tutorial api={@props.api} user={@props.user} project={@props.project} onFinish={resolve} />
