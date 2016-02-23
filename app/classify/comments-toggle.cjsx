@@ -21,7 +21,7 @@ module.exports = React.createClass
         <input type="checkbox" name="comments" checked={@state.active} onChange={@toggleComments} /> 
         <span className="readymade-clickable"> 
           <span className="fa fa-comments#{if @state.active then '' else '-o'}"></span>
-          <span>Show Comments</span> 
+          <span> Show Comments</span> 
         </span> 
       </label>
       {<SubjectComments project={@props.project} user={@props.user} subject={@props.subject} talk={@props.talk} discussion={@state.discussion} comments={@state.comments} onChange={@update} /> if @props.subject? && @state.active}
