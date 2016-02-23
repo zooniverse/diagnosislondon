@@ -34,6 +34,7 @@ module.exports = React.createClass
           .then @nextSubject
   
   componentDidUpdate: ->
+    return unless @subjects.current?
     container = @refs.scrollContainer?.getDOMNode()
     subject_node = @refs["subject#{@subjects.current.id}"]?.getDOMNode()
     return unless container? && subject_node?
