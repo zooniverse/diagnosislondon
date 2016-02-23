@@ -27,10 +27,11 @@ module.exports = React.createClass
     @subjects.update {api, project, subject_set_id: subject_set.id}
     @classifications.update {api, project, workflow}
     
-    @setState currentSubjects: [], =>
-      @subjects.flush()
-      @subjects.fetch()
-        .then @nextSubject
+    if newProps.user != @props.user
+      @setState currentSubjects: [], =>
+        @subjects.flush()
+        @subjects.fetch()
+          .then @nextSubject
   
   componentDidUpdate: ->
     container = @refs.scrollContainer?.getDOMNode()
