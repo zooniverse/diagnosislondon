@@ -11,6 +11,8 @@ Panoptes = require 'panoptes-client'
 Projects = require './lib/projects'
 Auth = require './lib/auth'
 a11y = require 'react-a11y'
+Tutorial = require './classify/tutorial'
+alert = require './panoptes/alert'
 
 a11y_options =
   includeSrcNode: true
@@ -56,6 +58,10 @@ Main = React.createClass
     React.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#reports'
     React.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
     @renderClassifier()
+  
+  componentDidMount: ->
+    document.querySelector('#classify').addEventListener 'activate', (e) =>
+      @startTutorial()
   
   render: ->
     <div className="readymade-home-page-content">
@@ -108,6 +114,13 @@ Main = React.createClass
       React.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client} talk={@talk} subject_set={@state.subject_set} />, document.querySelector '#classify'
     else
       React.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#classify'
+  
+  startTutorial: ->
+    Tutorial.checkIfCompleted @state.user, @state.project
+      .then (completed) =>
+        unless completed
+          alert (resolve) =>
+            <Tutorial api={@client} user={@state.user} project={@state.project} onFinish={resolve} />
           
             
 React.render <Main />, document.querySelector '#home'

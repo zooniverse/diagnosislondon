@@ -20,6 +20,10 @@ class TabControl
     @panel.setAttribute 'aria-hidden', 'false'
     @tab.setAttribute 'aria-selected', 'true'
     
+    event = document.createEvent('Event');
+    event.initEvent('activate', true, true);
+    @panel.dispatchEvent(event);
+    
   deactivate: =>
     @panel.setAttribute 'aria-selected', 'false'
     @panel.setAttribute 'aria-hidden', 'true'
