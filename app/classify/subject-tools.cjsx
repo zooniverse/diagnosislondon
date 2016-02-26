@@ -34,5 +34,9 @@ module.exports = React.createClass
      <FieldGuide api={@props.api} project={@props.project}/>
   
   showTutorial: (e) ->
-    alert (resolve) =>		
-     <Tutorial api={@props.api} user={@props.user} project={@props.project} onFinish={resolve} />
+    @props.api.type 'tutorials'
+      .get
+        project_id: @props.project.id
+      .then ([tutorial]) =>
+        alert (resolve) =>
+          <Tutorial tutorial={tutorial} api={@props.api} user={@props.user} project={@props.project} onFinish={resolve} />

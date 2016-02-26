@@ -119,8 +119,12 @@ Main = React.createClass
     Tutorial.checkIfCompleted @state.user, @state.project
       .then (completed) =>
         unless completed
-          alert (resolve) =>
-            <Tutorial api={@client} user={@state.user} project={@state.project} onFinish={resolve} />
+          @client.type 'tutorials'
+            .get
+              project_id: @state.project.id
+            .then ([tutorial]) =>
+              alert (resolve) =>
+                <Tutorial tutorial={tutorial} api={@client} user={@state.user} project={@state.project} onFinish={resolve} />
           
             
 React.render <Main />, document.querySelector '#home'
