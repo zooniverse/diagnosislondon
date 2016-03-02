@@ -257,4 +257,22 @@ button[disabled]
     & + p
       margin-top: 0
       text-align: center
+      
+.readymade-field-guide-container
+  position: absolute
+  right: 0
+  z-index: 1
+  overflow: hidden
+  width: 30em
+  min-height: 60vh
+  transition: width 1s
+  
+  .readymade-field-guide
+    position: relative
+    right: 0
+    width: 28em
+  
+  &[aria-hidden=true]
+    display: block
+    width: 0
 

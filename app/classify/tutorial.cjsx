@@ -30,28 +30,19 @@ module.exports = React.createClass
           true
   
   getInitialState: ->
-    tutorial:
-      steps: []
     selected: 0
-  
-  componentWillMount: ->
-    @props.api.type 'tutorials'
-      .get
-        project_id: @props.project.id
-      .then ([tutorial]) =>
-        @setState {tutorial}
   
   componentDidMount: ->
     @refs.continue.getDOMNode().focus()
   
   render: ->
-    if @state.selected == @state.tutorial.steps.length - 1
+    if @state.selected == @props.tutorial.steps.length - 1
       label = "Finish"
       action = @onFinish
     else
       label = "Continue"
       action = @nextStep
-    content = @state.tutorial.steps[@state.selected]?.content ? ''
+    content = @props.tutorial.steps[@state.selected]?.content ? ''
     <div className="readymade-mini-tutorial-contents">
       <div dangerouslySetInnerHTML={{__html: md.render content}}></div>
       <button ref="continue" className="standard-button" onClick={action}>{label}</button>

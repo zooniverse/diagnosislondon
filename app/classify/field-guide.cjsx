@@ -20,9 +20,6 @@ module.exports = React.createClass
       .then ([fieldGuide]) =>
         @setState {fieldGuide}
   
-  componentDidMount: ->
-    @refs.container.getDOMNode().focus()
-  
   render: ->
     content = @state.fieldGuide.items[@state.selected]?.content ? ''
     <div ref="container" tabIndex="-1" className="readymade-field-guide">
