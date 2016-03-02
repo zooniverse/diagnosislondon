@@ -18,7 +18,6 @@ module.exports = React.createClass
           <strong>{@props.user.display_name}</strong>
         </button>
         <Avatar user={@props.user} />
-        <a href="#" className="message-link"><i className="fa fa-envelope#{if @state.unread then '' else '-o'}" /></a>
       </div>
       <div aria-hidden={!@state.expanded} aria-label="account menu" className="account-menu" ref="accountMenu">
         <a className="secret-button" href="https://zooniverse.org/users/#{@props.user.login}">Profile</a>
