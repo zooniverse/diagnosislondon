@@ -20,6 +20,8 @@
 
 **Fixed bugs:**
 
+- Pages aren't being served in order [\#52](https://github.com/zooniverse/wellcome/issues/52)
+
 - IE11: Removing a selection deletes page text [\#48](https://github.com/zooniverse/wellcome/issues/48)
 
 - Bug in IE 11.0.9600 [\#47](https://github.com/zooniverse/wellcome/issues/47)
@@ -71,6 +73,8 @@
 - Link back to pages on the Wellcome site [\#7](https://github.com/zooniverse/wellcome/issues/7)
 
 **Merged pull requests:**
+
+- bugfix: Filter the subject queue for undefined subjects [\#67](https://github.com/zooniverse/wellcome/pull/67) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Add a slide tutorial for first-time visitors [\#66](https://github.com/zooniverse/wellcome/pull/66) ([eatyourgreens](https://github.com/eatyourgreens))
 
