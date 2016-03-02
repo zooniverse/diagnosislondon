@@ -74,6 +74,8 @@
 
 **Merged pull requests:**
 
+- Slide in panel for examples [\#68](https://github.com/zooniverse/wellcome/pull/68) ([eatyourgreens](https://github.com/eatyourgreens))
+
 - bugfix: Filter the subject queue for undefined subjects [\#67](https://github.com/zooniverse/wellcome/pull/67) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Add a slide tutorial for first-time visitors [\#66](https://github.com/zooniverse/wellcome/pull/66) ([eatyourgreens](https://github.com/eatyourgreens))
