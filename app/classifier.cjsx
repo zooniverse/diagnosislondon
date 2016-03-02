@@ -86,5 +86,7 @@ module.exports = React.createClass
       currentSubjects.shift() if currentSubjects.length > 3
     # create a new classification here
     @classifications.create [@subjects.current]
+    # remove undefined or null subjects from currentSubjects
+    currentSubjects = currentSubjects.filter Boolean
     @setState {currentSubjects}
 
