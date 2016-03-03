@@ -60,8 +60,7 @@ Main = React.createClass
     @renderClassifier()
   
   componentDidMount: ->
-    document.querySelector('#classify').addEventListener 'activate', (e) =>
-      @startTutorial()
+    document.querySelector('#classify').addEventListener 'activate', @startTutorial
   
   render: ->
     <div className="readymade-home-page-content">
@@ -116,6 +115,7 @@ Main = React.createClass
       React.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#classify'
   
   startTutorial: ->
+    document.querySelector('#classify').removeEventListener 'activate', @startTutorial
     Tutorial.checkIfCompleted @state.user, @state.project
       .then (completed) =>
         unless completed
