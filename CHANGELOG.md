@@ -30,6 +30,8 @@
 
 **Closed issues:**
 
+- oauth host config + api host [\#69](https://github.com/zooniverse/wellcome/issues/69)
+
 - "Pollution or waste problems" button should be "Pollution or waste problem" - singular [\#63](https://github.com/zooniverse/wellcome/issues/63)
 
 - Add text to Profile page when not signed in and provide sign in dialog [\#58](https://github.com/zooniverse/wellcome/issues/58)
@@ -73,6 +75,8 @@
 - Link back to pages on the Wellcome site [\#7](https://github.com/zooniverse/wellcome/issues/7)
 
 **Merged pull requests:**
+
+- Add panoptes.zooniverse.org for OAuth [\#70](https://github.com/zooniverse/wellcome/pull/70) ([eatyourgreens](https://github.com/eatyourgreens))
 
 - Slide in panel for examples [\#68](https://github.com/zooniverse/wellcome/pull/68) ([eatyourgreens](https://github.com/eatyourgreens))
 
