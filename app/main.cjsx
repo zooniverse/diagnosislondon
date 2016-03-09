@@ -34,6 +34,7 @@ Main = React.createClass
   
   componentWillMount: ->
     subject_set_id = window.location.hash.split('/')[2]
+    subject_set_id = null if subject_set_id == ''
     subject_set_id ?= localStorage.getItem 'subject-set-id'
     
     @client = Panoptes.apiClient
