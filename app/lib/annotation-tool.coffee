@@ -12,7 +12,7 @@ class AnnotationTool
     @id = "#{@type}-#{AnnotationTool.count}"
     @subtasks = {}
   
-  addIssue: (type) ->
+  addIssue: (type = 'issue') ->
     if @issue?
       document.getSelection().removeAllRanges()
     else
@@ -27,6 +27,7 @@ class AnnotationTool
     
   addSubtask: (type) ->
     rangeTool = @createSelection type
+    return unless rangeTool?
     rangeTool.el.classList.add @type
     @subtasks[rangeTool.type] ?= []
     @subtasks[rangeTool.type].push rangeTool

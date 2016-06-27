@@ -118,8 +118,11 @@ module.exports = React.createClass
   
   newAnnotation: (type) ->
     annotations = @state.annotations
-    annotations.unshift new AnnotationTool type
+    annotation = new AnnotationTool type
+    annotation.addIssue()
+    annotations.unshift annotation
     @setState {annotations}
+    @props.onChange annotation
   
   editAnnotation: (annotation) ->
     annotations = @state.annotations
