@@ -8,7 +8,8 @@
     
     .drawing-controls
       display: block
-      background: #283f45
+      background: #0b517c
+      color: #fff
       text-align: right
       margin: 0
       
@@ -36,7 +37,7 @@
         
     
     h3
-      background: #283f45
+      background: #0b517c
       color: white
       font-size: 1em
       padding: .2em .4em
@@ -71,7 +72,8 @@
     max-width: 500px
     
 .text-selection
-  background: #283f45
+  background: #0b517c
+  color: #fff
   margin: 0
   padding: .5em .2em
   
@@ -108,6 +110,7 @@
 .annotation
   width: 100%
   background: #283f45
+  color: #fff
   
   button
     float: right
@@ -162,39 +165,40 @@ button[disabled]
 
 .reports
 
-    ul
-      list-style-type: none
-      margin: 1em 0 0
-      padding: 0
-      text-indent: 0
-  
-      li
-        display: inline-block
-        width: 20%
-        
-        a
-          color: white
-          text-decoration: none
-          padding: 1em
-          margin-right: 1em
-          margin-bottom: .5em
-          border-radius: 5px
-          display: inline-block
-          width: 80%
-          vertical-align: middle
-          text-align: left
-          color: #fff
-          background: #000
-          background: rgba( 0, 0, 0, .5)
-          border: 1px solid transparent
+  ul
+    list-style-type: none
+    margin: 1em 0 0
+    padding: 0
+    text-indent: 0
+    color: white
 
-          &:hover
-          &:focus
-            background: #000
+  li
+    display: inline-block
+    width: 20%
+
+  a
+    color: white
+    text-decoration: none
+    padding: 1em
+    margin-right: 1em
+    margin-bottom: .5em
+    border-radius: 5px
+    display: inline-block
+    width: 80%
+    vertical-align: middle
+    text-align: left
+    color: #fff
+    background: #000
+    background: rgba( 0, 0, 0, .5)
+    border: 1px solid transparent
+
+    &:hover
+    &:focus
+      background: #000
 
 .column
-  background: #000
-  background: rgba(0, 0, 0, .4)
+  background: #fff
+  background: rgba(255, 255, 255, .8)
   padding: 1em
 
 #profile
@@ -239,7 +243,7 @@ button[disabled]
   padding: .5em
   border-radius: .5em
   background: #333
-  background: rgba(0, 0, 0, 0.5)
+  background: rgba(255, 255, 255, 0.8)
   margin-bottom: .5em
   
   .major-button
@@ -275,4 +279,12 @@ button[disabled]
   &[aria-hidden=true]
     display: block
     width: 0
+
+.main-footer
+  background: #0b517c
+  color: #fff
+  
+  .site-map-section
+    h6
+      color: #999
 
