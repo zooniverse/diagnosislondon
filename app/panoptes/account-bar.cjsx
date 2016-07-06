@@ -28,6 +28,8 @@ module.exports = React.createClass
 
   handleSignOutClick: ->
     @props.auth.signOut()
+    .catch =>
+      @props.onSignOut()
 
   toggleAccountMenu: ->
     @setState expanded: !@state.expanded
