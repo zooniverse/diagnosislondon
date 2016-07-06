@@ -1,13 +1,13 @@
 React = require 'react'
-config = require '../config'
 
 module.exports = React.createClass
   displayName: 'LoginBar'
-  client_id: config.panoptes.appID
-  app_uri: window.location
+  
+  signIn: ->
+    @props.auth.signIn("#{window.location}")
 
   render: ->
     <div className="login-bar">
-      <a className="secret-button" href="#{config.panoptes.oauth}/oauth/authorize?response_type=token&client_id=#{@client_id}&redirect_uri=#{@app_uri}">Sign in</a>
+      <button className="secret-button" onClick={@signIn}>Sign in</button>
     </div>
 

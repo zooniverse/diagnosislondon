@@ -7,9 +7,7 @@ Profile = require './profile'
 Page = require './page'
 UserStatus = require './user-status'
 ProjectStatistics = require './project-statistics'
-Panoptes = require 'panoptes-client'
 Projects = require './lib/projects'
-Auth = require './lib/auth'
 a11y = require 'react-a11y'
 Tutorial = require './classify/tutorial'
 alert = require './panoptes/alert'
@@ -37,25 +35,22 @@ Main = React.createClass
     subject_set_id = null if subject_set_id == ''
     subject_set_id ?= localStorage.getItem 'subject-set-id'
     
-    @client = Panoptes.apiClient
-    @client.root = config.panoptes.host + '/api'
+    @client = require 'panoptes-client/lib/api-client'
     
-    @talk = Panoptes.talkClient
-    @talk.root = config.talk.host
+    @talk = require 'panoptes-client/lib/talk-client'
       
     @projects = new Projects @client
     
-    @auth = new Auth @client, Panoptes.auth
-    
-    Panoptes.auth.listen @handleAuthChange
-
-    @handleAuthChange().then =>
-      @changeSubjectSet subject_set_id if subject_set_id?
+    @auth = require 'panoptes-client/lib/oauth'
+    @auth.init config.panoptes.appID
+      .then @init
+      .then =>
+        @changeSubjectSet subject_set_id if subject_set_id?
     
   componentDidUpdate:->
     @setBackground @state.project if @state.project?
     React.render <Profile project={@state.project} workflow={@state.workflow} user={@state.user} api={@client} />, document.querySelector '#profile'
-    React.render <UserStatus user={@state.user} auth={@auth} />, document.querySelector '#user-status'
+    React.render <UserStatus user={@state.user} auth={@auth} onSignOut={@signOut} />, document.querySelector '#user-status'
     React.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#reports'
     React.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
     @renderClassifier()
@@ -80,8 +75,15 @@ Main = React.createClass
       .then (background) ->
         document.querySelector '#site-background'
           .style.backgroundImage = "url(#{background.src})"
+  
+  signOut: ->
+    @client.headers['Authorization'] = null
+    localStorage.removeItem 'bearer_token'
+    console.log 'signed out'
+    @toggleProfile null
+    @setState user: null
           
-  handleAuthChange: (e) ->
+  init: ->
     @auth
       .checkCurrent()
       .then (user) =>

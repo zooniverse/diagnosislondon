@@ -17,9 +17,8 @@ module.exports = React.createClass
   componentWillReceiveProps: (newProps) ->
     @setState user: newProps.user unless newProps.user is @props.user
     
-  
   render: ->
     if @state.user?
-      <AccountBar user={@state.user} auth={@props.auth} />
+      <AccountBar user={@state.user} auth={@props.auth} onSignOut={@props.onSignOut} />
     else
       <LoginBar auth={@props.auth} />
