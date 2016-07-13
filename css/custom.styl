@@ -1,8 +1,8 @@
 .readymade-subject-viewer-container
   
   .readymade-subject-viewer
-    width: 75vw
-    max-width: 950px
+    width: 55vw
+    max-width: 700px
     background: #eee
     background: rgba(256,256,230,0.75)
     
@@ -10,19 +10,12 @@
       display: block
       background: #0b517c
       color: #fff
-      text-align: right
-      margin: 0
+      padding: 0.2em
       
       h2
-        display: inline-block
-        width: 45%
         text-align: left
         font-size: .9em
-    
-      .tools
-        display: inline-block
-        text-align: right
-        width: 55%
+        margin: 0.2em 0.3em
       
       .readymade-clickable
         background: rgba(0, 0, 0, 0.1)
@@ -58,14 +51,14 @@
   flex: 5
   min-height: 60vh
   color: #222
-  max-width: 450px
+  max-width: 100%
   margin: 0
   
   div
     padding: 1em
 
 .subject-image
-  flex: 3
+  display: none
   
   img
     width: 100%
@@ -240,6 +233,7 @@ button[disabled]
 .readymade-classification-summary
 .task-instructions
 .annotation-summary
+  font-size: 0.9em
   padding: .5em
   border-radius: .5em
   background: #333
@@ -265,6 +259,7 @@ button[disabled]
 .readymade-field-guide-container
   position: absolute
   right: 0
+  top: 5em
   z-index: 1
   overflow: hidden
   width: 30em

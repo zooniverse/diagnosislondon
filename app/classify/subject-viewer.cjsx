@@ -20,7 +20,6 @@ module.exports = React.createClass
     image = @mediaSrcs['image/jpeg']
     <div className={classList.join ' '}>
       <div className="text-viewer">
-        <h3>Page {@props.subject.metadata.page}</h3>
         <div data-subject={@props.subject.id}>{@state.text}</div>
       </div>
       <div className="subject-image">

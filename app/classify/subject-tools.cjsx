@@ -15,7 +15,7 @@ module.exports = React.createClass
   render: ->
     <div>
       <div className="drawing-controls">
-        <h2>{@props.subject_set.metadata.BOROUGH} {@props.subject_set.metadata.Date} ({@props.subject_set.display_name})</h2>
+        <h2>{@props.subject_set.metadata.BOROUGH} {@props.subject_set.metadata.Date} ({@props.subject_set.display_name}) {<span>Page {@props.subject.metadata.page}</span> if @props.subject?}</h2>
         <span className="tools">
           <label className="readymade-has-clickable"> 
             <input type="checkbox" name="examples" checked={!@state.fieldGuideHidden} onChange={@toggleFieldGuide} /> 
