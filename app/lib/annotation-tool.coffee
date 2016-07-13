@@ -55,6 +55,7 @@ class AnnotationTool
   
   createSelection: (type) ->
     sel = document.getSelection()
+    return null unless sel.anchorNode?.parentNode.getAttribute 'data-subject'
     if sel.rangeCount
       options =
         type: type
