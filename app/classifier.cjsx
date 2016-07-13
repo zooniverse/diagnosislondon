@@ -32,21 +32,6 @@ module.exports = React.createClass
         @subjects.flush()
         @subjects.fetch()
           .then @nextSubject
-  
-  componentDidUpdate: ->
-    return unless @subjects.current?
-    container = @refs.scrollContainer?.getDOMNode()
-    subject_node = @refs["subject#{@subjects.current.id}"]?.getDOMNode()
-    return unless container? && subject_node?
-    
-    container.scrollTop -= subject_node.scrollHeight
-    distance = subject_node.offsetTop / 20
-    
-    move_subject = =>
-      container.scrollTop = container.scrollTop + distance
-      setTimeout move_subject, 50 unless container.scrollTop > subject_node.offsetTop - 50
-    
-    setTimeout move_subject, 50
       
   render: ->
     <ClassificationTask onChange={@onChangeAnnotation} onFinish={@onFinishPage}>
@@ -77,13 +62,7 @@ module.exports = React.createClass
     @nextSubject()
     
   nextSubject: ->
-    currentSubjects = @state.currentSubjects
-    if currentSubjects.length is 0
-      currentSubjects.push @subjects.next(), @subjects.queue[0]
-    else
-      @subjects.next()
-      currentSubjects.push @subjects.queue[0]
-      currentSubjects.shift() if currentSubjects.length > 3
+    currentSubjects = [@subjects.next()]
     # create a new classification here
     @classifications.create [@subjects.current]
     # remove undefined or null subjects from currentSubjects
