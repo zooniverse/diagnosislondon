@@ -43,7 +43,8 @@ class AnnotationTool
   
   value: ->
     issue = @issue?.annotation
-    subtasks = (@subtasks[type]?.map (range) -> range.annotation) for type of @subtasks
+    subtasks = ((@subtasks[type]?.map (range) -> range.annotation) for type of @subtasks)
+    subtasks = subtasks.reduce (a, b) -> [a..., b...]
     {issue, subtasks}
   
   destroy: ->
