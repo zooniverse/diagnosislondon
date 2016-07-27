@@ -1,4 +1,5 @@
 React = require 'react'
+FilterTask = require './tasks/filter'
 ChooseTask = require './tasks/choose'
 EditTask = require './tasks/edit'
 Annotation = require './annotation'
@@ -40,21 +41,24 @@ module.exports = React.createClass
     description: "Find a health issue on this page that fits one of the categories below. Your task is to collect all the information on the page about the issue you've found."
   
   getInitialState: ->
-    step: 'choose'
+    step: 'filter'
     type: 'health'
     instructions: @defaultInstructions
     annotations: []
     
   render: ->
+    children = React.Children.map @props.children, (child) => React.cloneElement child, task: @state.step
     <div>
       <TaskInstructions instructions={@state.instructions} />
       <div className="readymade-classification-interface">
         <div className="readymade-decision-tree-container">
           <div className="decision-tree">
             {switch @state.step
+              when 'filter'
+                <FilterTask onComplete={@filter} />
               when 'choose'
                 <div>
-                  <ChooseTask onChooseTask={@create} onFinish={@finish} />
+                  <ChooseTask onChooseTask={@create} onBack={@reset} onFinish={@finish} />
                   <AnnotationsSummary annotations={@state.annotations} deleteTool={@deleteAnnotation} onEdit={@edit} />
                 </div>
               when 'edit'
@@ -62,10 +66,20 @@ module.exports = React.createClass
             }
           </div>
         </div>
-          {@props.children}
+          {children}
       </div>
     </div>
   
+  filter: (choice) ->
+    switch choice
+      when 'yes'
+        @setState 
+          step: 'choose'
+          type: null
+          instructions: @defaultInstructions
+      when 'no'
+        @finish()
+
   create: (type) ->
     @newAnnotation type
     @setState 
@@ -104,6 +118,12 @@ module.exports = React.createClass
     
     @props.onChange new AnnotationTool
   
+  reset: ->
+    annotation.destroy() for annotation in @state.annotations
+    step = 'filter'
+    annotations = []
+    @setState {annotations, step}
+    
   finish: ->
     task_annotations = {}
     @state.annotations.map (annotation, i) ->
@@ -114,7 +134,8 @@ module.exports = React.createClass
     annotations = @state.annotations
     annotation.destroy() for annotation in annotations
     annotations = []
-    @setState {annotations}
+    step = 'filter'
+    @setState {annotations, step}
   
   newAnnotation: (type) ->
     annotations = @state.annotations

@@ -77,6 +77,7 @@ module.exports = React.createClass
       <div className="decision-tree-question">
         {@instructions}
       </div>
+      <button type="button" className="decision-tree-choice major-button" onClick={@done}>Back</button>
       <ToolList annotation={@state.annotation} tools={tools} addText={@addText} deleteText={@deleteText}>
       </ToolList>
       <div className="decision-tree-confirmation">

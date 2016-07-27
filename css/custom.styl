@@ -41,11 +41,14 @@
 
 .readymade-marking-surface-container
   display: flex
-  opacity: 0.2
   
-  &.current
-  &.active
-    opacity: 1
+  &.image
+    .subject-image
+      display: block
+      text-align: center
+    
+    .text-viewer
+      display: none
   
 .text-viewer
   flex: 5
@@ -62,7 +65,6 @@
   
   img
     width: 100%
-    max-width: 500px
     
 .text-selection
   background: #0b517c
@@ -79,11 +81,22 @@
     &:hover
       background: rgba(0, 0, 0, 0.3)
 
-.decision-tree-choice
-  margin-bottom: .5em
+.readymade-decision-tree-container
+  .decision-tree-choice
+    display: block
+    margin-bottom: .5em
   
-  .decision-tree-choices
-    margin-top: .5em
+    .decision-tree-choices
+      margin-top: .5em
+    
+    input[type=radio]
+      position: absolute
+      height: 1px
+      width: 1px
+      opacity: 0
+  
+      &:checked + span
+        background: #0b517c
     
 .readymade-choice-clickable
   color: white

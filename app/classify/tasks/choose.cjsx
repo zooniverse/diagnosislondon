@@ -9,6 +9,7 @@ module.exports = React.createClass
       <div className="decision-tree-question">
         To get started first select the category
       </div>
+      <button type="button" className="decision-tree-choice major-button" onClick={@back}>Back</button>
       <ul className="decision-tree-choices">
         {for key, task of tasks
           <li key={key} className="decision-tree-choice">
@@ -17,14 +18,17 @@ module.exports = React.createClass
             </button> 
           </li>
         }
-        {@props.children}
-        <button type="button" className="major-button" onClick={@finish}>Finish page</button>
       </ul>
+      {@props.children}
+      <button type="button" className="major-button" onClick={@finish}>Finish page</button>
     </div>
   
   edit: (e) ->
     @props.onChooseTask e.currentTarget.value
   
+  back: ->
+    @props.onBack()
+
   finish: ->
     @props.onFinish()
 
