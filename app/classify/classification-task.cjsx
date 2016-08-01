@@ -89,16 +89,16 @@ module.exports = React.createClass
       type: type
       instructions: tasks[type]
   
-  edit: (tool) ->
-    tool.issue?.el.classList.remove 'complete'
-    for type, ranges of tool.subtasks
+  edit: (annotation) ->
+    annotation.issue?.el.classList.remove 'complete'
+    for type, ranges of annotation.subtasks
       ranges.map (range) -> range.el.classList.remove 'complete'
-    @editAnnotation tool
+    @editAnnotation annotation
     @setState 
       step: 'edit'
-      type: tool.type
-      instructions: tasks[tool.type]
-    @props.onChange tool
+      type: annotation.type
+      instructions: tasks[annotation.type]
+    @props.onChange annotation
   
   choose: (annotation) ->
     annotations = @state.annotations
