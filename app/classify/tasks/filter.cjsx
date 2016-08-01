@@ -26,7 +26,7 @@ module.exports = React.createClass
       </div>
       <div className="decision-tree-choices">
         {for key, answer of answers
-          <label className="decision-tree-choice">
+          <label key={key} className="decision-tree-choice">
             <input type="radio" name={@props.name} value={answer.value} checked={@state.value is answer.value} onChange={@choose} />
             <span className="readymade-choice-clickable standard-button">{answer.label}</span>
           </label> 
