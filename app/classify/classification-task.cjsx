@@ -41,6 +41,7 @@ module.exports = React.createClass
     description: "Find a health issue on this page that fits one of the categories below. Your task is to collect all the information on the page about the issue you've found."
   
   getInitialState: ->
+    relevant: null
     step: 'filter'
     type: 'health'
     instructions: @defaultInstructions
@@ -73,12 +74,13 @@ module.exports = React.createClass
   filter: (choice) ->
     switch choice
       when 'yes'
-        @setState 
+        @setState
+          relevant: 'yes'
           step: 'choose'
           type: null
           instructions: @defaultInstructions
       when 'no'
-        @finish()
+        @setState relevant: 'no', @finish
 
   create: (type) ->
     @newAnnotation type
@@ -125,12 +127,13 @@ module.exports = React.createClass
     @setState {annotations, step}
     
   finish: ->
-    task_annotations = {}
+    marking_annotations = []
     @state.annotations.map (annotation, i) ->
-      task_annotations[annotation.type] ?= []
-      task_annotations[annotation.type].push annotation.value()
-    task_annotations[task] ?= [] for task of tasks
-    @props.onFinish task_annotations
+      marking_annotations.push annotation.value()
+    annotations =
+      T1: @state.relevant
+      T2: marking_annotations 
+    @props.onFinish annotations
     annotations = @state.annotations
     annotation.destroy() for annotation in annotations
     annotations = []
