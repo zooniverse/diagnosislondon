@@ -34,10 +34,11 @@ module.exports = React.createClass
       
   render: ->
     <ClassificationTask onChange={@onChangeAnnotation} onFinish={@onFinishPage}>
-      <Subject project={@props.project} api={@props.api} talk={@props.talk} user={@props.user} subject_set={@props.subject_set} currentSubjects={@state.currentSubjects} />
+      <Subject ref='subject' project={@props.project} api={@props.api} talk={@props.talk} user={@props.user} subject_set={@props.subject_set} subject={@state.currentSubjects[0]} />
     </ClassificationTask>
   
   onChangeAnnotation: (annotation) ->
+    @refs.subject.onChange annotation
 
   onFinishPage: (task_annotations) ->
     @classifications?.set_annotations ({task: key, value: value} for key, value of task_annotations)
