@@ -11,11 +11,25 @@ module.exports = React.createClass
   
   getInitialState: ->
     fieldGuideHidden: true
+    subject_set:
+      display_name: ''
+      metadata:
+        BOROUGH: ''
+        Date: ''
+  
+  componentWillMount: ->
+    subject_set_id = @props.subject?.links.subject_sets[0]
+    @updateSubjectSet subject_set_id
+    
+  componentWillReceiveProps: (newProps) ->
+    new_id = newProps.subject.links.subject_sets[0]
+    if new_id != @props.subject.links.subject_sets[0]
+      @updateSubjectSet new_id
   
   render: ->
     <div>
       <div className="drawing-controls">
-        <h2>{@props.subject_set.metadata.BOROUGH} {@props.subject_set.metadata.Date} ({@props.subject_set.display_name}) {<span>Page {@props.subject.metadata.page}</span> if @props.subject?}</h2>
+        <h2>{@state.subject_set.metadata.BOROUGH} {@state.subject_set.metadata.Date} ({@state.subject_set.display_name}) {<span>Page {@props.subject.metadata.page}</span> if @props.subject?}</h2>
         <span className="tools">
           <label className="readymade-has-clickable"> 
             <input type="checkbox" name="examples" checked={!@state.fieldGuideHidden} onChange={@toggleFieldGuide} /> 
@@ -50,3 +64,7 @@ module.exports = React.createClass
       .then ([tutorial]) =>
         alert (resolve) =>
           <Tutorial tutorial={tutorial} api={@props.api} user={@props.user} project={@props.project} onFinish={resolve} />
+  updateSubjectSet: (subject_set_id) ->
+    @props.api.type('subject_sets').get subject_set_id
+      .then (subject_set) =>
+        @setState {subject_set}

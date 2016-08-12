@@ -5,6 +5,7 @@ class Subjects
   query:
     sort: 'queued'
     page_size: "30"
+    include: ['subject_sets']
   
   constructor: (@api, @project, @subject_set_id)->
     @query.workflow_id = @project?.links.workflows[0]
