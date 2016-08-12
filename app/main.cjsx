@@ -1,6 +1,7 @@
 init = require './init'
 config = require './config'
 React = require 'react'
+ReactDOM = require 'react-dom'
 ChooseSubjectSet = require './choose-subject-set'
 Classifier = require './classifier'
 Profile = require './profile'
@@ -49,10 +50,10 @@ Main = React.createClass
     
   componentDidUpdate:->
     @setBackground @state.project if @state.project?
-    React.render <Profile project={@state.project} workflow={@state.workflow} user={@state.user} api={@client} />, document.querySelector '#profile'
-    React.render <UserStatus user={@state.user} auth={@auth} onSignOut={@signOut} />, document.querySelector '#user-status'
-    React.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#reports'
-    React.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
+    ReactDOM.render <Profile project={@state.project} workflow={@state.workflow} user={@state.user} api={@client} />, document.querySelector '#profile'
+    ReactDOM.render <UserStatus user={@state.user} auth={@auth} onSignOut={@signOut} />, document.querySelector '#user-status'
+    ReactDOM.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#reports'
+    ReactDOM.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
     @renderClassifier()
   
   componentDidMount: ->
@@ -113,9 +114,9 @@ Main = React.createClass
   
   renderClassifier: ->
     if @state.subject_set?
-      React.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client} talk={@talk} subject_set={@state.subject_set} />, document.querySelector '#classify'
+      ReactDOM.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client} talk={@talk} subject_set={@state.subject_set} />, document.querySelector '#classify'
     else
-      React.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#classify'
+      ReactDOM.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#classify'
   
   startTutorial: ->
     document.querySelector('#classify').removeEventListener 'activate', @startTutorial
@@ -130,4 +131,4 @@ Main = React.createClass
                 <Tutorial tutorial={tutorial} api={@client} user={@state.user} project={@state.project} onFinish={resolve} />
           
             
-React.render <Main />, document.querySelector '#home'
+ReactDOM.render <Main />, document.querySelector '#home'
