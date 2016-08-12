@@ -16,7 +16,7 @@ module.exports = React.createClass
   
   render: ->
     classList=["readymade-marking-surface-container"]
-    classList.push 'image' if @props.task is 'filter'
+    classList.push @props.mode
     classList.push 'active' if @props.active
     image = @mediaSrcs['image/jpeg']
     <div className={classList.join ' '}>

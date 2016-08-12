@@ -34,6 +34,30 @@
       color: white
       font-size: 1em
       padding: .2em .4em
+    
+    .image-toggle
+      background: #0b517c
+      border: 0
+      color: white
+      float: right
+      padding: 0
+      border: 0
+      border-radius: 1px
+      font-size: 1.2em
+      
+      input[type=checkbox]
+        position: absolute
+        height: 0
+        width: 0
+        opacity: 0
+      
+      span
+        background: rgba(0, 0, 0, 0.1)
+        padding: .2em .4em
+        
+        &.active
+          background: rgba(0, 0, 0, 0.3)
+        
 
 .readymade-decision-tree-container
   padding-left: 0
