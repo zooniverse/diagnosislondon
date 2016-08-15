@@ -11,6 +11,7 @@ module.exports = React.createClass
     viewAll: false
 
   componentWillReceiveProps: (newProps) ->
+    return unless newProps.subject?
     {nextSubjectIds, prevSubjectIds} = newProps.subject.metadata
     @props.api.type('subjects')
       .get([nextSubjectIds[0], prevSubjectIds[0]])

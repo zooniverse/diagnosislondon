@@ -23,10 +23,10 @@ module.exports = React.createClass
   
   componentWillReceiveProps: (newProps)->
     {api, project, subject_set, workflow} = newProps
-    @subjects.update {api, project, subject_set_id: subject_set.id}
+    @subjects.update {api, project, subject_set_id: subject_set?.id}
     @classifications.update {api, project, workflow}
     
-    if newProps.user != @props.user || newProps.subject_set.id != @props.subject_set.id
+    if newProps.user != @props.user 
       @setState currentSubjects: [], =>
         @subjects.flush()
         @subjects.fetch()

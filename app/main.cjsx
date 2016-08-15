@@ -54,7 +54,7 @@ Main = React.createClass
     ReactDOM.render <UserStatus user={@state.user} auth={@auth} onSignOut={@signOut} />, document.querySelector '#user-status'
     ReactDOM.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#reports'
     ReactDOM.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
-    @renderClassifier()
+    ReactDOM.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client} talk={@talk} subject_set={@state.subject_set} />, document.querySelector '#classify'
   
   componentDidMount: ->
     document.querySelector('#classify').addEventListener 'activate', @startTutorial
@@ -67,7 +67,7 @@ Main = React.createClass
       </div>
       <div className="readymade-project-summary"> {@state.project?.description} </div>
       <div className="readymade-project-description"> {@state.project?.introduction} </div>
-      {<div className="readymade-footer"> <a href="#/#{ if @state.subject_set? then 'classify' else 'reports'}" className="major-button"> Get started! </a> </div> if @state.project?}
+      {<div className="readymade-footer"> <a href="#/classify" className="major-button"> Get started! </a> </div> if @state.project?}
       <ProjectStatistics project={@state.project} workflow={@state.workflow} />
     </div>
   
