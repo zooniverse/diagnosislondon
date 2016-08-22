@@ -5,7 +5,7 @@ TextRange = React.createClass
   displayName: 'TextRange'
   
   render: ->
-    annotation = @props.range.annotation
+    annotation = @props.range?.annotation ? ''
     <p className="text-selection">
       {annotation.text} 
     </p>

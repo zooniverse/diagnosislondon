@@ -60,17 +60,34 @@ module.exports = React.createClass
               when 'choose'
                 <div>
                   <ChooseTask onChooseTask={@create} onBack={@reset} onFinish={@finish} />
-                  <AnnotationsSummary annotations={@state.annotations} deleteTool={@deleteAnnotation} onEdit={@edit} />
                 </div>
               when 'edit'
-                <EditTask annotation={@state.annotations[0]} onChange={@props.onChange} onComplete={@choose}/>
+                <EditTask annotation={@state.annotations[0]} onChange={@onChange} onComplete={@choose}/>
             }
           </div>
         </div>
           {children}
+        <div className="readymade-decision-tree-container">
+          <div className="decision-tree">
+            {switch @state.step
+              when 'choose', 'edit'
+                <div>
+                  <AnnotationsSummary annotations={@state.annotations} deleteTool={@deleteAnnotation} onEdit={@edit} />
+                </div>
+            }
+          </div>
+        </div>
       </div>
     </div>
   
+  onChange: (annotation) ->
+    @props.onChange annotation
+    
+    annotations = @state.annotations
+    annotations.shift()
+    annotations.unshift annotation
+    @setState {annotations}
+    
   filter: (choice) ->
     switch choice
       when 'yes'
@@ -90,33 +107,20 @@ module.exports = React.createClass
       instructions: tasks[type]
   
   edit: (annotation) ->
-    annotation.issue?.el.classList.remove 'complete'
-    for type, ranges of annotation.subtasks
-      ranges.map (range) -> range.el.classList.remove 'complete'
-    @editAnnotation annotation
-    @setState 
-      step: 'edit'
-      type: annotation.type
-      instructions: tasks[annotation.type]
+
+    if @state.step is 'edit'
+      @completeAnnotation @state.annotations[0], => @editAnnotation annotation
+    else
+      @editAnnotation annotation
     @props.onChange annotation
   
   choose: (annotation) ->
-    annotations = @state.annotations
-    annotations.shift()
-    
-    if annotation.empty()
-      annotation.destroy()
-    else
-      annotation.issue?.el.classList.add 'complete'
-      for type, ranges of annotation.subtasks
-        ranges.map (range) -> range.el.classList.add 'complete'
-      annotations.unshift annotation
+    @completeAnnotation annotation
       
     @setState 
       step: 'choose'
       type: null
       instructions: @defaultInstructions
-      annotations: annotations
     
     @props.onChange new AnnotationTool
   
@@ -149,16 +153,39 @@ module.exports = React.createClass
     @props.onChange annotation
   
   editAnnotation: (annotation) ->
+    annotation.issue?.el.classList.remove 'complete'
+    for type, ranges of annotation.subtasks
+      ranges.map (range) -> range.el.classList.remove 'complete'
+    
     annotations = @state.annotations
     index = annotations.indexOf annotation
     annotations.splice index, 1
     annotations.unshift annotation
-    @setState {annotations}
-  
+    @setState 
+      step: 'edit'
+      type: annotation.type
+      instructions: tasks[annotation.type]
+      annotations: annotations
+      
   deleteAnnotation: (annotation) ->
     annotations = @state.annotations
     index = annotations.indexOf annotation
     annotations.splice index, 1
     annotation.destroy()
     @setState {annotations}
+  
+  completeAnnotation: (annotation, callback = () -> ) ->
+    annotations = @state.annotations
+    annotations.shift()
+    
+    if annotation.empty()
+      annotation.destroy()
+    else
+      annotation.issue?.el.classList.add 'complete'
+      for type, ranges of annotation.subtasks
+        ranges.map (range) -> range.el.classList.add 'complete'
+      annotations.unshift annotation
+    
+    @setState {annotations}, callback
+    
     

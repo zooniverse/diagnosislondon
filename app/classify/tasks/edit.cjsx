@@ -7,11 +7,14 @@ TextSelection = React.createClass
   getDefaultProps: ->
     range: {}
   
-  render: ->
-    <p className="text-selection"><button className="secret-button" aria-label='Delete' onClick={@delete}>X</button> {@props.range.annotation.text}</p>
-  
   delete: (e) ->
     @props.onDelete @props.range
+  
+  render: ->
+    <p className="text-selection">
+      <button className="secret-button" aria-label='Delete' onClick={@delete}>X</button>
+      {@props.range.annotation.text}
+    </p>
 
 ToolList = React.createClass
   displayName: 'ToolList'
@@ -69,6 +72,10 @@ module.exports = React.createClass
   
   componentWillMount: ->
     annotation = @props.annotation
+    @setState {annotation}
+  
+  componentWillReceiveProps: (newProps) ->
+    annotation = newProps.annotation
     @setState {annotation}
   
   render: ->
