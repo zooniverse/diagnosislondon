@@ -11,7 +11,7 @@ module.exports =
     host: 'https://talk.zooniverse.org'
     root: ''
   tasks:
-    health: 
+    pollution: 
       label: 'Pollution and Waste'
       description: 'Monitoring environmental health and sanitation was a major part of the Medical Officer’s role. They reported on contaminated water, noxious fumes and smells and sewerage and drainage. They monitored the health effects of seasonal changes in temperature and smog levels. They also directed the clean-up of areas that were a potential health hazard, removing piles of rubbish, stopping effluent run-off.'
       tools: [{
