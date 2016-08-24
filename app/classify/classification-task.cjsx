@@ -63,7 +63,7 @@ module.exports = React.createClass
                   <ChooseTask onChooseTask={@create} onBack={@reset} onFinish={@finish} />
                 </div>
               when 'edit'
-                <EditTask annotation={@state.annotations[0]} onChange={@onChange} onComplete={@choose}/>
+                <EditTask annotation={@currentAnnotation()} onChange={@onChange} onComplete={@choose}/>
             }
           </div>
         </div>
@@ -110,7 +110,7 @@ module.exports = React.createClass
   edit: (annotation) ->
 
     if @state.step is 'edit'
-      @completeAnnotation @state.annotations[0], => @editAnnotation annotation
+      @completeAnnotation @currentAnnotation(), => @editAnnotation annotation
     else
       @editAnnotation annotation
     @props.onChange annotation
@@ -174,6 +174,9 @@ module.exports = React.createClass
     annotations.splice index, 1
     annotation.destroy()
     @setState {annotations}
+  
+  currentAnnotation: ->
+    @state.annotations[0]
   
   completeAnnotation: (annotation, callback = () -> ) ->
     annotations = @state.annotations
