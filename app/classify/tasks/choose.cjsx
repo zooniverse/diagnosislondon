@@ -13,7 +13,7 @@ module.exports = React.createClass
       <ul className="decision-tree-choices">
         {for key, task of tasks
           <li key={key} className="decision-tree-choice">
-            <button className="readymade-choice-clickable standard-button" value={key} onClick={@edit}>
+            <button className="readymade-choice-clickable standard-button #{key}" value={key} onClick={@edit}>
               <span className="readymade-choice-label">{task.label}</span>
             </button> 
           </li>
