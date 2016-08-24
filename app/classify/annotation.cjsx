@@ -6,9 +6,9 @@ TextRange = React.createClass
   
   render: ->
     annotation = @props.range?.annotation ? ''
-    <p className="text-selection">
+    <span>
       {annotation.text} 
-    </p>
+    </span>
 
 module.exports = React.createClass
   displayName: 'Annotation'
@@ -16,10 +16,9 @@ module.exports = React.createClass
   tasks: tasks
   
   render: ->
-    <div className="annotation #{@props.tool.type}">
-      {@tasks[@props.tool.type].label} <button className="secret-button" aria-label='Edit' onClick={@edit}><span className="fa fa-pencil-square-o"></span></button>
+    <button className="standard-button annotation #{@props.tool.type}" onClick={@edit}>
       <TextRange range={@props.tool.issue} />
-    </div>
+    </button>
   
   edit: (e) ->
     @props.edit @props.tool
