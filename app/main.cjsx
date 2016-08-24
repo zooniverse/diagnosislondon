@@ -2,7 +2,7 @@ init = require './init'
 config = require './config'
 React = require 'react'
 ReactDOM = require 'react-dom'
-ChooseSubjectSet = require './choose-subject-set'
+# ChooseSubjectSet = require './choose-subject-set'
 Classifier = require './classifier'
 Profile = require './profile'
 Page = require './page'
@@ -52,7 +52,7 @@ Main = React.createClass
     @setBackground @state.project if @state.project?
     ReactDOM.render <Profile project={@state.project} workflow={@state.workflow} user={@state.user} api={@client} />, document.querySelector '#profile'
     ReactDOM.render <UserStatus user={@state.user} auth={@auth} onSignOut={@signOut} />, document.querySelector '#user-status'
-    ReactDOM.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#reports'
+    # ReactDOM.render <ChooseSubjectSet workflow={@state.workflow} onChange={@changeSubjectSet} />, document.querySelector '#reports'
     ReactDOM.render <Page project={@state.project} url_key='science_case' />, document.querySelector '#about'
     ReactDOM.render <Classifier project={@state.project} workflow={@state.workflow} user={@state.user} api={@client} talk={@talk} subject_set={@state.subject_set} />, document.querySelector '#classify'
   
