@@ -8,7 +8,7 @@ class Subjects
     include: ['subject_sets']
   
   constructor: (@api, @project, @subject_set_id)->
-    @query.workflow_id = @project?.links.workflows[0]
+    @query.workflow_id = '2368'
     # @query.subject_set_id = @subject_set_id
   
   update: (opts) ->

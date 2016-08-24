@@ -92,7 +92,7 @@ Main = React.createClass
         @projects?.fetch().then =>
           project = @projects.current()
           @client.type 'workflows'
-            .get project.links.workflows[0]
+            .get '2368'
             .then (workflow) =>
               @setState {user, project, workflow}
   
