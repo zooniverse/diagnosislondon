@@ -33,7 +33,7 @@ module.exports = React.createClass
     selected: 0
   
   componentDidMount: ->
-    @refs.continue.getDOMNode().focus()
+    @refs.continue.focus()
   
   render: ->
     if @state.selected == @props.tutorial.steps.length - 1

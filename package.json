@@ -38,7 +38,8 @@
   "dependencies": {
     "markdown-it": "~4.4.0",
     "publisssh": "~1.0.0",
-    "react": "0.13.3"
+    "react": "~0.14.1",
+    "react-dom": "~0.14.1"
   },
   "config": {
     "fontAwesomeURL": "https://github.com/FortAwesome/Font-Awesome/blob/8027c940b6/assets/font-awesome-4.2.0.zip?raw=true",

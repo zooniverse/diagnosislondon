@@ -1,27 +1,41 @@
+.pollution
+  background: #ff6639
+  
+  &:hover
+    background: #ff3900
+
+.work
+  background: #ffa539
+  
+  &:hover
+    background: #ff8b00
+
+.food
+  background: #5364fd
+  
+  &:hover
+    background: #0f25f5
+
+.housing
+  background: #43bcfd
+
 .readymade-subject-viewer-container
+  padding: 0 .5em
   
   .readymade-subject-viewer
-    width: 75vw
-    max-width: 950px
     background: #eee
     background: rgba(256,256,230,0.75)
     
     .drawing-controls
       display: block
-      background: #283f45
-      text-align: right
-      margin: 0
+      background: #0b517c
+      color: #fff
+      padding: 0.2em
       
       h2
-        display: inline-block
-        width: 45%
         text-align: left
         font-size: .9em
-    
-      .tools
-        display: inline-block
-        text-align: right
-        width: 55%
+        margin: 0.2em 0.3em
       
       .readymade-clickable
         background: rgba(0, 0, 0, 0.1)
@@ -36,42 +50,71 @@
         
     
     h3
-      background: #283f45
+      background: #0b517c
       color: white
       font-size: 1em
       padding: .2em .4em
+    
+    .image-toggle
+      background: #0b517c
+      border: 0
+      color: white
+      float: right
+      padding: 0
+      border: 0
+      border-radius: 1px
+      font-size: 1.2em
+      
+      input[type=checkbox]
+        position: absolute
+        height: 0
+        width: 0
+        opacity: 0
+      
+      span
+        background: rgba(0, 0, 0, 0.1)
+        padding: .2em .4em
+        
+        &.active
+          background: rgba(0, 0, 0, 0.3)
+        
 
 .readymade-decision-tree-container
-  padding-left: 0
-  padding-right: .5vw
+  padding: 0
 
 .readymade-marking-surface-container
-  display: flex
-  opacity: 0.2
+  display: none
   
-  &.current
   &.active
-    opacity: 1
+    display: block
+  
+  &.image
+    .subject-image
+      display: block
+      text-align: center
+    
+    .text-viewer
+      display: none
   
 .text-viewer
   flex: 5
   min-height: 60vh
   color: #222
-  max-width: 450px
+  max-width: 100%
   margin: 0
   
   div
     padding: 1em
 
 .subject-image
-  flex: 3
+  display: none
   
   img
     width: 100%
-    max-width: 500px
     
 .text-selection
-  background: #283f45
+  background: #0b517c
+  color: #fff
   margin: 0
   padding: .5em .2em
   
@@ -84,11 +127,22 @@
     &:hover
       background: rgba(0, 0, 0, 0.3)
 
-.decision-tree-choice
-  margin-bottom: .5em
+.readymade-decision-tree-container
+  .decision-tree-choice
+    display: block
+    margin-bottom: .5em
   
-  .decision-tree-choices
-    margin-top: .5em
+    .decision-tree-choices
+      margin-top: .5em
+    
+    input[type=radio]
+      position: absolute
+      height: 1px
+      width: 1px
+      opacity: 0
+  
+      &:checked + span
+        background: #0b517c
     
 .readymade-choice-clickable
   color: white
@@ -99,15 +153,14 @@
   text-align: center
   
 .highlight
-  color: black
-  background: #ddd
+  color: #fff
   
   &.complete
     opacity: 0.6
 
 .annotation
   width: 100%
-  background: #283f45
+  color: #fff
   
   button
     float: right
@@ -162,39 +215,40 @@ button[disabled]
 
 .reports
 
-    ul
-      list-style-type: none
-      margin: 1em 0 0
-      padding: 0
-      text-indent: 0
-  
-      li
-        display: inline-block
-        width: 20%
-        
-        a
-          color: white
-          text-decoration: none
-          padding: 1em
-          margin-right: 1em
-          margin-bottom: .5em
-          border-radius: 5px
-          display: inline-block
-          width: 80%
-          vertical-align: middle
-          text-align: left
-          color: #fff
-          background: #000
-          background: rgba( 0, 0, 0, .5)
-          border: 1px solid transparent
+  ul
+    list-style-type: none
+    margin: 1em 0 0
+    padding: 0
+    text-indent: 0
+    color: white
 
-          &:hover
-          &:focus
-            background: #000
+  li
+    display: inline-block
+    width: 20%
+
+  a
+    color: white
+    text-decoration: none
+    padding: 1em
+    margin-right: 1em
+    margin-bottom: .5em
+    border-radius: 5px
+    display: inline-block
+    width: 80%
+    vertical-align: middle
+    text-align: left
+    color: #fff
+    background: #000
+    background: rgba( 0, 0, 0, .5)
+    border: 1px solid transparent
+
+    &:hover
+    &:focus
+      background: #000
 
 .column
-  background: #000
-  background: rgba(0, 0, 0, .4)
+  background: #fff
+  background: rgba(255, 255, 255, .8)
   padding: 1em
 
 #profile
@@ -236,10 +290,11 @@ button[disabled]
 .readymade-classification-summary
 .task-instructions
 .annotation-summary
+  font-size: 0.9em
   padding: .5em
   border-radius: .5em
   background: #333
-  background: rgba(0, 0, 0, 0.5)
+  background: rgba(255, 255, 255, 0.8)
   margin-bottom: .5em
   
   .major-button
@@ -250,17 +305,15 @@ button[disabled]
   
   h2
     font-size: 1em
-    background: #283f45
-    margin-bottom: 0
-    padding: .5em
-    
-    & + p
-      margin-top: 0
-      text-align: center
+    margin-bottom: .5em
+  
+  .annotation
+    margin-bottom: .5em
       
 .readymade-field-guide-container
   position: absolute
   right: 0
+  top: 5em
   z-index: 1
   overflow: hidden
   width: 30em
@@ -275,4 +328,12 @@ button[disabled]
   &[aria-hidden=true]
     display: block
     width: 0
+
+.main-footer
+  background: #0b517c
+  color: #fff
+  
+  .site-map-section
+    h6
+      color: #999
 

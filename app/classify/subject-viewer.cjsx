@@ -16,16 +16,15 @@ module.exports = React.createClass
   
   render: ->
     classList=["readymade-marking-surface-container"]
-    classList.push "current" if @props.isCurrent
+    classList.push @props.mode
+    classList.push 'active' if @props.active
     image = @mediaSrcs['image/jpeg']
     <div className={classList.join ' '}>
       <div className="text-viewer">
-        <h3>Page {@props.subject.metadata.page}</h3>
         <div data-subject={@props.subject.id}>{@state.text}</div>
       </div>
       <div className="subject-image">
-        <h3>Scanned page</h3>
-        {<img src={image} alt="" /> if image}
+        {<img src={image} alt={@state.text} /> if image}
       </div>
     </div>
   

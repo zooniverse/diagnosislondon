@@ -12,7 +12,7 @@ class AnnotationTool
     @id = "#{@type}-#{AnnotationTool.count}"
     @subtasks = {}
   
-  addIssue: (type) ->
+  addIssue: (type = 'issue') ->
     if @issue?
       document.getSelection().removeAllRanges()
     else
@@ -27,6 +27,7 @@ class AnnotationTool
     
   addSubtask: (type) ->
     rangeTool = @createSelection type
+    return unless rangeTool?
     rangeTool.el.classList.add @type
     @subtasks[rangeTool.type] ?= []
     @subtasks[rangeTool.type].push rangeTool
@@ -41,9 +42,13 @@ class AnnotationTool
     !@issue?
   
   value: ->
-    issue = @issue?.annotation
-    subtasks = (@subtasks[type]?.map (range) -> range.annotation) for type of @subtasks
-    {issue, subtasks}
+    value = @issue?.annotation
+    subtasks = ((@subtasks[type]?.map (range) -> range.annotation) for type of @subtasks)
+    if subtasks.length
+      subtasks = subtasks.reduce (a, b) -> [a..., b...]
+    value.type = @type
+    value.details = subtasks
+    value
   
   destroy: ->
     @issue?.destroy()
@@ -53,6 +58,7 @@ class AnnotationTool
   
   createSelection: (type) ->
     sel = document.getSelection()
+    return null unless sel.anchorNode?.parentNode.getAttribute 'data-subject'
     if sel.rangeCount
       options =
         type: type
