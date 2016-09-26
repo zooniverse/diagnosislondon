@@ -56,6 +56,7 @@
 
 **Merged pull requests:**
 
+- Beta feedback changes [\#72](https://github.com/zooniverse/diagnosislondon/pull/72) ([eatyourgreens](https://github.com/eatyourgreens))
 - Panoptes client 2.5.2 [\#71](https://github.com/zooniverse/diagnosislondon/pull/71) ([eatyourgreens](https://github.com/eatyourgreens))
 - Add panoptes.zooniverse.org for OAuth [\#70](https://github.com/zooniverse/diagnosislondon/pull/70) ([eatyourgreens](https://github.com/eatyourgreens))
 - Slide in panel for examples [\#68](https://github.com/zooniverse/diagnosislondon/pull/68) ([eatyourgreens](https://github.com/eatyourgreens))
